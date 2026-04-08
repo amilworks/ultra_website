@@ -1,0 +1,36 @@
+---
+import PostCard from "@/components/PostCard.astro";
+import SiteShell from "@/layouts/SiteShell.astro";
+import { getAllNews } from "@/lib/content";
+
+const news = await getAllNews();
+---
+
+<SiteShell
+  title="BisQue Ultra News"
+  description="White papers, platform notes, and interface walkthroughs for BisQue Ultra."
+  canonicalPath="/news"
+  image="/images/site-home.svg"
+>
+  <section class="section-block">
+    <div class="section-header">
+      <p class="eyebrow">News archive</p>
+      <h1 class="section-title">White papers, platform foundations, and interface notes.</h1>
+      <p class="section-lead">
+        The archive focuses on release material that explains the product, the BisQue platform it builds on,
+        and the interface decisions that shape scientific work in BisQue Ultra.
+      </p>
+    </div>
+    <div class="post-grid">
+      {news.map((entry) => (
+        <PostCard
+          href={`/news/${entry.data.slug}`}
+          title={entry.data.title}
+          excerpt={entry.data.excerpt}
+          date={entry.data.date}
+          kind={entry.data.kind}
+        />
+      ))}
+    </div>
+  </section>
+</SiteShell>

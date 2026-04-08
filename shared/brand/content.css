@@ -1,0 +1,217 @@
+.content-body {
+  font-family: var(--font-reading);
+  font-size: var(--font-size-reading);
+  line-height: var(--line-height-reading);
+  font-weight: var(--font-weight-reading-body);
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  color: var(--text-main);
+  max-inline-size: var(--content-width);
+}
+
+.content-body > :first-child {
+  margin-top: 0;
+}
+
+.content-body > :last-child {
+  margin-bottom: 0;
+}
+
+.content-body h2,
+.content-body h3,
+.content-body h4 {
+  margin: 2.3rem 0 0.72rem;
+  letter-spacing: -0.016em;
+  line-height: 1.24;
+  font-weight: var(--font-weight-reading-heading);
+  text-wrap: balance;
+}
+
+.content-body h2 {
+  font-size: 1.45rem;
+}
+
+.content-body h3 {
+  font-size: 1.28rem;
+}
+
+.content-body h4 {
+  font-size: 1.12rem;
+}
+
+.content-body p,
+.content-body ul,
+.content-body ol,
+.content-body blockquote,
+.content-body table,
+.content-body pre {
+  margin: 1rem 0;
+}
+
+.content-body p {
+  color: color-mix(in oklab, var(--text-main) 90%, var(--text-muted) 10%);
+  text-wrap: pretty;
+  max-inline-size: var(--reading-measure);
+}
+
+.content-body ul,
+.content-body ol {
+  padding-inline-start: 1.35rem;
+  list-style-position: outside;
+  max-inline-size: var(--reading-measure);
+}
+
+.content-body ul {
+  list-style-type: disc;
+}
+
+.content-body ol {
+  list-style-type: decimal;
+}
+
+.content-body ul ul {
+  list-style-type: circle;
+}
+
+.content-body ul ul ul {
+  list-style-type: square;
+}
+
+.content-body ol ol {
+  list-style-type: lower-alpha;
+}
+
+.content-body ol ol ol {
+  list-style-type: lower-roman;
+}
+
+.content-body li + li {
+  margin-top: 0.42rem;
+}
+
+.content-body li > p,
+.content-body li > ul,
+.content-body li > ol {
+  margin-top: 0.34rem;
+  max-inline-size: none;
+}
+
+.content-body li::marker {
+  color: var(--text-muted);
+}
+
+.content-body ul.contains-task-list {
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+.content-body .task-list-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.62rem;
+  align-items: start;
+}
+
+.content-body .task-list-item input[type="checkbox"] {
+  margin: 0.24rem 0 0;
+}
+
+.content-body a {
+  color: var(--brand-strong);
+  text-decoration-color: color-mix(in oklab, var(--brand) 26%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.content-body strong {
+  font-weight: var(--font-weight-reading-strong);
+}
+
+.content-body code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  border: 1px solid var(--line);
+  border-radius: 0.375rem;
+  padding: 0.05rem 0.32rem;
+  background: color-mix(in oklab, var(--bg-main) 82%, var(--bg-panel-strong) 18%);
+}
+
+.content-body pre {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius-md) + 0.5rem);
+  padding: 1rem 1.15rem;
+  background: color-mix(in oklab, var(--bg-panel-strong) 94%, var(--bg-main) 6%);
+  box-shadow: var(--shadow-sm);
+}
+
+.content-body pre code {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.content-body img,
+.content-body video {
+  display: block;
+  width: 100%;
+  max-inline-size: 100%;
+  height: auto;
+  margin: 1.35rem 0;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius-md) + 0.45rem);
+  background: color-mix(in oklab, var(--bg-panel-strong) 92%, var(--bg-main) 8%);
+  box-shadow: var(--shadow-sm);
+}
+
+.content-body blockquote {
+  border-left: 3px solid var(--line-strong);
+  padding-left: 1rem;
+  color: var(--text-muted);
+  max-inline-size: var(--reading-measure);
+}
+
+.content-body hr {
+  margin: 2.4rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.content-body table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: calc(var(--radius-md) + 0.5rem);
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--bg-panel-strong) 90%, var(--bg-main) 10%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.content-body th,
+.content-body td {
+  max-width: 0;
+  padding: 0.78rem 1rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.content-body th {
+  position: sticky;
+  top: 0;
+  background: color-mix(in oklab, var(--bg-main) 78%, var(--bg-panel-strong) 22%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-main);
+}
+
+.content-body :where(p, li, blockquote, td, th, a, strong, em) {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}

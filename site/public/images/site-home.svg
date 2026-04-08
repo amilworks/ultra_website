@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="34" fill="#F7F7F5"/>
+  <rect x="34" y="34" width="1132" height="562" rx="28" fill="#FCFCFB" stroke="#E4E4E1"/>
+  <rect x="80" y="118" width="674" height="250" rx="30" fill="url(#lead)"/>
+  <rect x="794" y="118" width="326" height="250" rx="30" fill="url(#rail)"/>
+  <text x="80" y="84" fill="#171717" font-size="22" font-family="Inter, sans-serif" font-weight="600">BisQue Ultra</text>
+  <text x="80" y="456" fill="#171717" font-size="60" font-family="Inter, sans-serif" font-weight="700">Scientific imaging,</text>
+  <text x="80" y="514" fill="#171717" font-size="60" font-family="Inter, sans-serif" font-weight="700">clearer workflows.</text>
+  <text x="80" y="570" fill="#6B6B6B" font-size="24" font-family="Inter, sans-serif">White papers, platform notes, and interface walkthroughs for BisQue Ultra.</text>
+  <text x="846" y="448" fill="#171717" font-size="30" font-family="Inter, sans-serif" font-weight="600">BisQue platform</text>
+  <text x="846" y="486" fill="#6B6B6B" font-size="20" font-family="Inter, sans-serif">5D image data, metadata, annotations, modules.</text>
+  <defs>
+    <linearGradient id="lead" x1="80" y1="118" x2="754" y2="368" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DEE4FF"/>
+      <stop offset=".42" stop-color="#EFD6F6"/>
+      <stop offset="1" stop-color="#F8E6C8"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="794" y1="118" x2="1120" y2="368" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A6D1F6"/>
+      <stop offset="1" stop-color="#DDEBFF"/>
+    </linearGradient>
+  </defs>
+</svg>

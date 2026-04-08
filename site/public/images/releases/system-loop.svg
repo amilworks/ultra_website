@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" fill="none">
+  <rect width="1200" height="720" rx="28" fill="#121214"/>
+  <rect x="68" y="110" width="246" height="160" rx="28" fill="#1B1B1E" stroke="#3A3A40"/>
+  <rect x="478" y="110" width="246" height="160" rx="28" fill="#1B1B1E" stroke="#3A3A40"/>
+  <rect x="888" y="110" width="246" height="160" rx="28" fill="#1B1B1E" stroke="#3A3A40"/>
+  <rect x="270" y="446" width="246" height="160" rx="28" fill="#1B1B1E" stroke="#3A3A40"/>
+  <rect x="684" y="446" width="246" height="160" rx="28" fill="#1B1B1E" stroke="#3A3A40"/>
+  <path d="M314 190H478" stroke="#F1F1F1" stroke-width="10" stroke-linecap="round"/>
+  <path d="M724 190H888" stroke="#F1F1F1" stroke-width="10" stroke-linecap="round"/>
+  <path d="M599 270V446" stroke="#F1F1F1" stroke-width="10" stroke-linecap="round"/>
+  <path d="M516 526H684" stroke="#F1F1F1" stroke-width="10" stroke-linecap="round"/>
+  <text x="132" y="185" fill="#F5F5F5" font-size="34" font-family="Inter, sans-serif" font-weight="600">Uploads</text>
+  <text x="114" y="228" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">file_ids, resource URIs,</text>
+  <text x="122" y="258" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">dataset preflight</text>
+  <text x="524" y="185" fill="#F5F5F5" font-size="34" font-family="Inter, sans-serif" font-weight="600">Runtime</text>
+  <text x="522" y="228" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">direct agent default,</text>
+  <text x="526" y="258" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">approved tool use</text>
+  <text x="930" y="185" fill="#F5F5F5" font-size="34" font-family="Inter, sans-serif" font-weight="600">Artifacts</text>
+  <text x="922" y="228" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">figures, reports,</text>
+  <text x="914" y="258" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">viewer-ready outputs</text>
+  <text x="320" y="520" fill="#F5F5F5" font-size="34" font-family="Inter, sans-serif" font-weight="600">Typed events</text>
+  <text x="332" y="563" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">status, tools, approvals,</text>
+  <text x="342" y="593" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">machine-readable state</text>
+  <text x="734" y="520" fill="#F5F5F5" font-size="34" font-family="Inter, sans-serif" font-weight="600">Release comms</text>
+  <text x="728" y="563" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">white papers, news,</text>
+  <text x="734" y="593" fill="#9EA0A7" font-size="22" font-family="Inter, sans-serif">historical cadence</text>
+</svg>

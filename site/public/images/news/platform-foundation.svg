@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="34" fill="#F7F7F5"/>
+  <rect x="34" y="34" width="1132" height="562" rx="28" fill="#FCFCFB" stroke="#E4E4E1"/>
+  <rect x="76" y="116" width="288" height="182" rx="26" fill="#FDFDFC" stroke="#E5E5E2"/>
+  <rect x="456" y="116" width="288" height="182" rx="26" fill="#FDFDFC" stroke="#E5E5E2"/>
+  <rect x="836" y="116" width="288" height="182" rx="26" fill="#FDFDFC" stroke="#E5E5E2"/>
+  <rect x="76" y="352" width="1048" height="178" rx="28" fill="#171717"/>
+  <text x="114" y="176" fill="#171717" font-size="28" font-family="Inter, sans-serif" font-weight="600">5D image data</text>
+  <text x="114" y="214" fill="#6B6B6B" font-size="20" font-family="Inter, sans-serif">Store and visualize large scientific image collections.</text>
+  <text x="492" y="176" fill="#171717" font-size="28" font-family="Inter, sans-serif" font-weight="600">Flexible metadata</text>
+  <text x="492" y="214" fill="#6B6B6B" font-size="20" font-family="Inter, sans-serif">Annotations and resource context stay attached to data.</text>
+  <text x="872" y="176" fill="#171717" font-size="28" font-family="Inter, sans-serif" font-weight="600">Open modules</text>
+  <text x="872" y="214" fill="#6B6B6B" font-size="20" font-family="Inter, sans-serif">Extend workflows in Python, MATLAB, or Java plus ImageJ.</text>
+  <text x="114" y="70" fill="#171717" font-size="22" font-family="Inter, sans-serif" font-weight="600">BisQue Ultra</text>
+  <text x="114" y="430" fill="#F5F5F5" font-size="54" font-family="Inter, sans-serif" font-weight="700">Platform foundation</text>
+  <text x="114" y="474" fill="#A1A1AA" font-size="24" font-family="Inter, sans-serif">BisQue Ultra builds on BisQue's storage, metadata, annotation, and analysis infrastructure.</text>
+  <text x="114" y="514" fill="#A1A1AA" font-size="24" font-family="JetBrains Mono, monospace">storage + visualization + modules + provenance</text>
+</svg>

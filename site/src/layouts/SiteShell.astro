@@ -1,0 +1,159 @@
+---
+import "@/styles/global.css";
+import { siteConfig, siteNav } from "@/data/site";
+import BrandMark from "@/components/BrandMark.astro";
+import ArticleJumpMenu from "@/components/ArticleJumpMenu.astro";
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalPath?: string;
+  ogType?: "website" | "article";
+  publishedTime?: Date;
+  articleTags?: string[];
+  articleTitle?: string;
+  articleHeadings?: { depth: number; slug: string; text: string }[];
+};
+
+const {
+  title = `${siteConfig.name} ${siteConfig.releaseLabel}`,
+  description = siteConfig.description,
+  image = "/images/releases/bisque-ultra-og.svg",
+  canonicalPath = "/",
+  ogType = "website",
+  publishedTime,
+  articleTags = [],
+  articleTitle,
+  articleHeadings = [],
+} = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+const basePath = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+const normalizedPathname =
+  basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || "/" : pathname;
+const withBase = (path: string) =>
+  path === "/" ? baseUrl : `${baseUrl}${path.replace(/^\//, "")}`;
+const canonicalUrl = Astro.site ? new URL(withBase(canonicalPath), Astro.site).toString() : undefined;
+const imageUrl =
+  Astro.site && image.startsWith("/")
+    ? new URL(withBase(image), Astro.site).toString()
+    : image;
+
+const themeScript = `
+  (() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const applyTheme = () => {
+      const resolved = mediaQuery.matches ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", resolved === "dark");
+      document.documentElement.dataset.theme = resolved;
+    };
+
+    applyTheme();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", applyTheme);
+    } else if (typeof mediaQuery.addListener === "function") {
+      mediaQuery.addListener(applyTheme);
+    }
+  })();
+`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={title} />
+    {ogType === "article" && publishedTime ? (
+      <meta property="article:published_time" content={publishedTime.toISOString()} />
+    ) : null}
+    {ogType === "article"
+      ? articleTags.map((tag) => <meta property="article:tag" content={tag} />)
+      : null}
+    {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <title>{title}</title>
+    <script is:inline set:html={themeScript}></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="shell-header">
+        <div class="site-frame shell-header-inner">
+          <div class="shell-header-bar">
+            <div class="shell-header-row">
+              <a class="brand-lockup" href={baseUrl}>
+                <BrandMark />
+                <span>
+                  <p class="brand-title">{siteConfig.name}</p>
+                </span>
+              </a>
+              <nav class="shell-nav" aria-label="Primary">
+                {siteNav.map((item) => (
+                  <a
+                    href={withBase(item.href)}
+                    data-active={
+                      normalizedPathname === item.href ||
+                      normalizedPathname.startsWith(`${item.href}/`)
+                    }
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+              </nav>
+            </div>
+            {
+              articleTitle && articleHeadings.length ? (
+                <ArticleJumpMenu title={articleTitle} headings={articleHeadings} />
+              ) : null
+            }
+          </div>
+        </div>
+      </header>
+      <main class="main-shell">
+        <div class="site-frame">
+          <slot />
+        </div>
+      </main>
+      <footer class="shell-footer">
+        <div class="site-frame">
+          <div class="shell-footer-card">
+            <div>
+              <p class="eyebrow">BisQue Ultra release site</p>
+              <p class="section-lead footer-blurb">{siteConfig.footerBlurb}</p>
+            </div>
+            <div class="section-block footer-links">
+              <a class="subtle-link" href={siteConfig.docsUrl} target="_blank" rel="noreferrer">
+                BisQue docs
+              </a>
+              <a class="subtle-link" href={siteConfig.vrlUrl} target="_blank" rel="noreferrer">
+                Visit UCSB VRL
+              </a>
+              <a class="subtle-link" href={siteConfig.repoUrl} target="_blank" rel="noreferrer">
+                View repository
+              </a>
+              <a class="subtle-link" href={withBase("/news")}>Read product news</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

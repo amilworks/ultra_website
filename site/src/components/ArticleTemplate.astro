@@ -1,0 +1,33 @@
+---
+import ArticleMeta from "@/components/ArticleMeta.astro";
+
+type Props = {
+  title: string;
+  summary: string;
+  date: Date;
+  kind?: string;
+  version?: string;
+  tags?: string[];
+};
+
+const { title, summary, date, kind = "News", version, tags = [] } = Astro.props;
+---
+
+<article class="release-page" data-article-root>
+  <header class="release-title-card" data-article-title>
+    <div class="release-title-card-inner">
+      <p class="eyebrow release-card-label">{kind}</p>
+      <h1 class="release-title">{title}</h1>
+      <p class="release-summary">{summary}</p>
+      <ArticleMeta date={date} kind={kind} version={version} tags={tags} />
+    </div>
+  </header>
+
+  <section class="release-body">
+    <div class="release-body-inner">
+      <div class="content-body release-prose">
+        <slot />
+      </div>
+    </div>
+  </section>
+</article>

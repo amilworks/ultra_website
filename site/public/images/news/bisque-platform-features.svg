@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="78" y1="76" x2="1128" y2="554" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#63B4E7"/>
+      <stop offset="0.54" stop-color="#C8B8F1"/>
+      <stop offset="1" stop-color="#F3E78B"/>
+    </linearGradient>
+    <linearGradient id="card" x1="76" y1="110" x2="500" y2="498" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#FFFDF4" stop-opacity="0.94"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="34" fill="#F7F7F5"/>
+  <rect x="28" y="28" width="1144" height="574" rx="26" fill="url(#bg)"/>
+  <rect x="62" y="62" width="1076" height="506" rx="28" fill="#FCFCFB" fill-opacity="0.22" stroke="#FFFFFF" stroke-opacity="0.4"/>
+  <rect x="94" y="122" width="402" height="386" rx="30" fill="url(#card)" stroke="#FFFFFF" stroke-opacity="0.58"/>
+  <rect x="132" y="168" width="326" height="50" rx="18" fill="#FFFFFF" fill-opacity="0.82"/>
+  <text x="156" y="201" fill="#111113" font-size="27" font-family="Inter, sans-serif" font-weight="600">BisQue platform</text>
+  <rect x="132" y="246" width="326" height="88" rx="22" fill="#FFFFFF" fill-opacity="0.68"/>
+  <text x="156" y="284" fill="#111113" font-size="22" font-family="Inter, sans-serif" font-weight="600">storage + visualization</text>
+  <text x="156" y="316" fill="#5B6472" font-size="18" font-family="Inter, sans-serif">scientific image data up to 5D</text>
+  <rect x="132" y="354" width="326" height="112" rx="22" fill="#FFFFFF" fill-opacity="0.68"/>
+  <text x="156" y="393" fill="#111113" font-size="22" font-family="Inter, sans-serif" font-weight="600">metadata + modules</text>
+  <text x="156" y="425" fill="#5B6472" font-size="18" font-family="Inter, sans-serif">annotations, extensibility,</text>
+  <text x="156" y="451" fill="#5B6472" font-size="18" font-family="Inter, sans-serif">and reproducible workflows</text>
+  <text x="564" y="230" fill="#111113" font-size="60" font-family="Inter, sans-serif" font-weight="700">BisQue Platform</text>
+  <text x="564" y="300" fill="#111113" font-size="30" font-family="Inter, sans-serif">Storage, visualization, analysis,</text>
+  <text x="564" y="338" fill="#111113" font-size="30" font-family="Inter, sans-serif">and extensibility for scientific imaging.</text>
+  <text x="564" y="418" fill="#394555" font-size="24" font-family="Inter, sans-serif">Official docs images, local context, and a clearer product reading</text>
+  <text x="564" y="458" fill="#394555" font-size="24" font-family="Inter, sans-serif">of the platform that BisQue Ultra builds on.</text>
+  <text x="564" y="524" fill="#111113" font-size="24" font-family="JetBrains Mono, monospace">5D imaging + metadata + modules + deployment</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="34" fill="#F7F7F5"/>
+  <rect x="34" y="34" width="1132" height="562" rx="28" fill="#FCFCFB" stroke="#E4E4E1"/>
+  <rect x="72" y="96" width="218" height="438" rx="24" fill="#F3F3F1" stroke="#E2E2DE"/>
+  <rect x="322" y="96" width="806" height="64" rx="22" fill="#FAFAF9" stroke="#E5E5E2"/>
+  <rect x="382" y="202" width="458" height="90" rx="28" fill="#F1F1EF"/>
+  <rect x="382" y="338" width="560" height="172" rx="24" fill="#FCFCFB" stroke="#E5E5E2"/>
+  <rect x="760" y="470" width="124" height="32" rx="16" fill="#171717"/>
+  <rect x="454" y="448" width="82" height="30" rx="15" fill="#171717"/>
+  <rect x="84" y="124" width="78" height="18" rx="9" fill="#171717" fill-opacity=".08"/>
+  <rect x="84" y="166" width="146" height="18" rx="9" fill="#171717" fill-opacity=".08"/>
+  <rect x="84" y="208" width="128" height="18" rx="9" fill="#171717" fill-opacity=".08"/>
+  <rect x="84" y="286" width="112" height="18" rx="9" fill="#171717" fill-opacity=".08"/>
+  <rect x="84" y="328" width="136" height="18" rx="9" fill="#171717" fill-opacity=".08"/>
+  <text x="382" y="396" fill="#171717" font-size="26" font-family="Inter, sans-serif" font-weight="600">Frontend showcase</text>
+  <text x="382" y="432" fill="#6B6B6B" font-size="21" font-family="Inter, sans-serif">Readable shell, calm composer, structured answers.</text>
+  <text x="72" y="68" fill="#171717" font-size="22" font-family="Inter, sans-serif" font-weight="600">BisQue Ultra</text>
+  <text x="72" y="570" fill="#171717" font-size="54" font-family="Inter, sans-serif" font-weight="700">Interface system</text>
+  <text x="72" y="608" fill="#6B6B6B" font-size="24" font-family="Inter, sans-serif">Spacing, hierarchy, evidence cards, and scientific workflow controls.</text>
+</svg>

@@ -1,0 +1,26 @@
+---
+import { formatLongDate } from "@/lib/content";
+
+type Props = {
+  href: string;
+  title: string;
+  excerpt: string;
+  date: Date;
+  kind: string;
+};
+
+const { href, title, excerpt, date, kind } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const toHref = href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
+---
+
+<a class="surface-card post-card" href={toHref}>
+  <div class="post-card-meta">
+    <span class="pill">{kind}</span>
+    <span class="pill mono-copy">{formatLongDate(date)}</span>
+  </div>
+  <div class="section-header">
+    <h3 class="post-card-title">{title}</h3>
+    <p class="post-card-excerpt">{excerpt}</p>
+  </div>
+</a>

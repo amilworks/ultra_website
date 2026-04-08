@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths } from "astro";
+import { render } from "astro:content";
+import ArticleTemplate from "@/components/ArticleTemplate.astro";
+import SiteShell from "@/layouts/SiteShell.astro";
+import { getAllNews } from "@/lib/content";
+import { mdxComponents } from "@/components/mdx";
+
+export const getStaticPaths = (async () => {
+  const entries = await getAllNews();
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<SiteShell
+  title={`${entry.data.title} | BisQue Ultra`}
+  description={entry.data.summary}
+  image={entry.data.ogImage}
+  canonicalPath={`/news/${entry.data.slug}`}
+  ogType="article"
+  publishedTime={entry.data.date}
+  articleTags={entry.data.tags}
+  articleTitle={entry.data.title}
+  articleHeadings={headings}
+>
+  <ArticleTemplate
+    title={entry.data.title}
+    summary={entry.data.summary}
+    date={entry.data.date}
+    kind={entry.data.kind}
+    version={entry.data.version}
+    tags={entry.data.tags}
+  >
+    <Content components={mdxComponents} />
+  </ArticleTemplate>
+</SiteShell>

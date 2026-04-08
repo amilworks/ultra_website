@@ -1,0 +1,186 @@
+---
+import SiteShell from "@/layouts/SiteShell.astro";
+import { formatLongDate, getFeaturedNews, getLatestNews } from "@/lib/content";
+
+const featuredStory = await getFeaturedNews();
+const latestNews = await getLatestNews(2, featuredStory?.data.slug);
+const baseUrl = import.meta.env.BASE_URL;
+
+const toHref = (href: string) =>
+  href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
+
+if (!featuredStory) {
+  throw new Error("Expected at least one news entry for the site homepage.");
+}
+---
+
+<SiteShell
+  title="BisQue Ultra"
+  description="BisQue Ultra is a modern scientific work surface built on the BisQue platform for image organization, visualization, analysis, and reproducible workflows."
+  canonicalPath="/"
+  image="/images/site-home.svg"
+>
+  <div class="home-editorial">
+    <section class="editorial-grid" aria-label="Featured release and latest news">
+      <article class="story-feature">
+        <a
+          class="story-tile story-tile-large"
+          data-tone={featuredStory.data.coverImage ? "image" : "lead"}
+          data-has-image={featuredStory.data.coverImage ? "true" : "false"}
+          href={toHref(`/news/${featuredStory.data.slug}`)}
+          aria-label={`Open ${featuredStory.data.title}`}
+        >
+          {
+            featuredStory.data.coverImage ? (
+              <img
+                class="story-tile-image"
+                src={toHref(featuredStory.data.coverImage)}
+                alt={featuredStory.data.coverImageAlt ?? featuredStory.data.title}
+                style={`object-position: ${featuredStory.data.coverPosition ?? "50% 50%"}`}
+                loading="eager"
+                decoding="async"
+              />
+            ) : null
+          }
+          {
+            featuredStory.data.coverImage ? null : (
+              <span class="story-badge">
+                {featuredStory.data.version
+                  ? `${featuredStory.data.title} ${featuredStory.data.version}`
+                  : featuredStory.data.title}
+              </span>
+            )
+          }
+        </a>
+        <div class="story-copy story-copy-feature">
+          <p class="eyebrow">Featured {featuredStory.data.kind.toLowerCase()}</p>
+          <h1 class="story-headline">{featuredStory.data.title}</h1>
+          <p class="story-summary">{featuredStory.data.excerpt}</p>
+          <p class="story-meta">
+            <span>{featuredStory.data.kind}</span>
+            <span>{formatLongDate(featuredStory.data.date)}</span>
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>
+              {featuredStory.data.kind === "White paper" ? "Read the white paper" : "Read the article"}
+            </a>
+            <a class="secondary-button" href={toHref("/news")}>Browse product news</a>
+          </div>
+        </div>
+      </article>
+
+      <div class="story-rail">
+        {latestNews.map((entry, index) => (
+          <article class="story-rail-item">
+            <a
+              class="story-tile story-tile-rail"
+              data-tone={entry.data.coverImage ? "image" : index === 0 ? "cool" : "blend"}
+              data-has-image={entry.data.coverImage ? "true" : "false"}
+              href={toHref(`/news/${entry.data.slug}`)}
+              aria-label={`Open ${entry.data.title}`}
+            >
+              {
+                entry.data.coverImage ? (
+                  <img
+                    class="story-tile-image"
+                    src={toHref(entry.data.coverImage)}
+                    alt={entry.data.coverImageAlt ?? entry.data.title}
+                    style={`object-position: ${entry.data.coverPosition ?? "50% 50%"}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : null
+              }
+            </a>
+            <div class="story-copy">
+              <h2 class="story-rail-title">
+                <a class="story-link" href={toHref(`/news/${entry.data.slug}`)}>
+                  {entry.data.title}
+                </a>
+              </h2>
+              <p class="story-summary story-summary-rail">{entry.data.excerpt}</p>
+              <p class="story-meta">
+                <span>{entry.data.kind}</span>
+                <span>{formatLongDate(entry.data.date)}</span>
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="home-intro section-block">
+      <div class="section-header">
+        <p class="eyebrow">Platform foundation</p>
+        <h2 class="section-title">A scientific imaging platform, clarified for everyday work.</h2>
+        <p class="section-lead">
+          BisQue Ultra builds on the BisQue platform's storage, visualization, metadata, annotation, and
+          analysis infrastructure while making uploads, runs, artifacts, and follow-up work easier to read.
+        </p>
+      </div>
+      <figure class="surface-card home-platform-preview">
+        <img
+          class="home-platform-preview-image home-platform-preview-image-light"
+          src={toHref("/images/home/platform-preview-light.png")}
+          alt="Light mode BisQue Ultra report view showing a transformer report with structured reading layout."
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="home-platform-preview-image home-platform-preview-image-dark"
+          src={toHref("/images/home/platform-preview-dark.png")}
+          alt="Dark mode BisQue Ultra report view showing a transformer report with structured reading layout."
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+      <div class="home-notes-grid">
+        <article class="flat-note">
+          <p class="eyebrow">BisQue foundation</p>
+          <h3 class="flat-note-title">Store, visualize, organize, and analyze up to 5D image data.</h3>
+          <p class="flat-note-copy">
+            BisQue is a web-based platform designed for scientific imaging, with flexible metadata,
+            graphical and textual annotations, and an open architecture for domain-specific analysis.
+          </p>
+        </article>
+        <article class="flat-note">
+          <p class="eyebrow">Workflow continuity</p>
+          <h3 class="flat-note-title">From upload to artifact, the path stays inspectable.</h3>
+          <p class="flat-note-copy">
+            BisQue Ultra keeps resource imports, run events, generated outputs, viewer previews, and
+            reproducibility reports close to the same working surface instead of scattering them across
+            separate tools.
+          </p>
+        </article>
+        <article class="flat-note">
+          <p class="eyebrow">Research breadth</p>
+          <h3 class="flat-note-title">Used across biomedical, ecological, and materials workflows.</h3>
+          <p class="flat-note-copy">
+            BisQue has supported biomedical sciences, neuroscience, wildlife conservation, marine science,
+            and materials research. BisQue Ultra is designed to make that breadth easier to navigate.
+          </p>
+        </article>
+      </div>
+
+      <aside class="surface-card home-acknowledgement">
+        <div class="home-acknowledgement-copy">
+          <p class="eyebrow">About BisQue Ultra</p>
+          <h3 class="flat-note-title">Created within the UCSB Vision Research Lab.</h3>
+          <p class="flat-note-copy">
+            BisQue Ultra was created by Amil Khan, a PhD student in the UCSB Vision Research Lab. The lab
+            is led by Professor <a href="https://scholar.google.com/citations?user=wRYM4qgAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">B.S. Manjunath</a> in the Department of Electrical and Computer Engineering,
+            with research spanning computer vision, image processing, and machine learning applications.
+          </p>
+        </div>
+        <div class="home-acknowledgement-links">
+          <a class="subtle-link" href="https://vision.ece.ucsb.edu" target="_blank" rel="noreferrer">
+            Visit UCSB VRL
+          </a>
+          <a class="subtle-link" href="https://bisque.gitbook.io/docs/" target="_blank" rel="noreferrer">
+            Read BisQue docs
+          </a>
+        </div>
+      </aside>
+    </section>
+  </div>
+</SiteShell>

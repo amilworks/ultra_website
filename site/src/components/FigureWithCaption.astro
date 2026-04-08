@@ -1,0 +1,68 @@
+---
+type Props = {
+  src: string;
+  alt?: string;
+  title?: string;
+  caption?: string;
+  kind?: "image" | "video";
+  span?: "measure" | "wide";
+  poster?: string;
+  controls?: boolean;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  playsinline?: boolean;
+  preload?: "auto" | "metadata" | "none";
+  type?: string;
+};
+
+const {
+  src,
+  alt = "",
+  title,
+  caption,
+  kind = "image",
+  span = "wide",
+  poster,
+  controls = kind === "video",
+  autoplay = false,
+  loop = false,
+  muted = false,
+  playsinline = true,
+  preload = "metadata",
+  type,
+} = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const resolvedSrc = src.startsWith("/") ? `${baseUrl}${src.replace(/^\//, "")}` : src;
+const resolvedPoster =
+  poster && poster.startsWith("/") ? `${baseUrl}${poster.replace(/^\//, "")}` : poster;
+---
+
+<figure class="figure-card" data-kind={kind} data-span={span}>
+  <div class="figure-media">
+    {
+      kind === "video" ? (
+        <video
+          controls={controls}
+          autoplay={autoplay}
+          loop={loop}
+          muted={muted}
+          playsinline={playsinline}
+          preload={preload}
+          poster={resolvedPoster}
+          aria-label={alt || title || caption || "Article video"}
+        >
+          <source src={resolvedSrc} type={type} />
+        </video>
+      ) : (
+        <img src={resolvedSrc} alt={alt} loading="lazy" />
+      )
+    }
+  </div>
+  {title || caption ? (
+    <figcaption class="figure-copy">
+      {title ? <strong>{title}</strong> : null}
+      {caption ? <p>{caption}</p> : null}
+    </figcaption>
+  ) : null}
+</figure>

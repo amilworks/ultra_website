@@ -1,0 +1,26 @@
+---
+type Props = {
+  title: string;
+  eyebrow?: string;
+  description?: string;
+};
+
+const {
+  title,
+  eyebrow = "Frontend component",
+  description = "Reserved for a future embedded BisQue Ultra UI example.",
+} = Astro.props;
+---
+
+<aside class="interface-showcase">
+  <div class="interface-showcase-head">
+    <p class="eyebrow">{eyebrow}</p>
+    <div class="interface-showcase-copy">
+      <h4>{title}</h4>
+      <p>{description}</p>
+    </div>
+  </div>
+  <div class="interface-showcase-slot">
+    <slot />
+  </div>
+</aside>

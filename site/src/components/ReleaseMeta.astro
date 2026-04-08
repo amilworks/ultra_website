@@ -1,0 +1,18 @@
+---
+import { formatLongDate } from "@/lib/content";
+
+type Props = {
+  version: string;
+  date: Date;
+  tags: string[];
+};
+
+const { version, date, tags } = Astro.props;
+---
+
+<div class="release-meta" aria-label="Release metadata">
+  <span>{formatLongDate(date)}</span>
+  <span>White paper</span>
+  <span>Version {version}</span>
+  {tags[0] ? <span>{tags[0]}</span> : null}
+</div>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="34" fill="#101012"/>
+  <rect x="28" y="28" width="1144" height="574" rx="26" fill="#171719" stroke="#2A2A2D"/>
+  <circle cx="1030" cy="130" r="140" fill="#DCE5F0" opacity="0.18"/>
+  <path d="M138 170V325A170 170 0 0 0 478 325V170" stroke="#F5F5F5" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M192 301A62 62 0 0 1 308 260A62 62 0 0 0 424 301" stroke="#F5F5F5" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="590" y="230" fill="#F5F5F5" font-size="62" font-family="Inter, sans-serif" font-weight="700">BisQue Ultra</text>
+  <text x="590" y="302" fill="#A1A1AA" font-size="30" font-family="Inter, sans-serif">Release notes and white paper</text>
+  <text x="590" y="386" fill="#F5F5F5" font-size="28" font-family="JetBrains Mono, monospace">scientific imaging + reproducible workflows</text>
+</svg>

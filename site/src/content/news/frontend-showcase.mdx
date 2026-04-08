@@ -1,0 +1,140 @@
+---
+title: "Why the BisQue Ultra frontend looks the way it does"
+slug: "frontend-showcase"
+date: 2026-04-06
+summary: "A practical walkthrough of the BisQue Ultra frontend: why the palette stays neutral, why Inter carries the UI, why the composer is flat, and why calm software depends on technical correctness."
+excerpt: "A conversational white paper on the BisQue Ultra frontend. It explains the reasoning behind color, typography, spacing, interaction design, streaming behavior, and evidence handling, using the product's actual values and constraints rather than generic design slogans."
+ogImage: "/images/news/frontend-showcase.svg"
+kind: "White paper"
+tags:
+  - Frontend
+  - Design language
+  - Typography
+  - Performance
+  - Scientific software
+---
+
+Most interface writing fails in one of two ways. It either sounds like marketing, or it sounds like a code review. Neither helps a reader understand why a product feels the way it does.
+
+This article tries to do something harder and more useful. It explains the BisQue Ultra frontend the way we would explain it to a careful collaborator: not by saying the interface is clean, but by showing what that cleanliness is doing. Why is the page not pure white? Why are the headings lighter than people expect? Why does the composer stay flat? Why is the Pro control the darkest object in the input area? Why does evidence sit next to language instead of somewhere else?
+
+Those questions matter because BisQue Ultra is not a brand exercise. It is a working surface for scientists. People use it to inspect data, launch workflows, read long answers, check supporting evidence, and return later without losing the thread. In that kind of product, the interface has one primary duty: it must keep thought moving.
+
+<Callout title="Central claim" tone="proof">
+  The BisQue Ultra design language is not a mood. It is a sequence of small decisions that make long sessions easier to read, easier to trust, and easier to recover when something goes wrong.
+</Callout>
+
+## Start with the work, not the style
+
+The fastest way to make scientific software look expensive is to add more. More borders. More color. More shadow. More headings that announce themselves before the reader has asked for them.
+
+The better way is quieter. Start with the work. Ask what the user is actually doing. In BisQue Ultra, that work has a particular shape. A researcher may spend an hour inside one thread. They may read a long answer, inspect an image, compare evidence, upload a file, switch modes, and come back tomorrow. That rhythm punishes decorative decisions very quickly. A bright white canvas that looks sharp in a screenshot becomes tiring. Heavy headings that feel dramatic in a mockup begin to sound like shouting. A composer with too many nested surfaces starts to feel like clutter at the exact moment when the user needs control.
+
+So the frontend had to follow a stricter rule: each visible choice had to earn its place by helping concentration, orientation, or trust.
+
+## Why the palette begins with near-white, not white
+
+Pure white is persuasive in a presentation. It looks crisp, modern, and clean. It is also harsher than many people notice at first, especially when black text sits on it for a long reading session.
+
+That is why the BisQue Ultra light theme does not begin at `#ffffff`. It begins at `#f5f5f4` for the page and `#f8f8f7` for the main working surface. Those values are close enough to white to feel open, but soft enough to reduce glare. The text follows the same logic. The primary foreground is `#171717`, not a true black, and the supporting text sits at `#737373`, which is dark enough to read but quiet enough to remain secondary.
+
+If you have ever used a bright interface for an afternoon and felt more fatigued than the task itself seemed to justify, you already know the logic here. Contrast must serve reading. It should not become a spectacle of its own.
+
+The same restraint shapes accent color. The product does have warm and cool notes, but they are not allowed to behave like a brand campaign. Soft warm surfaces and cool blue-gray surfaces appear where they clarify state or help separate planes. The composer hover state is not a loud new color. It is a small shift toward light. The active control state leans gently toward warmth. That warmth matters because it helps the eye register change without turning the interface into a dashboard of competing signals.
+
+Dark mode follows the same philosophy rather than simply inverting light mode. The working surface moves to `#111113`, strong panels to `#1b1b1d`, the main text to `#f5f5f5`, and the muted text to `#a1a1aa`. In other words, the colors change, but the relationships stay intact. That is what makes the product feel like itself in both themes.
+
+<Callout title="Color rule">
+  Most surfaces should recede. Color should step forward only when it clarifies priority, state, or evidence.
+</Callout>
+
+## Why Inter carries the interface
+
+A typeface does more than set a mood. It establishes how patiently the interface can speak.
+
+BisQue Ultra uses Inter for almost everything because Inter holds up under the actual conditions of use. It stays readable at modest sizes. It behaves well in dense application surfaces. It offers enough weight range to create hierarchy without becoming theatrical. It also pairs cleanly with JetBrains Mono, which matters in a product that regularly shows identifiers, paths, parameters, and other technical strings.
+
+The type scale is deliberately restrained. General UI text sits at `0.9375rem`. Reading text rises to `1rem`. Long-form content uses a `1.62` line height. Those numbers are not decorative trivia. They encode a reading posture. The body is compact enough for an application shell, but prose is given more air so that dense answers do not collapse into a wall.
+
+Weight matters just as much as size. Navigation stays at `400`. Panel headings sit at `500`. That lighter hierarchy is intentional. In scientific software, heavy type can create a false sense of urgency. A heading should guide the eye, not seize the room.
+
+There is a useful literary parallel here. In good prose, emphasis works only because most of the sentence stays calm. The same is true on a screen. If every heading is loud, then nothing has authority. If every surface is bright, then nothing feels important. BisQue Ultra keeps its strongest voice in reserve.
+
+## Why alignment matters more than decoration
+
+What many people call polish is often alignment.
+
+Optical alignment is the difference between a shell that feels assembled and one that feels inevitable. The sidebar is `260px` wide. Its rows share `0.75rem` horizontal padding and `0.625rem` internal gaps. Those are small values, but the repetition matters. Repeated edges give the eye a place to settle. Once the left rail stops wobbling, the whole application feels calmer.
+
+That is also why the shell avoids excessive contour. It does not rely on stacked card effects, loud separators, or a parade of visual containers. The structure comes from spacing, rhythm, and predictable edges. Decoration is not forbidden. It is simply not doing the main work.
+
+<InterfaceShowcase
+  eyebrow="Application shell"
+  title="A shell that orients the user without competing with the work"
+  description="The left rail, top bar, and thread surface stay disciplined so the user's attention can remain on the task at hand rather than on the chrome around it."
+>
+  <FrontendShellPreview />
+</InterfaceShowcase>
+
+This is one of the quieter truths of interface design: when alignment is right, you need fewer tricks. The screen already knows how to stand up.
+
+## Why the composer is flat, and why the Pro button is dark
+
+The composer is the most stressed object in the product. It must hold language, uploads, workflow state, mode selection, and execution intent without feeling crowded. If it becomes decorative, it becomes confusing.
+
+That is why the BisQue Ultra composer became flatter over time. Nested cards were removed. The textarea stopped looking like a separate object floating inside a larger object. The supporting controls moved into the same visual family. The result is not merely simpler. It is easier to read. The eye can see one control surface instead of three stacked ones pretending to be one.
+
+The smaller details follow the same rule. The attachment button is quiet because attachment is common, not ceremonial. Hover states use soft surface shifts rather than bold outlines. The control active state borrows a little warmth rather than a lot of saturation. Each move tells the truth about its importance.
+
+The strongest contrast belongs to Pro Mode. The Pro control uses a nearly black fill, `#050505`, with nearly white text. That choice was earned slowly. Softer versions looked more decorative than decisive. Gradient-heavy versions felt stylish, but too stylish for a tool that needs to read as infrastructure. The darker version works because it does one thing cleanly: it marks a genuine change in mode. It is the loudest note in the composer because it is the one note that actually needs to be loud.
+
+<InterfaceShowcase
+  eyebrow="Prompt composer"
+  title="A control surface that makes priority obvious"
+  description="The typing area stays dominant, support actions stay nearby but secondary, and the only strong contrast is reserved for a real change in mode."
+>
+  <PromptComposerPreview />
+</InterfaceShowcase>
+
+Good minimalism is not the removal of personality. It is the removal of ambiguity.
+
+## Why calm visuals require honest mechanics
+
+A calm interface that types poorly is not calm. A streaming interface that reveals its answer all at once is not streaming. A precise scientific tool that misses the user's click by a few pixels is not precise.
+
+This is where design and engineering become the same discipline.
+
+BisQue Ultra only feels steady because the mechanics were forced to support the visual claims. Draft text was pulled into a lighter local state path so typing would not drag the whole conversation through unnecessary work. Scroll behavior was refined so the thread would stop fighting its own auto-scroll logic. Streamed responses stayed mounted until the local reveal had truly finished, which made the interface look honest rather than theatrical.
+
+The same principle shaped tool interactions. Segmentation prompts had to land in source-pixel space, not merely somewhere near the user's click. Workflow state had to remain visible instead of disappearing into backend behavior. A scientific interface loses credibility the moment it asks the user to trust a black box while pretending to be transparent.
+
+That is why performance belongs in a design article. Speed is not separate from tone. A product that hesitates in the wrong places becomes harder to believe.
+
+## Why evidence sits beside the answer
+
+Scientific software should not force a choice between a readable explanation and inspectable support. The answer and the evidence belong in the same field of attention.
+
+That belief shaped the frontend strongly. Structured results live as cards and inspectable objects, not as loose fragments inside a wall of prose. The user should be able to read a conclusion, see the artifact that supports it, and understand what happened without leaving the thread or reconstructing the logic from memory.
+
+<InterfaceShowcase
+  eyebrow="Evidence handling"
+  title="Language and proof stay close to each other"
+  description="The interface treats evidence as part of the answer rather than as a detached appendix. That makes the product easier to trust and easier to revisit later."
+>
+  <EvidenceCardPreview />
+</InterfaceShowcase>
+
+This matters for the public writing too. A good technical article should behave the same way a good interface behaves. It should tell the reader what changed, why it changed, and what piece of evidence supports the claim.
+
+## A short rulebook for future contributors
+
+If this frontend stays coherent as the product grows, it will be because a few rules remain non-negotiable:
+
+1. Start with reading comfort, not brand expression.
+2. Keep most surfaces neutral so emphasis has somewhere to go.
+3. Let spacing, rhythm, and alignment do more work than borders and effects.
+4. Use one strong contrast move only when the product is signaling a real change in priority.
+5. Never call an interaction calm unless the mechanics are calm too.
+6. Keep explanation and evidence close enough that the user does not have to rebuild trust from memory.
+
+That is the real design language of BisQue Ultra. It is not a set of fashionable ingredients. It is a way of making sure the interface remains legible under pressure, patient over time, and useful enough that a reader can come back later and still learn from it.

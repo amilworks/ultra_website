@@ -1,0 +1,105 @@
+---
+type Heading = {
+  depth: number;
+  slug: string;
+  text: string;
+};
+
+type Props = {
+  title: string;
+  headings?: Heading[];
+};
+
+const { title, headings = [] } = Astro.props;
+const sectionHeadings = headings.filter((heading) => heading.depth === 2 && heading.slug);
+---
+
+{
+  sectionHeadings.length ? (
+    <details class="article-jump" data-article-jump data-visible="false">
+      <summary class="article-jump-summary">
+        <div class="article-jump-copy">
+          <p class="article-jump-label">On this page</p>
+          <p class="article-jump-title">{title}</p>
+        </div>
+        <span class="article-jump-chevron" aria-hidden="true">
+          <svg viewBox="0 0 16 16" focusable="false" aria-hidden="true">
+            <path
+              d="M4 6.5 8 10.25 12 6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.6"
+            />
+          </svg>
+        </span>
+      </summary>
+
+      <nav class="article-jump-nav" aria-label="Article sections">
+        <ol>
+          {sectionHeadings.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+  ) : null
+}
+
+<script is:inline>
+  const setupArticleJumpMenus = () => {
+    const menus = document.querySelectorAll("[data-article-jump]");
+    const titleBlock = document.querySelector("[data-article-title]");
+    const siteHeader = document.querySelector(".shell-header");
+
+    menus.forEach((menu) => {
+      if (!(menu instanceof HTMLElement) || menu.dataset.bound === "true") {
+        return;
+      }
+
+      if (!(titleBlock instanceof HTMLElement)) {
+        return;
+      }
+
+      menu.dataset.bound = "true";
+
+      let ticking = false;
+
+      const update = () => {
+        const headerHeight = siteHeader instanceof HTMLElement ? siteHeader.getBoundingClientRect().height : 64;
+        const offset = Math.round(headerHeight + 6);
+        const titleBottom = titleBlock.getBoundingClientRect().bottom;
+
+        menu.dataset.visible = titleBottom <= offset ? "true" : "false";
+        if (titleBottom > offset) {
+          menu.removeAttribute("open");
+        }
+      };
+
+      const requestUpdate = () => {
+        if (ticking) {
+          return;
+        }
+
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+      };
+
+      update();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupArticleJumpMenus, { once: true });
+  } else {
+    setupArticleJumpMenus();
+  }
+</script>
