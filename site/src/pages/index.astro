@@ -34,6 +34,11 @@ const homeImage = featuredStory.data.coverImage ?? "/images/news/bisque-ultra-co
 const homeImageAlt =
   featuredStory.data.coverImageAlt ??
   "BisQue Ultra launch artwork with a bright abstract gradient in pink, violet, sand, and electric blue.";
+const launchHeroImage = homeImage;
+const launchHeroImageAlt = homeImageAlt;
+const primaryTileImage = "/images/news/bisque-ultra-launch2.png";
+const primaryTileImageAlt =
+  "BisQue Ultra showing a prairie dog detection report in a structured interface with a calm sidebar, readable report surface, and integrated prompt composer.";
 ---
 
 <SiteShell
@@ -62,11 +67,15 @@ const homeImageAlt =
         >
           <img
             class="launch-hero-art-image"
-            src={toHref(homeImage)}
-            alt={homeImageAlt}
+            src={toHref(launchHeroImage)}
+            alt={launchHeroImageAlt}
             loading="eager"
             decoding="async"
           />
+          <span class="launch-hero-badge" aria-hidden="true">
+            <span class="launch-hero-badge-subtle">BisQue</span>
+            <span class="launch-hero-badge-strong">Ultra</span>
+          </span>
         </a>
       </div>
       <div class="hero-actions launch-actions">
@@ -103,23 +112,19 @@ const homeImageAlt =
       <article class="launch-primary">
         <a
           class="story-tile story-tile-large"
-          data-tone={featuredStory.data.coverImage ? "image" : "lead"}
-          data-has-image={featuredStory.data.coverImage ? "true" : "false"}
+          data-tone="image"
+          data-has-image="true"
           href={toHref(`/news/${featuredStory.data.slug}`)}
           aria-label={`Open ${featuredStory.data.title}`}
         >
-          {
-            featuredStory.data.coverImage ? (
-              <img
-                class="story-tile-image"
-                src={toHref(featuredStory.data.coverImage)}
-                alt={featuredStory.data.coverImageAlt ?? featuredStory.data.title}
-                style={`object-position: ${featuredStory.data.coverPosition ?? "50% 50%"}`}
-                loading="eager"
-                decoding="async"
-              />
-            ) : null
-          }
+          <img
+            class="story-tile-image"
+            src={toHref(primaryTileImage)}
+            alt={primaryTileImageAlt}
+            style="object-position: 50% 50%"
+            loading="eager"
+            decoding="async"
+          />
         </a>
         <div class="launch-primary-copy">
           <p class="eyebrow">Flagship launch</p>
