@@ -8,24 +8,28 @@ type Props = {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   canonicalPath?: string;
   ogType?: "website" | "article";
   publishedTime?: Date;
   articleTags?: string[];
   articleTitle?: string;
   articleHeadings?: { depth: number; slug: string; text: string }[];
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 };
 
 const {
   title = `${siteConfig.name} ${siteConfig.releaseLabel}`,
   description = siteConfig.description,
   image = "/images/releases/bisque-ultra-og.svg",
+  imageAlt = title,
   canonicalPath = "/",
   ogType = "website",
   publishedTime,
   articleTags = [],
   articleTitle,
   articleHeadings = [],
+  jsonLd,
 } = Astro.props;
 
 const baseUrl = import.meta.env.BASE_URL;
@@ -74,11 +78,12 @@ const themeScript = `
     <meta property="og:site_name" content={siteConfig.name} />
     {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
-    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:image:alt" content={imageAlt} />
     {ogType === "article" && publishedTime ? (
       <meta property="article:published_time" content={publishedTime.toISOString()} />
     ) : null}
@@ -89,6 +94,9 @@ const themeScript = `
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
     <title>{title}</title>
     <script is:inline set:html={themeScript}></script>
+    {jsonLd ? (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    ) : null}
   </head>
   <body>
     <div class="site-shell">

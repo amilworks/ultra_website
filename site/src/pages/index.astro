@@ -1,10 +1,27 @@
 ---
 import SiteShell from "@/layouts/SiteShell.astro";
 import { formatLongDate, getFeaturedNews, getLatestNews } from "@/lib/content";
+import ProofStrip from "@/components/ProofStrip.astro";
 
 const featuredStory = await getFeaturedNews();
 const latestNews = await getLatestNews(2, featuredStory?.data.slug);
 const baseUrl = import.meta.env.BASE_URL;
+const canonicalUrl = Astro.site ? new URL(baseUrl, Astro.site).toString() : undefined;
+const homeJsonLd = canonicalUrl
+  ? {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "BisQue Ultra",
+      description:
+        "BisQue Ultra is a new scientific work surface built on the BisQue platform for image analysis, model reasoning, and reproducible outputs.",
+      url: canonicalUrl,
+      about: {
+        "@type": "SoftwareApplication",
+        name: "BisQue Ultra",
+        applicationCategory: "ScientificApplication",
+      },
+    }
+  : undefined;
 
 const toHref = (href: string) =>
   href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
@@ -12,17 +29,78 @@ const toHref = (href: string) =>
 if (!featuredStory) {
   throw new Error("Expected at least one news entry for the site homepage.");
 }
+
+const homeImage = featuredStory.data.coverImage ?? "/images/news/bisque-ultra-cover.png";
+const homeImageAlt =
+  featuredStory.data.coverImageAlt ??
+  "BisQue Ultra launch artwork with a bright abstract gradient in pink, violet, sand, and electric blue.";
 ---
 
 <SiteShell
   title="BisQue Ultra"
-  description="BisQue Ultra is a modern scientific work surface built on the BisQue platform for image organization, visualization, analysis, and reproducible workflows."
+  description="BisQue Ultra is a new scientific work surface built on the BisQue platform for image analysis, model reasoning, and reproducible outputs."
   canonicalPath="/"
-  image="/images/site-home.svg"
+  image={homeImage}
+  imageAlt={homeImageAlt}
+  jsonLd={homeJsonLd}
 >
   <div class="home-editorial">
-    <section class="editorial-grid" aria-label="Featured release and latest news">
-      <article class="story-feature">
+    <section class="launch-hero section-block" aria-label="Launch overview">
+      <div class="launch-hero-top">
+        <div class="section-header launch-hero-copy">
+          <p class="eyebrow">Scientific product launch</p>
+          <h1 class="launch-headline">A clearer scientific work surface for images, models, and evidence.</h1>
+          <p class="launch-subhead">
+            Built on the BisQue platform, BisQue Ultra brings uploads, multidimensional viewing, structured
+            reasoning, and reproducible artifacts into one readable surface instead of scattering them across tools.
+          </p>
+        </div>
+        <a
+          class="launch-hero-art"
+          href={toHref(`/news/${featuredStory.data.slug}`)}
+          aria-label={`Open ${featuredStory.data.title}`}
+        >
+          <img
+            class="launch-hero-art-image"
+            src={toHref(homeImage)}
+            alt={homeImageAlt}
+            loading="eager"
+            decoding="async"
+          />
+        </a>
+      </div>
+      <div class="hero-actions launch-actions">
+        <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Read the flagship article</a>
+        <a class="secondary-button" href={toHref("/news")}>Read the launch sequence</a>
+      </div>
+      <ProofStrip
+        items={[
+          {
+            label: "Platform foundation",
+            title: "BisQue stays underneath",
+            body: "Storage, metadata, annotations, analysis modules, and up to 5D visualization remain part of the product contract.",
+          },
+          {
+            label: "Model path",
+            title: "vLLM + gpt-oss-120b",
+            body: "OpenAI-compatible serving, a 128k context window, and fast, auto, and deep reasoning modes.",
+          },
+          {
+            label: "Image boundary",
+            title: "BioIO reads real lab files",
+            body: "One universal scientific image-loading layer with scenes, channels, dimensions, and physical scale intact.",
+          },
+          {
+            label: "Provenance",
+            title: "Runs and artifacts stay visible",
+            body: "Uploads, run events, generated outputs, and reproducibility clues remain inspectable after the answer lands.",
+          },
+        ]}
+      />
+    </section>
+
+    <section class="launch-spotlight" aria-label="Flagship launch and supporting notes">
+      <article class="launch-primary">
         <a
           class="story-tile story-tile-large"
           data-tone={featuredStory.data.coverImage ? "image" : "lead"}
@@ -42,19 +120,10 @@ if (!featuredStory) {
               />
             ) : null
           }
-          {
-            featuredStory.data.coverImage ? null : (
-              <span class="story-badge">
-                {featuredStory.data.version
-                  ? `${featuredStory.data.title} ${featuredStory.data.version}`
-                  : featuredStory.data.title}
-              </span>
-            )
-          }
         </a>
-        <div class="story-copy story-copy-feature">
-          <p class="eyebrow">Featured {featuredStory.data.kind.toLowerCase()}</p>
-          <h1 class="story-headline">{featuredStory.data.title}</h1>
+        <div class="launch-primary-copy">
+          <p class="eyebrow">Flagship launch</p>
+          <h2 class="story-headline">{featuredStory.data.title}</h2>
           <p class="story-summary">{featuredStory.data.excerpt}</p>
           <p class="story-meta">
             <span>{featuredStory.data.kind}</span>
@@ -69,53 +138,39 @@ if (!featuredStory) {
         </div>
       </article>
 
-      <div class="story-rail">
-        {latestNews.map((entry, index) => (
-          <article class="story-rail-item">
-            <a
-              class="story-tile story-tile-rail"
-              data-tone={entry.data.coverImage ? "image" : index === 0 ? "cool" : "blend"}
-              data-has-image={entry.data.coverImage ? "true" : "false"}
-              href={toHref(`/news/${entry.data.slug}`)}
-              aria-label={`Open ${entry.data.title}`}
-            >
-              {
-                entry.data.coverImage ? (
-                  <img
-                    class="story-tile-image"
-                    src={toHref(entry.data.coverImage)}
-                    alt={entry.data.coverImageAlt ?? entry.data.title}
-                    style={`object-position: ${entry.data.coverPosition ?? "50% 50%"}`}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : null
-              }
-            </a>
-            <div class="story-copy">
-              <h2 class="story-rail-title">
-                <a class="story-link" href={toHref(`/news/${entry.data.slug}`)}>
-                  {entry.data.title}
-                </a>
-              </h2>
-              <p class="story-summary story-summary-rail">{entry.data.excerpt}</p>
-              <p class="story-meta">
+      <aside class="launch-reading surface-card">
+        <div class="section-header">
+          <p class="eyebrow">Read next</p>
+          <h2 class="section-title">Two supporting notes that explain the platform and the interface.</h2>
+          <p class="section-lead">
+            The launch article explains what changed. These two pieces explain what BisQue Ultra stands on
+            and why the product feels the way it does.
+          </p>
+        </div>
+        <div class="launch-reading-grid">
+          {latestNews.map((entry) => (
+            <a class="launch-reading-card" href={toHref(`/news/${entry.data.slug}`)}>
+              <p class="launch-reading-meta">
+                <span class="post-card-sequence mono-copy">
+                  {String(entry.data.sequence ?? 0).padStart(2, "0")}
+                </span>
                 <span>{entry.data.kind}</span>
-                <span>{formatLongDate(entry.data.date)}</span>
               </p>
-            </div>
-          </article>
-        ))}
-      </div>
+              <h3 class="story-rail-title">{entry.data.title}</h3>
+              <p class="story-summary story-summary-rail">{entry.data.excerpt}</p>
+            </a>
+          ))}
+        </div>
+      </aside>
     </section>
 
     <section class="home-intro section-block">
       <div class="section-header">
-        <p class="eyebrow">Platform foundation</p>
+        <p class="eyebrow">Why this launch matters</p>
         <h2 class="section-title">A scientific imaging platform, clarified for everyday work.</h2>
         <p class="section-lead">
-          BisQue Ultra builds on the BisQue platform's storage, visualization, metadata, annotation, and
-          analysis infrastructure while making uploads, runs, artifacts, and follow-up work easier to read.
+          BisQue Ultra does not ask scientists to choose between a capable platform and a readable interface.
+          It makes the BisQue foundation easier to steer without hiding the evidence that serious work depends on.
         </p>
       </div>
       <figure class="surface-card home-platform-preview">

@@ -7,18 +7,19 @@ const news = await getAllNews();
 ---
 
 <SiteShell
-  title="BisQue Ultra News"
-  description="White papers, platform notes, and interface walkthroughs for BisQue Ultra."
+  title="BisQue Ultra Launch Sequence"
+  description="The BisQue Ultra reading sequence: the flagship launch, the BisQue platform foundation, and the frontend design language behind the product."
   canonicalPath="/news"
   image="/images/site-home.svg"
 >
   <section class="section-block">
     <div class="section-header">
-      <p class="eyebrow">News archive</p>
-      <h1 class="section-title">White papers, platform foundations, and interface notes.</h1>
+      <p class="eyebrow">Reading sequence</p>
+      <h1 class="section-title">Start with the launch, then read the platform and the interface.</h1>
       <p class="section-lead">
-        The archive focuses on release material that explains the product, the BisQue platform it builds on,
-        and the interface decisions that shape scientific work in BisQue Ultra.
+        This site is intentionally short. The flagship article explains what BisQue Ultra is, the platform
+        article explains what it stands on, and the design-language article explains why the interface feels
+        calm when the work is not.
       </p>
     </div>
     <div class="post-grid">
@@ -29,6 +30,7 @@ const news = await getAllNews();
           excerpt={entry.data.excerpt}
           date={entry.data.date}
           kind={entry.data.kind}
+          sequence={entry.data.sequence}
         />
       ))}
     </div>

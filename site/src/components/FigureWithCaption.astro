@@ -6,6 +6,7 @@ type Props = {
   caption?: string;
   kind?: "image" | "video";
   span?: "measure" | "wide";
+  frame?: boolean;
   poster?: string;
   controls?: boolean;
   autoplay?: boolean;
@@ -23,6 +24,7 @@ const {
   caption,
   kind = "image",
   span = "wide",
+  frame = true,
   poster,
   controls = kind === "video",
   autoplay = false,
@@ -38,8 +40,8 @@ const resolvedPoster =
   poster && poster.startsWith("/") ? `${baseUrl}${poster.replace(/^\//, "")}` : poster;
 ---
 
-<figure class="figure-card" data-kind={kind} data-span={span}>
-  <div class="figure-media">
+<figure class="figure-card" data-kind={kind} data-span={span} data-frame={frame ? "true" : "false"}>
+  <div class:list={["figure-media", !frame && "figure-media-raw"]}>
     {
       kind === "video" ? (
         <video

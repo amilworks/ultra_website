@@ -1,0 +1,23 @@
+---
+type ProofItem = {
+  label: string;
+  title: string;
+  body: string;
+};
+
+type Props = {
+  items: ProofItem[];
+};
+
+const { items } = Astro.props;
+---
+
+<div class="proof-strip" aria-label="Launch proof points">
+  {items.map((item) => (
+    <article class="proof-item">
+      <p class="eyebrow">{item.label}</p>
+      <h3 class="proof-item-title">{item.title}</h3>
+      <p class="proof-item-body">{item.body}</p>
+    </article>
+  ))}
+</div>

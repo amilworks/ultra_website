@@ -16,18 +16,53 @@ export const getStaticPaths = (async () => {
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+const baseUrl = import.meta.env.BASE_URL;
+const withBase = (path: string) => (path === "/" ? baseUrl : `${baseUrl}${path.replace(/^\//, "")}`);
+const canonicalUrl = Astro.site
+  ? new URL(withBase(`/news/${entry.data.slug}`), Astro.site).toString()
+  : undefined;
+const articleImagePath = entry.data.coverImage ?? entry.data.ogImage;
+const articleImageUrl =
+  Astro.site && articleImagePath.startsWith("/")
+    ? new URL(withBase(articleImagePath), Astro.site).toString()
+    : articleImagePath;
+const articleJsonLd = canonicalUrl
+  ? {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: entry.data.title,
+      description: entry.data.summary,
+      datePublished: entry.data.date.toISOString(),
+      dateModified: entry.data.date.toISOString(),
+      articleSection: entry.data.kind,
+      keywords: entry.data.tags,
+      image: [articleImageUrl],
+      mainEntityOfPage: canonicalUrl,
+      author: {
+        "@type": "Person",
+        name: "Amil Khan",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "BisQue Ultra",
+        url: "https://github.com/amilworks/bisque_ultra",
+      },
+    }
+  : undefined;
 ---
 
 <SiteShell
   title={`${entry.data.title} | BisQue Ultra`}
   description={entry.data.summary}
   image={entry.data.ogImage}
+  imageAlt={entry.data.title}
   canonicalPath={`/news/${entry.data.slug}`}
   ogType="article"
   publishedTime={entry.data.date}
   articleTags={entry.data.tags}
   articleTitle={entry.data.title}
   articleHeadings={headings}
+  jsonLd={articleJsonLd}
 >
   <ArticleTemplate
     title={entry.data.title}

@@ -10,7 +10,7 @@ type Props = {
   tags?: string[];
 };
 
-const { title, summary, date, kind = "News", version, tags = [] } = Astro.props;
+const { title, summary, date, kind = "Article", version, tags = [] } = Astro.props;
 ---
 
 <article class="release-page" data-article-root>

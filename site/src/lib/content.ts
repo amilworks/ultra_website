@@ -10,9 +10,21 @@ const sortByDateDesc = <T extends { data: { date: Date; title: string } }>(left:
   return left.data.title.localeCompare(right.data.title);
 };
 
+const sortByEditorialOrder = <T extends { data: { date: Date; title: string; sequence?: number } }>(
+  left: T,
+  right: T,
+) => {
+  const leftSequence = left.data.sequence ?? Number.MAX_SAFE_INTEGER;
+  const rightSequence = right.data.sequence ?? Number.MAX_SAFE_INTEGER;
+  if (leftSequence !== rightSequence) {
+    return leftSequence - rightSequence;
+  }
+  return sortByDateDesc(left, right);
+};
+
 export async function getAllNews(): Promise<NewsEntry[]> {
   const news = await getCollection("news");
-  return news.sort(sortByDateDesc);
+  return news.sort(sortByEditorialOrder);
 }
 
 export async function getFeaturedNews(): Promise<NewsEntry | undefined> {

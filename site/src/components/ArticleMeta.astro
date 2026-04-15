@@ -8,7 +8,7 @@ type Props = {
   tags?: string[];
 };
 
-const { date, kind = "News", version, tags = [] } = Astro.props;
+const { date, kind = "Article", version, tags = [] } = Astro.props;
 const primaryTag = tags[0];
 ---
 

@@ -7,17 +7,19 @@ type Props = {
   excerpt: string;
   date: Date;
   kind: string;
+  sequence?: number;
 };
 
-const { href, title, excerpt, date, kind } = Astro.props;
+const { href, title, excerpt, date, kind, sequence } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const toHref = href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
 ---
 
 <a class="surface-card post-card" href={toHref}>
   <div class="post-card-meta">
-    <span class="pill">{kind}</span>
-    <span class="pill mono-copy">{formatLongDate(date)}</span>
+    {sequence ? <span class="post-card-sequence mono-copy">{String(sequence).padStart(2, "0")}</span> : null}
+    <span>{kind}</span>
+    <span>{formatLongDate(date)}</span>
   </div>
   <div class="section-header">
     <h3 class="post-card-title">{title}</h3>

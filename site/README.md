@@ -35,7 +35,8 @@ Each article entry supports:
 - `excerpt`
 - `ogImage`
 - `tags`
-- `kind` (`News` or `White paper`)
+- `kind` (`White paper`, `Platform foundation`, or `Design language`)
+- `sequence` (optional, for curated reading order)
 - `featured` (optional)
 - `version` (optional)
 - `coverImage` (optional)

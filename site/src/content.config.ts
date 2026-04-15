@@ -22,8 +22,9 @@ const news = defineCollection({
   }),
   schema: z.object({
     ...sharedFields,
-    kind: z.enum(["News", "White paper"]).default("News"),
+    kind: z.enum(["White paper", "Platform foundation", "Design language"]).default("Platform foundation"),
     featured: z.boolean().default(false),
+    sequence: z.number().int().positive().optional(),
     version: z.string().min(1).optional(),
   }),
 });

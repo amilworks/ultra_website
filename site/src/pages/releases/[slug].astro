@@ -1,42 +1,26 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { render } from "astro:content";
-import ArticleTemplate from "@/components/ArticleTemplate.astro";
-import SiteShell from "@/layouts/SiteShell.astro";
-import { getWhitePapers } from "@/lib/content";
-import { mdxComponents } from "@/components/mdx";
 
 export const getStaticPaths = (async () => {
-  const entries = await getWhitePapers();
-  return entries.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+  return [{ params: { slug: "bisque-ultra" } }];
 }) satisfies GetStaticPaths;
 
-const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
+const baseUrl = import.meta.env.BASE_URL;
+const redirectTarget = `${baseUrl}news/bisque-ultra`;
+const canonicalUrl = Astro.site ? new URL(redirectTarget, Astro.site).toString() : redirectTarget;
 ---
-
-<SiteShell
-  title={`${entry.data.title} | BisQue Ultra`}
-  description={entry.data.summary}
-  image={entry.data.ogImage}
-  canonicalPath={`/news/${entry.data.slug}`}
-  ogType="article"
-  publishedTime={entry.data.date}
-  articleTags={entry.data.tags}
-  articleTitle={entry.data.title}
-  articleHeadings={headings}
->
-  <ArticleTemplate
-    title={entry.data.title}
-    summary={entry.data.summary}
-    date={entry.data.date}
-    kind={entry.data.kind}
-    version={entry.data.version}
-    tags={entry.data.tags}
-  >
-    <Content components={mdxComponents} />
-  </ArticleTemplate>
-</SiteShell>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0;url=${redirectTarget}`} />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>Redirecting to BisQue Ultra</title>
+    <script is:inline>{`window.location.replace(${JSON.stringify(redirectTarget)});`}</script>
+  </head>
+  <body>
+    <p>
+      Redirecting to <a href={redirectTarget}>the BisQue Ultra launch article</a>.
+    </p>
+  </body>
+</html>
