@@ -4,7 +4,7 @@ export const siteConfig = {
   releaseLabel: "Release Notes",
   description:
     "BisQue Ultra is a new scientific work surface built on the BisQue platform for image analysis, model reasoning, and reproducible outputs.",
-  repoUrl: "https://github.com/amilworks/bisque_ultra",
+  repoUrl: "https://github.com/amilworks/ultra",
   docsUrl: "https://bisque.gitbook.io/docs/",
   platformUrl: "https://bisque2.ece.ucsb.edu",
   vrlUrl: "https://vision.ece.ucsb.edu",
