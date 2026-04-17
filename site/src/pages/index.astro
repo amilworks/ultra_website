@@ -13,7 +13,7 @@ const homeJsonLd = canonicalUrl
       "@type": "WebPage",
       name: "BisQue Ultra",
       description:
-        "BisQue Ultra is a new scientific work surface built on the BisQue platform for image analysis, model reasoning, and reproducible outputs.",
+        "BisQue Ultra keeps scientific AI attached to the data, the viewer, and the proof.",
       url: canonicalUrl,
       about: {
         "@type": "SoftwareApplication",
@@ -43,7 +43,7 @@ const primaryTileImageAlt =
 
 <SiteShell
   title="BisQue Ultra"
-  description="BisQue Ultra is a new scientific work surface built on the BisQue platform for image analysis, model reasoning, and reproducible outputs."
+  description="BisQue Ultra keeps scientific AI attached to the data, the viewer, and the proof."
   canonicalPath="/"
   image={homeImage}
   imageAlt={homeImageAlt}
@@ -54,10 +54,11 @@ const primaryTileImageAlt =
       <div class="launch-hero-top">
         <div class="section-header launch-hero-copy">
           <p class="eyebrow">Scientific product launch</p>
-          <h1 class="launch-headline">A clearer scientific work surface for images, models, and evidence.</h1>
+          <h1 class="launch-headline">BisQue Ultra</h1>
+          <p class="launch-claim">Scientific AI that stays attached to the data.</p>
           <p class="launch-subhead">
-            Built on the BisQue platform, BisQue Ultra brings uploads, multidimensional viewing, structured
-            reasoning, and reproducible artifacts into one readable surface instead of scattering them across tools.
+            Open scientific imaging data, inspect its structure, reason at the right depth, and keep the run,
+            artifacts, and proof in view.
           </p>
         </div>
         <a
@@ -79,30 +80,30 @@ const primaryTileImageAlt =
         </a>
       </div>
       <div class="hero-actions launch-actions">
-        <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Read the flagship article</a>
-        <a class="secondary-button" href={toHref("/news")}>Read the launch sequence</a>
+        <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Read the launch article</a>
+        <a class="secondary-button" href={toHref("/news")}>See the launch sequence</a>
       </div>
       <ProofStrip
         items={[
           {
-            label: "Platform foundation",
-            title: "BisQue stays underneath",
-            body: "Storage, metadata, annotations, analysis modules, and up to 5D visualization remain part of the product contract.",
+            label: "File fidelity",
+            title: "Open real lab files, not flattened previews",
+            body: "Scenes, channels, dimensions, and physical scale stay visible from the first turn.",
           },
           {
-            label: "Model path",
-            title: "vLLM + gpt-oss-120b",
-            body: "OpenAI-compatible serving, a 128k context window, and fast, auto, and deep reasoning modes.",
+            label: "Reasoning control",
+            title: "Choose how hard the model thinks",
+            body: "Fast, auto, and deep modes let short turns stay quick while harder analysis can lean in.",
           },
           {
-            label: "Image boundary",
-            title: "BioIO reads real lab files",
-            body: "One universal scientific image-loading layer with scenes, channels, dimensions, and physical scale intact.",
+            label: "Evidence chain",
+            title: "The answer keeps its run and artifacts",
+            body: "Generated outputs, run events, and provenance stay attached instead of dissolving into chat text.",
           },
           {
-            label: "Provenance",
-            title: "Runs and artifacts stay visible",
-            body: "Uploads, run events, generated outputs, and reproducibility clues remain inspectable after the answer lands.",
+            label: "Platform depth",
+            title: "BisQue still carries the scientific substrate",
+            body: "Storage, metadata, annotations, modules, and up to 5D visualization remain part of the contract.",
           },
         ]}
       />
@@ -127,7 +128,7 @@ const primaryTileImageAlt =
           />
         </a>
         <div class="launch-primary-copy">
-          <p class="eyebrow">Flagship launch</p>
+          <p class="eyebrow">Launch article</p>
           <h2 class="story-headline">{featuredStory.data.title}</h2>
           <p class="story-summary">{featuredStory.data.excerpt}</p>
           <p class="story-meta">
@@ -136,20 +137,20 @@ const primaryTileImageAlt =
           </p>
           <div class="hero-actions">
             <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>
-              {featuredStory.data.kind === "White paper" ? "Read the white paper" : "Read the article"}
+              {featuredStory.data.kind === "White paper" ? "Open the white paper" : "Open the article"}
             </a>
             <a class="secondary-button" href={toHref("/news")}>Browse product news</a>
           </div>
         </div>
       </article>
 
-      <aside class="launch-reading surface-card">
+      <aside class="launch-reading">
         <div class="section-header">
           <p class="eyebrow">Read next</p>
-          <h2 class="section-title">Two supporting notes that explain the platform and the interface.</h2>
+          <h2 class="section-title">Then read the platform and the interface.</h2>
           <p class="section-lead">
-            The launch article explains what changed. These two pieces explain what BisQue Ultra stands on
-            and why the product feels the way it does.
+            Start with the launch, then read the two pieces that explain what the product stands on
+            and why the interface feels this way.
           </p>
         </div>
         <div class="launch-reading-grid">
@@ -172,10 +173,10 @@ const primaryTileImageAlt =
     <section class="home-intro section-block">
       <div class="section-header">
         <p class="eyebrow">Why this launch matters</p>
-        <h2 class="section-title">A scientific imaging platform, clarified for everyday work.</h2>
+        <h2 class="section-title">The interface changed. The scientific contract did not.</h2>
         <p class="section-lead">
-          BisQue Ultra does not ask scientists to choose between a capable platform and a readable interface.
-          It makes the BisQue foundation easier to steer without hiding the evidence that serious work depends on.
+          BisQue Ultra makes the BisQue foundation easier to steer without dropping the file,
+          the viewer, the metadata, or the evidence trail.
         </p>
       </div>
       <figure class="surface-card home-platform-preview">
@@ -197,7 +198,7 @@ const primaryTileImageAlt =
       <div class="home-notes-grid">
         <article class="flat-note">
           <p class="eyebrow">BisQue foundation</p>
-          <h3 class="flat-note-title">Store, visualize, organize, and analyze up to 5D image data.</h3>
+          <h3 class="flat-note-title">Storage, viewers, metadata, and modules still do the heavy lifting.</h3>
           <p class="flat-note-copy">
             BisQue is a web-based platform designed for scientific imaging, with flexible metadata,
             graphical and textual annotations, and an open architecture for domain-specific analysis.
@@ -205,7 +206,7 @@ const primaryTileImageAlt =
         </article>
         <article class="flat-note">
           <p class="eyebrow">Workflow continuity</p>
-          <h3 class="flat-note-title">From upload to artifact, the path stays inspectable.</h3>
+          <h3 class="flat-note-title">One thread can now hold the question, the run, and the artifact trail.</h3>
           <p class="flat-note-copy">
             BisQue Ultra keeps resource imports, run events, generated outputs, viewer previews, and
             reproducibility reports close to the same working surface instead of scattering them across
@@ -214,7 +215,7 @@ const primaryTileImageAlt =
         </article>
         <article class="flat-note">
           <p class="eyebrow">Research breadth</p>
-          <h3 class="flat-note-title">Used across biomedical, ecological, and materials workflows.</h3>
+          <h3 class="flat-note-title">The same surface can serve microscopy, wildlife, and materials work.</h3>
           <p class="flat-note-copy">
             BisQue has supported biomedical sciences, neuroscience, wildlife conservation, marine science,
             and materials research. BisQue Ultra is designed to make that breadth easier to navigate.

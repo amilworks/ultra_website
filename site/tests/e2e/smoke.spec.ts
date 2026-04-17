@@ -7,17 +7,18 @@ test("homepage presents the release site shell and follows system dark mode", as
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: /A clearer scientific work surface for images, models, and evidence/i,
+      name: /BisQue Ultra/i,
     })
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /Read the flagship article/i })).toBeVisible();
+  await expect(page.getByText(/Scientific AI that stays attached to the data/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Read the launch article/i })).toBeVisible();
   await expect(page.getByText(/Created within the UCSB Vision Research Lab/i)).toBeVisible();
   await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(page.locator(".story-tile-large .story-tile-image")).toBeVisible();
-  await expect(page.getByText(/BisQue stays underneath/i)).toBeVisible();
+  await expect(page.getByText(/BisQue still carries the scientific substrate/i)).toBeVisible();
 
-  const primaryButton = page.getByRole("link", { name: /Read the flagship article/i });
+  const primaryButton = page.getByRole("link", { name: /Read the launch article/i });
   await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
 });
 
