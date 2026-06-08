@@ -2,153 +2,162 @@
 title: "BisQue Ultra"
 slug: "bisque-ultra"
 date: 2026-04-06
-summary: "A scientific AI work surface that keeps image analysis, model reasoning, and provenance in the same field of view."
-excerpt: "Why BisQue Ultra exists, what it makes easier for scientists, and why the stack took this shape."
-ogImage: "/images/releases/bisque-ultra-og.svg"
-coverImage: "/images/news/bisque-ultra-cover.png"
-coverImageAlt: "An abstract BisQue Ultra hero gradient in deep blue, red, and warm neutral tones."
+summary: "A scientific AI control plane and workbench for BisQue resources, durable autonomous runs, model-guided tools, and reproducible artifacts."
+excerpt: "The 2026.04 launch brief for BisQue Ultra: what changed in the updated stack, what is live in the product, and why it matters for frontier image research."
+ogImage: "/images/news/bisque-ultra-launch2.png"
+coverImage: "/images/news/bisque-ultra-launch2.png"
+coverImageAlt: "BisQue Ultra product interface showing a scientific report, integrated prompt composer, and structured analysis surface."
 coverPosition: "50% 50%"
-kind: "White paper"
+kind: "Launch brief"
 featured: true
 sequence: 1
 version: "2026.04"
 tags:
-  - Scientific imaging
+  - Scientific AI
+  - Scientific imaging workbench
   - Run provenance
   - BisQue platform
+  - Deep Agents
 ---
 
-Today we are introducing BisQue Ultra, a new scientific work surface built for researchers who need image analysis, model reasoning, and reproducible outputs to stay in the same field of view.
+Released April 6, 2026, BisQue Ultra is a scientific AI control plane wrapped in a workbench for frontier image research. It gives scientists one place to inspect BisQue resources, launch model-guided tools, watch durable runs, and recover the artifacts that prove what happened.
 
-The BisQue platform already knew how to store scientific data, visualize up to 5D imagery, preserve metadata, and run domain-specific analysis. What was still missing was a product surface equal to that foundation: one that made serious work easier to start, easier to steer, and easier to explain after the fact.
+The updated app is not a prettier chat box over old infrastructure. It is a production-shaped system: a React workbench, a Go control plane, Postgres as durable state, NATS JetStream as dispatch, Python Deep Agents workers for long-running tool work, and a replaceable OpenAI-compatible model endpoint.
 
-BisQue Ultra is our answer to that gap. It does not replace BisQue. It makes BisQue easier to inhabit.
+That architecture is the point. Scientific AI becomes useful when the answer stays attached to the resource, the run, the tool events, the generated files, and the evidence trail.
 
 <ProofStrip
   items={[
     {
-      label: "Platform foundation",
-      title: "Built on BisQue, not beside it",
-      body: "Storage, metadata, annotations, modules, and up to 5D visualization stay intact under the new surface.",
+      label: "Data layer",
+      title: "BisQue remains the scientific substrate",
+      body: "Images, datasets, tables, metadata, annotations, and modules stay first-class instead of becoming loose chat attachments.",
+    },
+    {
+      label: "Run control",
+      title: "Go owns threads, runs, events, artifacts, and leases",
+      body: "The V2 control plane gives long autonomous work a durable contract that can survive refreshes and restarts.",
+    },
+    {
+      label: "Workers",
+      title: "Deep Agents execute long-running research workflows",
+      body: "Workers route BisQue tools, RareSpot ecology flows, paper tools, sandboxed code, and scientific result generation.",
     },
     {
       label: "Model path",
-      title: "vLLM + gpt-oss-120b",
-      body: "OpenAI-compatible serving, local control, 128k context, and reasoning levels exposed as fast, auto, and deep.",
-    },
-    {
-      label: "Image boundary",
-      title: "BioIO reads real scientific files",
-      body: "The stack opens microscopy formats through one universal loading path instead of a pile of fragile format exceptions.",
-    },
-    {
-      label: "Provenance",
-      title: "Runs and artifacts stay first-class",
-      body: "Uploads, run events, generated outputs, and reproducibility clues remain visible instead of disappearing into chat text.",
+      title: "OpenAI-compatible endpoints stay replaceable",
+      body: "The runtime can point at vLLM, Ollama, or another compatible server through base URL, model, and key settings.",
     },
   ]}
 />
 
 <FigureWithCaption
   src="/images/news/bisque-ultra-launch2.png"
-  alt="BisQue Ultra showing a prairie dog detection report in a structured interface with a calm sidebar, readable report surface, and integrated prompt composer."
+  alt="BisQue Ultra showing a structured scientific report, prompt composer, and product workbench surface."
+  title="The product surface is built around the record, not only the answer."
+  caption="The interface keeps the prompt, run context, generated result, and downstream evidence close enough to inspect."
   span="wide"
   frame={false}
 />
 
-## What BisQue Ultra actually is
+## What BisQue Ultra is
 
-BisQue Ultra is a working surface built on top of the BisQue platform. That distinction matters because the product was never meant to discard the scientific substrate and start over with a prettier chat box. The point was to keep the hard-won capabilities that already matter in research, then make them easier to read and easier to trust.
+BisQue Ultra is a scientific imaging workbench over BisQue data and durable autonomous runs. The user-facing surface is React and Vite. The run-control spine is Go. The long-running worker runtime is Deep Agents. The data layer is an existing BisQue deployment. The model layer is intentionally replaceable through OpenAI-compatible configuration.
 
-That is why BisQue Ultra still treats the scientific objects as first-class realities:
+That separation makes the system easier to operate and easier to trust. If the frontend loads but a run stalls, the control plane, worker, NATS transport, model endpoint, or BisQue connection can be inspected independently. If a result is produced, the output does not have to be reconstructed from prose. It can stay tied to the thread, run, event stream, and artifacts that produced it.
 
-- uploaded files
-- BisQue resources and dataset imports
-- multidimensional image viewers
-- run records
-- generated artifacts
-- reproducibility outputs
+BisQue Ultra is built for the kinds of work where a frontier lab cannot accept a detached answer:
 
-In other words, the product is not trying to abstract science away. It is trying to make the scientific objects easier to follow.
+- scientific image and volume inspection
+- BisQue search, metadata loading, upload, download, annotation, tagging, dataset creation, and module execution
+- deployment-configured vision workflows such as RareSpot prairie analysis and other model-backed image tools
+- sandboxed code execution and scientific calculators
+- paper and research-context tools
+- durable run events, downloadable artifacts, and hydrated prior conversations
 
-## Why the stack took this shape
+## What changed in the updated stack
 
-BisQue Ultra uses a React frontend, a FastAPI backend, a lean Agno runtime, the BisQue platform as its scientific substrate, and an OpenAI-compatible model path that currently defaults to `vLLM` serving `gpt-oss-120b`.
-
-That stack is not eclectic. It is practical. Each layer solves a different problem, and the product only works because those problems were separated cleanly instead of folded into one clever but fragile system.
+The current app moves the product story from “AI interface” to “scientific run-control system.”
 
 <FeatureGrid
   items={[
     {
-      title: "React + Vite on the frontend",
-      body: "The UI needs explicit state, fast iteration, and enough structure to support long threads, viewers, uploads, and structured result cards without turning into one opaque component tree.",
-      metric: "fast, inspectable UI",
+      title: "React workbench",
+      body: "The frontend keeps chat, resource browsing, workflow presets, run steps, artifacts, admin surfaces, and scientific viewers in one product shell.",
+      metric: "frontend/",
     },
     {
-      title: "FastAPI at the contract boundary",
-      body: "Chat, uploads, runs, artifacts, previews, and reports need one stable API surface that both the web client and future clients can trust.",
-      metric: "clear API contracts",
+      title: "Go control plane",
+      body: "The API owns auth/session handling, threads, messages, runs, run events, artifacts, admin users, organizations, worker leases, and the OpenAPI contract.",
+      metric: "backend/controlplane/",
     },
     {
-      title: "Agno, used with restraint",
-      body: "The runtime stays single-agent by default, with allowlisted tools, bounded budgets, and explicit approval paths. That keeps orchestration powerful without making it mysterious.",
-      metric: "bounded reasoning",
+      title: "Postgres + NATS JetStream",
+      body: "Postgres is the durable source of truth; NATS JetStream dispatches jobs, worker events, and cancellation signals with retry deduplication.",
+      metric: "durable V2 path",
     },
     {
-      title: "BisQue under the surface",
-      body: "The platform underneath still carries the durable scientific objects: resources, metadata, viewers, analysis modules, and the continuity that makes later reasoning credible.",
-      metric: "scientific continuity",
+      title: "Deep Agents workers",
+      body: "Python workers execute long-running tool work and route specialized flows for BisQue resources, RareSpot, papers, code execution, and live traces.",
+      metric: "backend/deepagents_runtime/",
     },
   ]}
 />
 
-React is there because the interface has to tell the truth about state. A scientific surface is always moving: uploads arrive, responses stream, viewers open, workflows change, and results accumulate. FastAPI is there because the system needs contracts strong enough to keep chat, uploads, run events, and artifacts legible over time. Agno is there because model reasoning needs a runtime, but the runtime is kept lean on purpose. One clean model pass when one clean model pass is enough is a better default than hidden internal theater.
+The old way to describe BisQue Ultra was to emphasize a calm scientific AI surface. The current way is more direct: the product has a control plane. It persists the work. It dispatches workers. It hydrates prior runs. It lets the model be swapped without rewriting the product around a single vendor.
 
-## Why the flagship model path is gpt-oss-120b
+That matters for serious research because long work fails in ordinary ways: browsers refresh, workers restart, streams disconnect, model endpoints change, and users return later. BisQue Ultra is being built so those ordinary failures do not erase the scientific record.
 
-Once the serving layer was chosen, the harder question was the model itself.
+## Scientific file and viewer support
 
-The flagship path is `gpt-oss-120b` because BisQue Ultra needs more than agreeable language. It needs a model that can hold scientific context, survive longer reasoning chains, decide when tools matter, and still return an answer a scientist can actually use. OpenAI describes `gpt-oss-120b` as a 117B-parameter mixture-of-experts model with 5.1B active parameters per token, 36 layers, 128 experts with 4 active per token, and a native 128k context window. That trade is what made it compelling: large-model headroom without paying the full dense-model cost on every token.
+BisQue already provides the platform substrate for scientific images, datasets, tables, metadata, annotations, and modules. BisQue Ultra builds on that instead of bypassing it.
 
-The benchmark profile matters too. OpenAI reports GPQA Diamond at `67.1` on low reasoning, `73.1` on medium, and `80.1` on high reasoning without tools; with tools it reaches `80.9`. MMLU rises to `90.0` at high reasoning. SWE-Bench Verified reaches `62.4`. Tau-Bench Retail reaches `67.8`. Those are not just nice numbers to cite. They show a model that gets better when it is allowed to think harder, which is exactly the kind of behavior a scientific product can put to work.
+Inside the product, scientific resources can be searched, staged, loaded, downloaded, uploaded, tagged, annotated, grouped into datasets, and passed into analysis workflows. The frontend also includes scientific viewer surfaces for direct image and volume work, with image and OME-TIFF-oriented manifests, NIfTI-style scalar-volume inspection, slices, histograms, physical spacing, channel controls, transfer presets, and voxel probing.
 
-That is why BisQue Ultra exposes `fast`, `auto`, and `deep` reasoning modes instead of treating intelligence like one fixed speed. A quick routing decision, a short factual turn, and a long analytical synthesis should not all pay the same cognitive or latency cost. The model's reasoning ladder gives the product gears. That is the real advantage. Scientists do not only get a stronger model. They get a system that can choose when to think lightly and when to lean in.
+The important design choice is simple: the file is not treated as an ornament for a model prompt. It remains a scientific object with structure, metadata, viewer state, and downstream artifacts.
 
-<Callout title="The real superpower">
-  The advantage of `gpt-oss-120b` is not only that it knows more. It is that BisQue Ultra can use the model at different depths without changing the surrounding product contract.
+## Run provenance, artifacts, and replay
+
+Scientific AI needs a stronger memory model than chat history. A useful answer must remain connected to:
+
+- the thread where the work was requested
+- the run that executed it
+- the events that explain progress and terminal state
+- the worker lease and dispatch path
+- the files and artifacts produced
+- the figures, reports, CSVs, XML, JSON, images, and downloads generated by tools
+
+BisQue Ultra’s updated control plane treats those objects as first-class. Postgres stores users, organizations, threads, messages, runs, run events, artifacts, idempotency keys, worker heartbeats, and leases. NATS JetStream carries durable jobs, run events, and cancellation signals. The React app hydrates artifacts from past runs and recovers stream state after refreshes.
+
+That is the difference between a compelling demo and a scientific workbench. A demo can impress once. A workbench has to be inspectable later.
+
+## Domain workflows
+
+The product is designed for real scientific breadth without flattening every domain into the same prompt pattern.
+
+The current composer exposes resource workflows for BisQue search, advanced tag-aware search, metadata loading, downloads, uploads, dataset creation, dataset updates, annotations, tags, XML inspection, deletion, and module execution. It also exposes computation and expert-workflow controls including Pro Mode, a NumPy-backed calculator, chemistry tools, sandboxed code execution, and deployment-configured vision paths such as RareSpot ecology inference.
+
+Some tool paths depend on deployment-configured model weights or services. That is the right boundary for a research platform: the workbench can expose the control surface while operators decide which specialized assets are provisioned in a given environment.
+
+<Callout title="What this launch proves">
+  BisQue Ultra is not betting that one model can absorb a lab. It is building the control plane where data systems, model endpoints, workers, tools, and artifacts can cooperate without losing the scientific record.
 </Callout>
 
-## Why BioIO sits at the image boundary
+## What teams can safely claim now
 
-One quiet choice matters more than it first appears: BisQue Ultra uses BioIO, the successor to AICSImageIO from the Allen Institute for Cell Science image-I/O line. That decision lives below the chat surface, but it shapes the honesty of everything above it. Scientific files are not ordinary pictures. They arrive as scenes, channels, z-stacks, time series, mosaics, and metadata-heavy containers that punish any interface willing to guess. BioIO gives us a stricter first contact. Its `BioImage` interface reads microscopy data into a consistent 5D `TCZYX` model, exposes scenes, dimensions, channel names, metadata, and physical pixel sizes, and can stay lazy through Dask until a real chunk needs to be pulled into memory. That is exactly the posture we wanted: inspect structure first, spend compute second.
+For frontier labs, the strongest claims are operational:
 
-The package is also broad enough to keep the product unified instead of turning file support into a patchwork of exceptions. The official BioIO docs list 12 maintained reader plug-ins covering `CZI`, `DV`, `LIF`, `ND2`, `OME-TIFF`, tiled `OME-TIFF`, `OME-Zarr`, `SLDY`, `TIFF`, globbed `TIFF`, and imageio-backed formats such as `PNG` and `GIF`, plus a `Bio-Formats` bridge for many more microscopy files. In this repository we install the base `bioio` package alongside 11 reader plug-ins, including `bioio-czi`, `bioio-nd2`, `bioio-ome-tiff`, `bioio-ome-zarr`, `bioio-tifffile`, and `bioio-bioformats`. That is not overengineering. It is how one product surface can open real scientific data without asking the user to care which lab instrument wrote the file.
+- BisQue Ultra connects a React scientific workbench to a Go V2 control plane.
+- The product uses Postgres for durable state and NATS JetStream for production-shaped worker dispatch.
+- Deep Agents workers execute long-running tool workflows through an OpenAI-compatible model contract.
+- The app can use vLLM, Ollama, or another compatible server by changing endpoint configuration.
+- BisQue resources remain central: search, inspect, upload, download, annotate, tag, dataset, and module workflows are product concepts, not external footnotes.
+- Runs and artifacts are designed to remain recoverable after browser refresh, reconnect, and worker restart paths.
 
-That choice shows up directly in the code. Our imaging layer is described as a universal entrypoint for scientific image loading and preview generation, and the `bioio_load_image` tool uses that layer to normalize dimensions, surface previews, and recover metadata before heavier reasoning begins. In practice, BioIO helps BisQue Ultra answer the questions that matter at the start of scientific work: What is this file? How many channels does it have? Is it a volume, a time series, a mosaic, a scene collection? What are the physical scales? A good scientific assistant should not start with improvisation. It should start by reading the specimen correctly.
+What we should not overclaim is equally important. A given deployment’s exact model, weights, GPU services, and domain checkpoints depend on operator configuration. The website should describe the product architecture and supported surfaces, then let deployment-specific runbooks make environment claims.
 
-## What becomes easier now
+## Built in the UCSB Vision Research Lab
 
-The launch matters because a few workflows get meaningfully easier at once:
+BisQue Ultra was created by Amil Khan, a PhD student in the UCSB Vision Research Lab. The lab is led by Professor <a href="https://scholar.google.com/citations?user=wRYM4qgAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">B.S. Manjunath</a> in the Department of Electrical and Computer Engineering, with research spanning computer vision, image processing, and machine learning applications.
 
-- You can import a scientific file and start from its real structure rather than from a guessed image preview.
-- You can ask for a report, a detection run, or a follow-up explanation without losing the link back to the source data.
-- You can move between language, viewer context, run status, and generated artifacts without treating each one as a separate tool.
-- You can return later and still recover what happened, what file it happened on, and what outputs the run produced.
-
-Those are small sentences, but they point to a larger change. BisQue Ultra is trying to lower the cost of serious work without lowering the standard of evidence.
-
-## Why runs, artifacts, and upload states are part of the product
-
-Many AI interfaces behave as if the answer is the product and everything else is scaffolding. That model breaks down quickly in scientific work.
-
-In research, the answer is only the beginning of the conversation. The more important questions come right after it: Which file did this come from? Which run produced it? Which workflow was active? Which artifacts were generated? Can I recover the evidence later?
-
-That is why BisQue Ultra treats uploads, run events, and artifacts as first-class objects. Uploads move through explicit lifecycle states. Run metadata is persisted. Artifacts live under run-scoped directories with manifests and source references. Event payloads stay machine-readable so the interface does not have to guess what happened by parsing decorative text.
-
-This is not implementation trivia. It is the difference between a result that feels impressive for ten seconds and a result that can survive scrutiny next week.
-
-## Acknowledgment
-
-<Callout title="About BisQue Ultra">
-  BisQue Ultra was created by Amil Khan, a PhD student in the UCSB Vision Research Lab. The lab is led by Professor <a href="https://scholar.google.com/citations?user=wRYM4qgAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">B.S. Manjunath</a> in the Department of Electrical and Computer Engineering, with research spanning computer vision, image processing, and machine learning applications. <a href="https://vision.ece.ucsb.edu" target="_blank" rel="noreferrer">Visit UCSB VRL</a> to see the rest of the lab.
-</Callout>
+That origin matters. The product is not trying to make research look like ordinary chat. It is trying to make model-guided work behave like research infrastructure: inspectable, replayable, extensible, and tied to the data that made the answer possible.

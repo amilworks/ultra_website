@@ -5,6 +5,7 @@ import ArticleTemplate from "@/components/ArticleTemplate.astro";
 import SiteShell from "@/layouts/SiteShell.astro";
 import { getAllNews } from "@/lib/content";
 import { mdxComponents } from "@/components/mdx";
+import { siteConfig } from "@/data/site";
 
 export const getStaticPaths = (async () => {
   const entries = await getAllNews();
@@ -27,27 +28,53 @@ const articleImageUrl =
     ? new URL(withBase(articleImagePath), Astro.site).toString()
     : articleImagePath;
 const articleJsonLd = canonicalUrl
-  ? {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: entry.data.title,
-      description: entry.data.summary,
-      datePublished: entry.data.date.toISOString(),
-      dateModified: entry.data.date.toISOString(),
-      articleSection: entry.data.kind,
-      keywords: entry.data.tags,
-      image: [articleImageUrl],
-      mainEntityOfPage: canonicalUrl,
-      author: {
-        "@type": "Person",
-        name: "Amil Khan",
+  ? [
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: entry.data.title,
+        description: entry.data.summary,
+        datePublished: entry.data.date.toISOString(),
+        dateModified: entry.data.date.toISOString(),
+        articleSection: entry.data.kind,
+        keywords: entry.data.tags,
+        image: [articleImageUrl],
+        mainEntityOfPage: canonicalUrl,
+        author: {
+          "@type": "Person",
+          name: siteConfig.authorName,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "UCSB Vision Research Lab",
+          url: siteConfig.vrlUrl,
+        },
       },
-      publisher: {
-        "@type": "Organization",
-        name: "BisQue Ultra",
-        url: "https://github.com/amilworks/ultra",
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: Astro.site ? new URL(withBase("/"), Astro.site).toString() : undefined,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "News",
+            item: Astro.site ? new URL(withBase("/news"), Astro.site).toString() : undefined,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: entry.data.title,
+            item: canonicalUrl,
+          },
+        ],
       },
-    }
+    ]
   : undefined;
 ---
 

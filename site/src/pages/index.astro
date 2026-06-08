@@ -2,6 +2,7 @@
 import SiteShell from "@/layouts/SiteShell.astro";
 import { formatLongDate, getFeaturedNews, getLatestNews } from "@/lib/content";
 import ProofStrip from "@/components/ProofStrip.astro";
+import { siteConfig } from "@/data/site";
 
 const featuredStory = await getFeaturedNews();
 const latestNews = await getLatestNews(2, featuredStory?.data.slug);
@@ -13,12 +14,29 @@ const homeJsonLd = canonicalUrl
       "@type": "WebPage",
       name: "BisQue Ultra",
       description:
-        "BisQue Ultra keeps scientific AI attached to the data, the viewer, and the proof.",
+        "BisQue Ultra is a scientific AI control plane for image research, durable autonomous runs, and reproducible artifacts.",
       url: canonicalUrl,
       about: {
         "@type": "SoftwareApplication",
         name: "BisQue Ultra",
         applicationCategory: "ScientificApplication",
+        operatingSystem: "Web",
+        applicationSubCategory: "Scientific AI workbench",
+        description:
+          "A React workbench, Go control plane, Deep Agents worker runtime, and BisQue data layer for scientific imaging workflows.",
+        codeRepository: siteConfig.repoUrl,
+        softwareVersion: "0.1.0",
+        keywords:
+          "BisQue Ultra, scientific AI, scientific imaging workbench, Go control plane, Deep Agents, run provenance, artifact lineage, BisQue platform",
+        offers: {
+          "@type": "Offer",
+          availability: "https://schema.org/InDevelopment",
+        },
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "UCSB Vision Research Lab",
+        url: "https://vision.ece.ucsb.edu",
       },
     }
   : undefined;
@@ -30,10 +48,9 @@ if (!featuredStory) {
   throw new Error("Expected at least one news entry for the site homepage.");
 }
 
-const homeImage = featuredStory.data.coverImage ?? "/images/news/bisque-ultra-cover.png";
+const homeImage = "/images/news/bisque-ultra-launch2.png";
 const homeImageAlt =
-  featuredStory.data.coverImageAlt ??
-  "BisQue Ultra launch artwork with a bright abstract gradient in pink, violet, sand, and electric blue.";
+  "BisQue Ultra product interface showing a scientific report, integrated prompt composer, and structured analysis surface.";
 const launchHeroImage = homeImage;
 const launchHeroImageAlt = homeImageAlt;
 const primaryTileImage = "/images/news/bisque-ultra-launch2.png";
@@ -42,8 +59,8 @@ const primaryTileImageAlt =
 ---
 
 <SiteShell
-  title="BisQue Ultra"
-  description="BisQue Ultra keeps scientific AI attached to the data, the viewer, and the proof."
+  title="BisQue Ultra | Scientific AI Control Plane for Image Research"
+  description="BisQue Ultra combines a React scientific workbench, Go control plane, Deep Agents workers, BisQue resources, and durable run artifacts for frontier image research."
   canonicalPath="/"
   image={homeImage}
   imageAlt={homeImageAlt}
@@ -53,13 +70,19 @@ const primaryTileImageAlt =
     <section class="launch-hero section-block" aria-label="Launch overview">
       <div class="launch-hero-top">
         <div class="section-header launch-hero-copy">
-          <p class="eyebrow">Scientific product launch</p>
           <h1 class="launch-headline">BisQue Ultra</h1>
-          <p class="launch-claim">Scientific AI that stays attached to the data.</p>
+          <p class="launch-claim">Scientific AI control plane for image research.</p>
           <p class="launch-subhead">
-            Open scientific imaging data, inspect its structure, reason at the right depth, and keep the run,
-            artifacts, and proof in view.
+            A product workbench for BisQue resources, multidimensional image analysis, durable autonomous
+            runs, and model-guided tools where the data, run events, artifacts, and explanation stay in one
+            inspectable record.
           </p>
+          <div class="launch-command-line" aria-label="Current stack">
+            <span>React workbench</span>
+            <span>Go control plane</span>
+            <span>Deep Agents workers</span>
+            <span>Postgres and NATS JetStream</span>
+          </div>
         </div>
         <a
           class="launch-hero-art"
@@ -73,40 +96,69 @@ const primaryTileImageAlt =
             loading="eager"
             decoding="async"
           />
-          <span class="launch-hero-badge" aria-hidden="true">
-            <span class="launch-hero-badge-subtle">BisQue</span>
-            <span class="launch-hero-badge-strong">Ultra</span>
-          </span>
         </a>
       </div>
       <div class="hero-actions launch-actions">
-        <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Read the launch article</a>
-        <a class="secondary-button" href={toHref("/news")}>See the launch sequence</a>
+        <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Read the launch brief</a>
+        <a class="secondary-button" href={siteConfig.repoUrl} target="_blank" rel="noreferrer">View the repository</a>
       </div>
       <ProofStrip
         items={[
           {
-            label: "File fidelity",
-            title: "Open real lab files, not flattened previews",
-            body: "Scenes, channels, dimensions, and physical scale stay visible from the first turn.",
+            label: "Control plane",
+            title: "Go owns the run contract",
+            body: "Threads, messages, runs, events, artifacts, users, organizations, idempotency keys, and worker leases have a durable API spine.",
           },
           {
-            label: "Reasoning control",
-            title: "Choose how hard the model thinks",
-            body: "Fast, auto, and deep modes let short turns stay quick while harder analysis can lean in.",
+            label: "Durability",
+            title: "Postgres and NATS JetStream keep long work recoverable",
+            body: "Run state, event streams, worker heartbeats, leases, and dispatch survive refreshes, reconnects, and worker restarts.",
           },
           {
-            label: "Evidence chain",
-            title: "The answer keeps its run and artifacts",
-            body: "Generated outputs, run events, and provenance stay attached instead of dissolving into chat text.",
+            label: "Model layer",
+            title: "OpenAI-compatible model layer",
+            body: "The worker contract can point at vLLM, Ollama, or another compatible server without rebuilding the product around one vendor.",
           },
           {
-            label: "Platform depth",
-            title: "BisQue still carries the scientific substrate",
-            body: "Storage, metadata, annotations, modules, and up to 5D visualization remain part of the contract.",
+            label: "Scientific substrate",
+            title: "BisQue resources stay first-class",
+            body: "Search, load, download, upload, tag, annotate, create datasets, run modules, and inspect scientific resources from the workbench.",
           },
         ]}
       />
+    </section>
+
+    <section class="launch-update section-block" aria-label="Product update">
+      <div class="section-header">
+        <h2 class="section-title">The updated app is no longer a polished chat surface. It is run-control infrastructure.</h2>
+        <p class="section-lead">
+          BisQue Ultra now separates the system into a React client, a Go control plane, durable Postgres
+          state, NATS JetStream dispatch, Python Deep Agents workers, deployment-configured vision services,
+          and a replaceable OpenAI-compatible model endpoint.
+        </p>
+      </div>
+      <div class="architecture-rail" aria-label="BisQue Ultra architecture">
+        <article>
+          <span class="mono-copy">01</span>
+          <h3>BisQue data layer</h3>
+          <p>Images, datasets, tables, metadata, annotations, and modules remain the scientific record.</p>
+        </article>
+        <article>
+          <span class="mono-copy">02</span>
+          <h3>Go control plane</h3>
+          <p>Auth, threads, runs, leases, events, artifacts, admin state, and the OpenAPI contract live here.</p>
+        </article>
+        <article>
+          <span class="mono-copy">03</span>
+          <h3>Deep Agents runtime</h3>
+          <p>Workers execute long-running tool work, code execution, paper/research routing, and RareSpot flows.</p>
+        </article>
+        <article>
+          <span class="mono-copy">04</span>
+          <h3>React workbench</h3>
+          <p>The interface keeps resource browsing, composer workflows, run steps, artifacts, and viewers visible.</p>
+        </article>
+      </div>
     </section>
 
     <section class="launch-spotlight" aria-label="Flagship launch and supporting notes">
@@ -128,7 +180,7 @@ const primaryTileImageAlt =
           />
         </a>
         <div class="launch-primary-copy">
-          <p class="eyebrow">Launch article</p>
+          <p class="eyebrow">Launch brief</p>
           <h2 class="story-headline">{featuredStory.data.title}</h2>
           <p class="story-summary">{featuredStory.data.excerpt}</p>
           <p class="story-meta">
@@ -137,7 +189,7 @@ const primaryTileImageAlt =
           </p>
           <div class="hero-actions">
             <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>
-              {featuredStory.data.kind === "White paper" ? "Open the white paper" : "Open the article"}
+              Open the launch brief
             </a>
             <a class="secondary-button" href={toHref("/news")}>Browse product news</a>
           </div>
@@ -147,10 +199,10 @@ const primaryTileImageAlt =
       <aside class="launch-reading">
         <div class="section-header">
           <p class="eyebrow">Read next</p>
-          <h2 class="section-title">Then read the platform and the interface.</h2>
+          <h2 class="section-title">Then read the platform and interface updates.</h2>
           <p class="section-lead">
-            Start with the launch, then read the two pieces that explain what the product stands on
-            and why the interface feels this way.
+            The strongest product story is not a slogan. It is the chain from scientific substrate to
+            durable control plane to inspectable product surface.
           </p>
         </div>
         <div class="launch-reading-grid">
@@ -172,11 +224,12 @@ const primaryTileImageAlt =
 
     <section class="home-intro section-block">
       <div class="section-header">
-        <p class="eyebrow">Why this launch matters</p>
-        <h2 class="section-title">The interface changed. The scientific contract did not.</h2>
+        <p class="eyebrow">Product surface</p>
+        <h2 class="section-title">A scientific workbench with launch-grade infrastructure underneath.</h2>
         <p class="section-lead">
-          BisQue Ultra makes the BisQue foundation easier to steer without dropping the file,
-          the viewer, the metadata, or the evidence trail.
+          The current frontend exposes the details that serious image research needs: resource navigation,
+          workflow presets, Pro Mode, run recovery, artifact hydration, scientific result cards, and viewers
+          for image and volume inspection.
         </p>
       </div>
       <figure class="surface-card home-platform-preview">
@@ -197,28 +250,27 @@ const primaryTileImageAlt =
       </figure>
       <div class="home-notes-grid">
         <article class="flat-note">
-          <p class="eyebrow">BisQue foundation</p>
-          <h3 class="flat-note-title">Storage, viewers, metadata, and modules still do the heavy lifting.</h3>
+          <p class="eyebrow">Resource operations</p>
+          <h3 class="flat-note-title">Search, stage, modify, and run against BisQue resources.</h3>
           <p class="flat-note-copy">
-            BisQue is a web-based platform designed for scientific imaging, with flexible metadata,
-            graphical and textual annotations, and an open architecture for domain-specific analysis.
+            The composer includes workflows for BisQue search, metadata loading, downloads, uploads,
+            dataset creation, tag updates, annotations, XML inspection, deletion, and module execution.
           </p>
         </article>
         <article class="flat-note">
-          <p class="eyebrow">Workflow continuity</p>
-          <h3 class="flat-note-title">One thread can now hold the question, the run, and the artifact trail.</h3>
+          <p class="eyebrow">Vision workflows</p>
+          <h3 class="flat-note-title">Domain tools are routed through the same run record.</h3>
           <p class="flat-note-copy">
-            BisQue Ultra keeps resource imports, run events, generated outputs, viewer previews, and
-            reproducibility reports close to the same working surface instead of scattering them across
-            separate tools.
+            Deployment-configured vision workflows, RareSpot prairie analysis, scientific calculators,
+            chemistry tools, and code execution can produce structured outputs and artifacts.
           </p>
         </article>
         <article class="flat-note">
-          <p class="eyebrow">Research breadth</p>
-          <h3 class="flat-note-title">The same surface can serve microscopy, wildlife, and materials work.</h3>
+          <p class="eyebrow">Run memory</p>
+          <h3 class="flat-note-title">The answer is not detached from the system that produced it.</h3>
           <p class="flat-note-copy">
-            BisQue has supported biomedical sciences, neuroscience, wildlife conservation, marine science,
-            and materials research. BisQue Ultra is designed to make that breadth easier to navigate.
+            Past chats hydrate from durable thread messages, run artifacts remain downloadable, stream
+            recovery survives refreshes, and scientific result groups retain reports, figures, and metrics.
           </p>
         </article>
       </div>

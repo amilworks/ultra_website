@@ -10,15 +10,19 @@ test("homepage presents the release site shell and follows system dark mode", as
       name: /BisQue Ultra/i,
     })
   ).toBeVisible();
-  await expect(page.getByText(/Scientific AI that stays attached to the data/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /Read the launch article/i })).toBeVisible();
+  await expect(page.getByText(/Scientific AI control plane for image research/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Read the launch brief/i })).toBeVisible();
   await expect(page.getByText(/Created within the UCSB Vision Research Lab/i)).toBeVisible();
   await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(page.locator(".story-tile-large .story-tile-image")).toBeVisible();
-  await expect(page.getByText(/BisQue still carries the scientific substrate/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Go control plane", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /Postgres and NATS JetStream keep long work recoverable/i })
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "OpenAI-compatible model layer", exact: true })).toBeVisible();
 
-  const primaryButton = page.getByRole("link", { name: /Read the launch article/i });
+  const primaryButton = page.getByRole("link", { name: /Read the launch brief/i });
   await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
 });
 
@@ -27,9 +31,9 @@ test("white paper route renders content and on-page navigation", async ({ page }
 
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
   await expect(
-    page.getByText(/BisQue Ultra is our answer to that gap\. It does not replace BisQue\./i)
+    page.getByText(/BisQue Ultra is a scientific AI control plane wrapped in a workbench/i)
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Why BioIO sits at the image boundary/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /What changed in the updated stack/i })).toBeVisible();
 
   const jumpMenu = page.locator("[data-article-jump]");
   await expect(jumpMenu).toHaveAttribute("data-visible", "false");
@@ -43,12 +47,12 @@ test("white paper route renders content and on-page navigation", async ({ page }
   await expect(jumpMenu).not.toHaveAttribute("open", "");
   await jumpMenu.locator(".article-jump-summary").click();
   await expect(jumpMenu).toHaveAttribute("open", "");
-  await expect(jumpMenu.getByRole("link", { name: /What becomes easier now/i })).toBeVisible();
+  await expect(jumpMenu.getByRole("link", { name: /What teams can safely claim now/i })).toBeVisible();
 });
 
 test("news index and a follow-up post both render", async ({ page }) => {
   await page.goto("/news");
-  await expect(page.getByRole("heading", { name: /Start with the launch, then read the platform and the interface/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Read the launch, the platform proof, and the interface update/i })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /BisQue Platform: storage, visualization, analysis, and extensibility/i })
   ).toBeVisible();

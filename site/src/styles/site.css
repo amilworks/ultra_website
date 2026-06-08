@@ -1235,12 +1235,12 @@ button {
 
 .home-editorial {
   display: grid;
-  gap: 3rem;
+  gap: 3.6rem;
   padding-top: 0.8rem;
 }
 
 .launch-hero {
-  gap: 1.45rem;
+  gap: 1.25rem;
   padding-top: 0.42rem;
 }
 
@@ -1251,25 +1251,25 @@ button {
 }
 
 .launch-hero-copy {
-  max-width: 52rem;
+  max-width: 48rem;
 }
 
 .launch-headline {
   margin: 0;
-  max-width: 10ch;
-  font-size: clamp(3rem, 6vw, 4.7rem);
-  line-height: 0.9;
-  letter-spacing: -0.065em;
+  max-width: 12ch;
+  font-size: clamp(3.2rem, 6.2vw, 5.2rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
   font-weight: 400;
   text-wrap: balance;
 }
 
 .launch-claim {
-  margin: 0.12rem 0 0;
-  max-width: 22ch;
-  font-size: clamp(1.38rem, 2.1vw, 1.85rem);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
+  margin: 0.28rem 0 0;
+  max-width: 24ch;
+  font-size: clamp(1.42rem, 2.2vw, 2rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   font-weight: 400;
   color: color-mix(in oklab, var(--text-main) 94%, var(--text-muted) 6%);
   text-wrap: balance;
@@ -1284,22 +1284,42 @@ button {
   text-wrap: pretty;
 }
 
+.launch-command-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin-top: 0.88rem;
+  max-width: 45rem;
+}
+
+.launch-command-line span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.32rem 0.55rem;
+  color: color-mix(in oklab, var(--text-main) 76%, var(--text-muted) 24%);
+  background: color-mix(in oklab, var(--bg-panel-strong) 72%, transparent);
+  font-size: 0.75rem;
+  line-height: 1.1;
+}
+
 .launch-hero-art {
   position: relative;
   display: block;
   overflow: hidden;
-  min-height: 15rem;
-  border-radius: calc(var(--radius-lg) + 0.15rem);
-  background:
-    radial-gradient(circle at 18% 26%, rgba(255, 196, 223, 0.5), transparent 26%),
-    radial-gradient(circle at 76% 78%, rgba(73, 164, 255, 0.34), transparent 30%),
-    linear-gradient(135deg, rgba(215, 209, 255, 0.88) 0%, rgba(250, 214, 230, 0.92) 42%, rgba(245, 236, 202, 0.88) 100%);
+  min-height: 18rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--bg-panel-strong);
   text-decoration: none;
-  transition: transform 260ms ease, filter 260ms ease;
+  box-shadow: 0 22px 70px rgba(12, 12, 14, 0.1);
+  transition: transform 260ms ease, border-color 260ms ease;
 }
 
 .launch-hero-art::after {
-  content: "";
+  content: none;
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(10, 11, 18, 0) 0%, rgba(10, 11, 18, 0.08) 100%);
@@ -1310,9 +1330,9 @@ button {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 15rem;
+  min-height: 18rem;
   object-fit: cover;
-  object-position: 54% 50%;
+  object-position: 50% 50%;
   transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1363,7 +1383,7 @@ button {
 
 .proof-strip {
   display: grid;
-  gap: 0.95rem;
+  gap: 0.78rem;
 }
 
 .content-body .proof-strip {
@@ -1375,6 +1395,49 @@ button {
   gap: 0.38rem;
   padding-top: 0.95rem;
   border-top: 1px solid var(--line);
+}
+
+.launch-update {
+  gap: 1.15rem;
+}
+
+.launch-update .section-title {
+  max-width: 28ch;
+}
+
+.architecture-rail {
+  display: grid;
+  border-top: 1px solid var(--line-strong);
+}
+
+.architecture-rail article {
+  display: grid;
+  gap: 0.42rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.architecture-rail span {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.architecture-rail h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.architecture-rail p {
+  margin: 0;
+  max-width: 28rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.56;
+  text-wrap: pretty;
 }
 
 .proof-item-title {
@@ -1814,19 +1877,19 @@ button {
 
 @media (min-width: 860px) {
   .launch-hero-top {
-    grid-template-columns: minmax(0, 1.48fr) minmax(17rem, 0.72fr);
-    gap: clamp(1rem, 2vw, 1.8rem);
+    grid-template-columns: minmax(0, 0.9fr) minmax(25rem, 1.1fr);
+    gap: clamp(1.2rem, 2.6vw, 2.3rem);
   }
 
   .launch-hero-art {
-    aspect-ratio: 4 / 5;
-    width: min(100%, 24.5rem);
-    min-height: 26rem;
-    justify-self: start;
+    aspect-ratio: 16 / 11;
+    width: 100%;
+    min-height: 26.5rem;
+    justify-self: stretch;
   }
 
   .launch-hero-art-image {
-    min-height: 26rem;
+    min-height: 26.5rem;
   }
 
   .proof-strip {
@@ -1835,6 +1898,20 @@ button {
 
   .launch-hero .proof-strip {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .architecture-rail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .architecture-rail article {
+    min-height: 13.5rem;
+    padding: 1rem 1rem 1.05rem 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .architecture-rail article:last-child {
+    border-right: 0;
   }
 
   .launch-spotlight {

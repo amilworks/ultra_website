@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "BisQue Ultra",
   releaseLabel: "Release Notes",
   description:
-    "BisQue Ultra is a new scientific work surface built on the BisQue platform for image analysis, model reasoning, and reproducible outputs.",
+    "BisQue Ultra is a scientific AI control plane and product workbench for BisQue image resources, durable autonomous runs, model-guided tools, and reproducible artifacts.",
   repoUrl: "https://github.com/amilworks/ultra",
   docsUrl: "https://bisque.gitbook.io/docs/",
   platformUrl: "https://bisque2.ece.ucsb.edu",
@@ -11,7 +11,7 @@ export const siteConfig = {
   authorName: "Amil Khan",
   organizationName: "BisQue Ultra",
   footerBlurb:
-    "BisQue Ultra brings the BisQue platform's storage, visualization, metadata, and analysis infrastructure into a calmer interface for scientific work.",
+    "BisQue Ultra connects BisQue scientific resources, a Go run-control spine, Deep Agents workers, and a React workbench for image research that has to stay inspectable.",
 };
 
 export const siteNav = [
