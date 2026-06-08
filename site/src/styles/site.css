@@ -1877,12 +1877,17 @@ button {
   }
 
   .launch-hero .proof-item {
-    padding-right: 0.92rem;
+    padding-inline: 1.05rem;
     border-right: 1px solid var(--line);
+  }
+
+  .launch-hero .proof-item:first-child {
+    padding-left: 0;
   }
 
   .launch-hero .proof-item:last-child {
     border-right: 0;
+    padding-right: 0;
   }
 
   .architecture-rail {
