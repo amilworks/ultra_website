@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "BisQue Ultra",
   releaseLabel: "Release Notes",
   description:
-    "BisQue Ultra is a scientific AI control plane and product workbench for BisQue image resources, durable autonomous runs, model-guided tools, and reproducible artifacts.",
+    "BisQue Ultra is a scientific AI workbench and durable run-control plane for BisQue image resources, model-guided tools, Deep Agents workers, and reproducible artifacts.",
   repoUrl: "https://github.com/amilworks/ultra",
   docsUrl: "https://bisque.gitbook.io/docs/",
   platformUrl: "https://bisque2.ece.ucsb.edu",

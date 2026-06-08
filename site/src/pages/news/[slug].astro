@@ -27,6 +27,10 @@ const articleImageUrl =
   Astro.site && articleImagePath.startsWith("/")
     ? new URL(withBase(articleImagePath), Astro.site).toString()
     : articleImagePath;
+const articlePageTitle =
+  entry.data.title === siteConfig.name
+    ? `${entry.data.kind} | ${siteConfig.name}`
+    : `${entry.data.title} | ${siteConfig.name}`;
 const articleJsonLd = canonicalUrl
   ? [
       {
@@ -79,7 +83,7 @@ const articleJsonLd = canonicalUrl
 ---
 
 <SiteShell
-  title={`${entry.data.title} | BisQue Ultra`}
+  title={articlePageTitle}
   description={entry.data.summary}
   image={entry.data.ogImage}
   imageAlt={entry.data.title}

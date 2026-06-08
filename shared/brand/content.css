@@ -21,7 +21,7 @@
 .content-body h3,
 .content-body h4 {
   margin: 2.3rem 0 0.72rem;
-  letter-spacing: -0.016em;
+  letter-spacing: 0;
   line-height: 1.24;
   font-weight: var(--font-weight-reading-heading);
   text-wrap: balance;

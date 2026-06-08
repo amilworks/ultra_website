@@ -10,7 +10,7 @@ test("homepage presents the release site shell and follows system dark mode", as
       name: /BisQue Ultra/i,
     })
   ).toBeVisible();
-  await expect(page.getByText(/Scientific AI control plane for image research/i)).toBeVisible();
+  await expect(page.getByText(/Scientific AI run control for image research/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /Read the launch brief/i })).toBeVisible();
   await expect(page.getByText(/Created within the UCSB Vision Research Lab/i)).toBeVisible();
   await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
@@ -28,6 +28,7 @@ test("homepage presents the release site shell and follows system dark mode", as
 
 test("white paper route renders content and on-page navigation", async ({ page }) => {
   await page.goto("/news/bisque-ultra");
+  await expect(page).toHaveTitle("Launch brief | BisQue Ultra");
 
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
   await expect(
