@@ -23,11 +23,13 @@ const homeJsonLd = canonicalUrl
         name: "UCSB Electrical and Computer Engineering",
       },
       description:
-        "A UCSB Electrical and Computer Engineering project home for computer vision, multimodal learning, scientific image informatics, and reproducible AI workbenches.",
+        "A UCSB Electrical and Computer Engineering project home for Bright 4B, computer vision, multimodal learning, scientific image informatics, and reproducible AI workbenches.",
       knowsAbout: [
+        "Bright 4B",
         "computer vision",
         "multimodal learning",
         "scientific image informatics",
+        "3D brightfield microscopy",
         "hyperspectral methane detection",
         "aerial wildlife detection",
         "clinical neuroimaging",
@@ -55,11 +57,11 @@ const homeJsonLd = canonicalUrl
 ---
 
 <SiteShell
-  title="Center for Multimodal Learning | Frontier Computer Vision at UCSB ECE"
-  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for frontier computer vision, multimodal learning, BisQue image informatics, and scientific AI workbenches."
+  title="Center for Multimodal Learning | Bright 4B and Frontier Computer Vision at UCSB ECE"
+  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for Bright 4B, frontier computer vision, multimodal learning, BisQue image informatics, and scientific AI workbenches."
   canonicalPath="/"
-  image="/images/home/cml-research-atlas.png"
-  imageAlt="Research atlas showing hyperspectral methane sensing, aerial wildlife mapping, materials microscopy, and 3D cell analysis."
+  image="/images/home/ultra-hero.png"
+  imageAlt="Abstract BisQue Ultra hero image with a soft frontier-lab color field."
   jsonLd={homeJsonLd}
 >
   <div class="home-editorial lab-home research-home">
@@ -69,11 +71,13 @@ const homeJsonLd = canonicalUrl
           <h1 class="lab-headline">Center for Multimodal Learning</h1>
           <p class="lab-affiliation">UCSB Electrical and Computer Engineering</p>
           <p class="lab-subhead">
-            Frontier computer vision for scientific data: hyperspectral methane sensing, aerial
-            wildlife mapping, clinical neuroimaging, materials microscopy, time-lapse 3D cell
-            analysis, and the image informatics systems that make those workflows reproducible.
+            Frontier computer vision for scientific data: Bright 4B microscopy foundation models,
+            hyperspectral methane sensing, aerial wildlife mapping, clinical neuroimaging,
+            materials microscopy, and the image informatics systems that make those workflows
+            reproducible.
           </p>
           <div class="launch-command-line lab-command-line" aria-label="Research themes">
+            <span>Bright 4B</span>
             <span>Computer vision</span>
             <span>Multimodal learning</span>
             <span>Scientific image informatics</span>
@@ -84,15 +88,20 @@ const homeJsonLd = canonicalUrl
             <a class="secondary-button" href={toHref("/bisque-ultra")}>BisQue Ultra</a>
           </div>
         </div>
-        <figure class="research-atlas-frame">
+        <figure class="research-atlas-frame research-ultra-hero-frame">
           <img
-            src={toHref("/images/home/cml-research-atlas.png")}
-            alt="A calm research atlas combining methane hyperspectral imaging, wildlife aerial imagery, EBSD materials maps, and 3D cell microscopy."
+            src={toHref("/images/home/ultra-hero.png")}
+            alt="Abstract BisQue Ultra hero image with a soft frontier-lab color field."
             decoding="async"
           />
+          <div class="research-ultra-hero-panel" aria-hidden="true">
+            <span class="mono-copy">BRIGHT 4B</span>
+            <strong>3D brightfield microscopy</strong>
+            <small>Foundation-model evidence routed through BisQue Ultra run control.</small>
+          </div>
           <figcaption>
-            A visual atlas of lab-scale image AI, from remote sensing and ecology to materials
-            microscopy and 3D cell analysis.
+            A visual field for the lab stack: scientific vision models, BisQue image informatics,
+            and BisQue Ultra run control.
           </figcaption>
         </figure>
       </div>
@@ -122,6 +131,71 @@ const homeJsonLd = canonicalUrl
             and OpenAI-compatible model endpoints.
           </p>
         </article>
+      </div>
+    </section>
+
+    <section class="bright4b-feature section-block" id="bright-4b" aria-label="Bright 4B research">
+      <div class="section-header research-section-heading">
+        <p class="eyebrow">Bright 4B</p>
+        <h2 class="section-title">Scaling hyperspectral learning into 3D brightfield microscopy.</h2>
+        <p class="section-lead">
+          Bright 4B frames microscopy as a foundation-model problem with the measurement physics left
+          intact: anisotropic 3D stacks, point-spread behavior, label-free segmentation targets, and
+          biological outputs that need to survive scientific review.
+        </p>
+      </div>
+
+      <div class="bright4b-showcase">
+        <figure class="bright4b-figure bright4b-figure-large">
+          <img
+            src={toHref("/images/home/bright4b/broader-vision.png")}
+            alt="Bright 4B broader vision slide showing brightfield inputs, pseudo-labels, predictions, and zoomed 3D morphology outputs."
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            Bright 4B connects raw brightfield volumes to morphology-aware 3D segmentation across
+            structures and acquisition regimes.
+          </figcaption>
+        </figure>
+        <div class="bright4b-evidence-grid">
+          <article class="bright4b-evidence-card">
+            <figure>
+              <img
+                src={toHref("/images/home/bright4b/geometry-aware-representation.png")}
+                alt="Bright 4B geometry-aware input representation slide with PSF-aware 3D patching."
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div>
+              <p class="eyebrow">Representation</p>
+              <h3>Patch embeddings respect confocal geometry.</h3>
+              <p>
+                The model preserves fine structure across depth before global reasoning begins,
+                instead of flattening 3D microscopy into generic image tokens.
+              </p>
+            </div>
+          </article>
+          <article class="bright4b-evidence-card">
+            <figure>
+              <img
+                src={toHref("/images/home/bright4b/biological-task-output.png")}
+                alt="Bright 4B output slide showing predicted 3D masks for nuclei, mitochondria, and microtubules."
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div>
+              <p class="eyebrow">Biological output</p>
+              <h3>Label-free masks become inspectable scientific evidence.</h3>
+              <p>
+                Nuclei, mitochondria, microtubules, and related structures can be compared as
+                segmentation outputs rather than treated as opaque model responses.
+              </p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 

@@ -15,6 +15,9 @@ test("homepage presents the center project shell and follows system dark mode", 
   await expect(page.getByText(/hyperspectral methane sensing/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore research/i })).toHaveCount(0);
+  await expect(page.locator(".research-ultra-hero-frame img")).toHaveAttribute("src", "/images/home/ultra-hero.png");
+  await expect(page.getByRole("heading", { name: /Scaling hyperspectral learning/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Patch embeddings respect confocal geometry/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Location-aware patch-based CNNs/i })).toBeVisible();
@@ -46,6 +49,8 @@ test("BisQue Ultra landing page moved to its own route", async ({ page }) => {
     page.getByRole("heading", { name: /Postgres and NATS JetStream keep long work recoverable/i })
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "OpenAI-compatible model layer", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /A frontier microscopy model/i })).toBeVisible();
+  await expect(page.getByText(/Bright 4B output evidence becomes stronger/i)).toBeVisible();
 });
 
 test("BisQue platform page renders research infrastructure content", async ({ page }) => {

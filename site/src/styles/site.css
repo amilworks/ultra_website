@@ -2045,14 +2045,64 @@ button {
   margin: 0;
 }
 
+.research-ultra-hero-frame {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.research-ultra-hero-frame img {
+  grid-column: 1;
+  grid-row: 1;
+}
+
 .research-atlas-frame img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9.4;
   object-fit: cover;
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: var(--shadow-lg);
+}
+
+.research-ultra-hero-panel {
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  justify-self: start;
+  display: grid;
+  gap: 0.28rem;
+  max-width: 20rem;
+  margin: clamp(0.85rem, 1.7vw, 1.2rem);
+  padding: 0.78rem 0.85rem;
+  border: 1px solid color-mix(in oklab, white 18%, transparent);
+  border-radius: 8px;
+  background: color-mix(in oklab, rgb(8 8 10) 70%, transparent);
+  color: white;
+  box-shadow: 0 22px 55px color-mix(in oklab, black 34%, transparent);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.research-ultra-hero-panel span {
+  color: color-mix(in oklab, white 70%, transparent);
+  font-size: 0.68rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+.research-ultra-hero-panel strong {
+  font-size: clamp(1rem, 1.35vw, 1.22rem);
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.research-ultra-hero-panel small {
+  max-width: 17rem;
+  color: color-mix(in oklab, white 72%, transparent);
+  font-size: 0.78rem;
+  line-height: 1.4;
 }
 
 .research-atlas-frame figcaption {
@@ -2070,6 +2120,116 @@ button {
 
 .research-section-heading {
   max-width: 48rem;
+}
+
+.bright4b-feature,
+.ultra-bright4b {
+  border-top: 1px solid var(--line-strong);
+  padding-top: 1.25rem;
+  scroll-margin-top: 6.4rem;
+}
+
+.bright4b-showcase,
+.ultra-bright4b-grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.7rem);
+  align-items: start;
+}
+
+.bright4b-figure,
+.ultra-bright4b-figure,
+.bright4b-evidence-card figure {
+  margin: 0;
+}
+
+.bright4b-figure {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.bright4b-figure img,
+.ultra-bright4b-figure img,
+.bright4b-evidence-card img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--bg-panel-strong);
+}
+
+.bright4b-figure img {
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--shadow-lg);
+}
+
+.bright4b-figure figcaption,
+.ultra-bright4b-figure figcaption {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.52;
+  text-wrap: pretty;
+}
+
+.bright4b-evidence-grid,
+.ultra-bright4b-steps {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.bright4b-evidence-card,
+.ultra-bright4b-steps article {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.bright4b-evidence-card img {
+  aspect-ratio: 16 / 9;
+}
+
+.bright4b-evidence-card h3,
+.ultra-bright4b-steps h3 {
+  margin: 0.36rem 0 0;
+  max-width: 28rem;
+  font-size: clamp(1.08rem, 1.35vw, 1.28rem);
+  line-height: 1.14;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.bright4b-evidence-card p:not(.eyebrow),
+.ultra-bright4b-steps p {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.56;
+  text-wrap: pretty;
+}
+
+.ultra-bright4b-figure {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.ultra-bright4b-figure img {
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--shadow-lg);
+}
+
+.ultra-bright4b-steps {
+  margin-top: clamp(1rem, 2vw, 1.45rem);
+}
+
+.ultra-bright4b-steps span {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1.2;
 }
 
 .research-programs {
@@ -2389,8 +2549,39 @@ button {
     grid-template-columns: minmax(0, 0.9fr) minmax(30rem, 1.1fr);
   }
 
+  .bright4b-showcase {
+    grid-template-columns: minmax(0, 1.18fr) minmax(22rem, 0.82fr);
+  }
+
+  .bright4b-evidence-card {
+    gap: 0.8rem;
+  }
+
   .bisque-hero-grid {
     grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.72fr);
+  }
+
+  .ultra-bright4b-grid {
+    grid-template-columns: minmax(0, 0.82fr) minmax(28rem, 1.18fr);
+  }
+
+  .ultra-bright4b-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ultra-bright4b-steps article {
+    min-height: 11.5rem;
+    padding: 1rem 1.05rem 1.1rem;
+    border-right: 1px solid var(--line);
+  }
+
+  .ultra-bright4b-steps article:first-child {
+    padding-left: 0;
+  }
+
+  .ultra-bright4b-steps article:last-child {
+    border-right: 0;
+    padding-right: 0;
   }
 
   .research-program-card {
