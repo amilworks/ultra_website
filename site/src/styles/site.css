@@ -2029,6 +2029,10 @@ button {
   text-transform: uppercase;
 }
 
+.research-hero .lab-hero-copy {
+  max-width: min(100%, 57rem);
+}
+
 .research-hero-grid,
 .bisque-hero-grid,
 .research-platform-grid,
@@ -2041,13 +2045,14 @@ button {
 .research-atlas-frame {
   display: grid;
   gap: 0.7rem;
-  margin: 0;
+  width: min(100%, 54rem);
+  margin: 0.2rem 0 0;
 }
 
 .research-atlas-frame img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9.5;
   object-fit: cover;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -2385,7 +2390,7 @@ button {
   }
 
   .research-hero-grid {
-    grid-template-columns: minmax(0, 0.9fr) minmax(30rem, 1.1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .bisque-hero-grid {

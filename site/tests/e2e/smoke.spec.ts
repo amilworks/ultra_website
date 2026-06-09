@@ -13,8 +13,8 @@ test("homepage presents the center project shell and follows system dark mode", 
   await expect(page.getByText("UCSB ELECTRICAL & COMPUTER ENGINEERING")).toBeVisible();
   await expect(page.getByText(/UCSB Electrical and Computer Engineering/i)).toBeVisible();
   await expect(page.getByText(/hyperspectral methane sensing/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /Explore research/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore research/i })).toHaveCount(0);
   await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Location-aware patch-based CNNs/i })).toBeVisible();
@@ -28,7 +28,7 @@ test("homepage presents the center project shell and follows system dark mode", 
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "BisQue", exact: true })
   ).toBeVisible();
 
-  const primaryButton = page.getByRole("link", { name: /Explore research/i });
+  const primaryButton = page.getByRole("link", { name: /Open BisQue platform/i });
   await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
 });
 
