@@ -63,7 +63,13 @@ test("BisQue platform page renders research infrastructure content", async ({ pa
   await expect(bisqueOverview.getByRole("link", { name: /Open BisQue/i })).toBeVisible();
   await expect(bisqueOverview.getByRole("link", { name: /Read docs/i })).toBeVisible();
   await expect(bisqueOverview.getByRole("link", { name: /View repository/i })).toBeVisible();
+  await expect(page.locator(".bisque-workshop-frame img")).toHaveAttribute(
+    "src",
+    "/images/bisque/workshop/store-share-collaborate.png"
+  );
   await expect(page.getByRole("heading", { name: /A scientific image platform built/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /BisQue turns scientific image work/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Large mosaics stay inspectable/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /BisQue is the substrate/i })).toBeVisible();
   await expect(page.getByText(/Frontiers in Neuroscience 2020/i)).toBeVisible();
   await expect(page.getByText(/BME Frontiers 2022/i)).toBeVisible();

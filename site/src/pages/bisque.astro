@@ -32,8 +32,8 @@ const bisqueJsonLd = canonicalUrl
   title="BisQue | Scientific Image Informatics Platform"
   description="BisQue is the scientific image informatics platform for 5D images, flexible metadata, annotation, visualization, scalable analysis modules, and reproducible computer vision workflows."
   canonicalPath="/bisque"
-  image="/images/home/cml-research-atlas.png"
-  imageAlt="Research atlas representing BisQue-supported scientific image domains."
+  image="/images/bisque/workshop/store-share-collaborate.png"
+  imageAlt="BisQue workshop slide showing the platform as a place to store, share, and collaborate on scientific images."
   jsonLd={bisqueJsonLd}
 >
   <div class="home-editorial lab-home bisque-page">
@@ -65,16 +65,30 @@ const bisqueJsonLd = canonicalUrl
             </a>
           </div>
         </div>
-        <aside class="bisque-context-panel">
-          <p class="eyebrow">Research objective</p>
-          <p>
-            Research Outreach describes BisQue as an advanced image database and analysis system for
-            large-scale image databases, flexible experimental data management, metadata and
-            content-based search, analysis integration, and knowledge discovery.
-          </p>
-          <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">
-            Read the reproducible computer vision article
-          </a>
+        <aside class="bisque-hero-visual">
+          <figure class="bisque-workshop-frame">
+            <img
+              src={toHref("/images/bisque/workshop/store-share-collaborate.png")}
+              alt="BisQue workshop slide showing store, share, and collaborate next to the BisQue browser interface."
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption>
+              Workshop framing: BisQue is a browser substrate for storing, sharing, and collaborating
+              around scientific image resources.
+            </figcaption>
+          </figure>
+          <div class="bisque-context-panel">
+            <p class="eyebrow">Research objective</p>
+            <p>
+              Research Outreach describes BisQue as an advanced image database and analysis system for
+              large-scale image databases, flexible experimental data management, metadata and
+              content-based search, analysis integration, and knowledge discovery.
+            </p>
+            <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">
+              Read the reproducible computer vision article
+            </a>
+          </div>
         </aside>
       </div>
 
@@ -102,6 +116,74 @@ const bisqueJsonLd = canonicalUrl
             BisQue gives domain researchers access to machine-learning tools without requiring them
             to rebuild the computational stack.
           </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bisque-workshop section-block" aria-label="BisQue workshop evidence">
+      <div class="section-header research-section-heading">
+        <p class="eyebrow">Workshop evidence</p>
+        <h2 class="section-title">BisQue turns scientific image work into browser-visible infrastructure.</h2>
+        <p class="section-lead">
+          The Winter 2025 workshop material makes the product story concrete: large mosaics,
+          multidimensional viewers, containerized workflows, and module outputs can sit inside one
+          shared image-informatics surface.
+        </p>
+      </div>
+      <div class="bisque-workshop-grid">
+        <article class="bisque-workshop-card bisque-workshop-card-large">
+          <figure>
+            <img
+              src={toHref("/images/bisque/workshop/large-scale-visualization.png")}
+              alt="BisQue workshop slide showing a 90K by 90K image mosaic visualized inside a web browser."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div>
+            <p class="eyebrow">Scale</p>
+            <h3>Large mosaics stay inspectable in the web browser.</h3>
+            <p>
+              The workshop shows a 90K by 90K image mosaic in BisQue, making scale a product
+              capability rather than an offline preprocessing footnote.
+            </p>
+          </div>
+        </article>
+        <article class="bisque-workshop-card">
+          <figure>
+            <img
+              src={toHref("/images/bisque/workshop/materials-workflow.png")}
+              alt="BisQue workshop slide showing materials-science modules stitched into a containerized workflow."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div>
+            <p class="eyebrow">Materials science</p>
+            <h3>Modules can be stitched into containerized workflows.</h3>
+            <p>
+              EBSD and microstructure workflows become repeatable analysis paths with visible
+              inputs, module steps, and derived outputs.
+            </p>
+          </div>
+        </article>
+        <article class="bisque-workshop-card">
+          <figure>
+            <img
+              src={toHref("/images/bisque/workshop/bioimaging-module.png")}
+              alt="BisQue workshop slide showing CellECT bioimaging segmentation and output tables."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div>
+            <p class="eyebrow">Bioimaging</p>
+            <h3>Image modules return masks, metadata, and tables together.</h3>
+            <p>
+              Cell segmentation outputs stay connected to image viewers and table inspection, which
+              is the practical base for reproducible bioimage analysis.
+            </p>
+          </div>
         </article>
       </div>
     </section>
