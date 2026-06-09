@@ -16,6 +16,8 @@ test("homepage presents the center project shell and follows system dark mode", 
   await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Location-aware patch-based CNNs/i })).toBeVisible();
+  await expect(page.getByText(/Scientific Reports 2023/i)).toBeVisible();
   await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(
@@ -57,6 +59,9 @@ test("BisQue platform page renders research infrastructure content", async ({ pa
   await expect(bisqueOverview.getByRole("link", { name: /View repository/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /A scientific image platform built/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /BisQue is the substrate/i })).toBeVisible();
+  await expect(page.getByText(/Frontiers in Neuroscience 2020/i)).toBeVisible();
+  await expect(page.getByText(/BME Frontiers 2022/i)).toBeVisible();
+  await expect(page.getByText(/Scientific Reports 2023/i)).toBeVisible();
 });
 
 test("white paper route renders content and on-page navigation", async ({ page }) => {

@@ -13,6 +13,11 @@ export const sourceLinks = {
   wildlifeMapperPaper:
     "https://openaccess.thecvf.com/content/CVPR2024/papers/Kumar_WildlifeMapper_Aerial_Image_Analysis_for_Multi-Species_Detection_and_Identification_CVPR_2024_paper.pdf",
   ebsdPaper: "https://www.nature.com/articles/s41524-022-00924-2",
+  brainTumorPaper:
+    "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2019.01449/full",
+  hydrocephalusPaper: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10521674/",
+  hydrocephalusPublisherPaper: "https://spj.science.org/doi/10.34133/2022/9783128",
+  cellAnalysisPaper: "https://www.nature.com/articles/s41598-023-29149-z",
 };
 
 export const researchPrograms = [
@@ -59,15 +64,43 @@ export const researchPrograms = [
     ],
   },
   {
+    name: "MRI Brain Tumor Segmentation",
+    domain: "Clinical neuroimaging",
+    title: "Location-aware patch-based CNNs for MRI brain tumor segmentation",
+    venue: "Frontiers in Neuroscience 2020",
+    summary:
+      "Improves glioma segmentation by registering a brain parcellation atlas into each subject space and combining that location signal with multimodal MR images, 3D U-Net, DeepMedic, and ensemble learning.",
+    evidence:
+      "The paper reports that location information improves patch-based neural networks for BraTS brain tumor segmentation and uses model diversity plus uncertainty reduction in a two-level ensemble.",
+    links: [{ label: "Frontiers paper", href: sourceLinks.brainTumorPaper }],
+  },
+  {
+    name: "Normal Pressure Hydrocephalus",
+    domain: "Clinical neuroimage analysis",
+    title: "Automated CT segmentation and connectome-aware NPH prediction",
+    venue: "BME Frontiers 2022",
+    summary:
+      "Segments regions of interest from CT brain scans, combines them with diffusion tractography and connectome features, and predicts Normal Pressure Hydrocephalus from measurable neuroanatomy.",
+    evidence:
+      "The article describes an automated NPH prediction method from CT scans that incorporates MRI diffusion tractography information, with reported gains over prior state-of-the-art precision and recall.",
+    links: [
+      { label: "PMC article", href: sourceLinks.hydrocephalusPaper },
+      { label: "Publisher page", href: sourceLinks.hydrocephalusPublisherPaper },
+    ],
+  },
+  {
     name: "Time-lapse 3D Cell Analysis",
     domain: "Bioimage analysis",
-    title: "End-to-end analysis for boundary-tagged 3D cell images",
-    venue: "Deep learning cell analysis",
+    title: "Segmentation, tracking, and sub-cellular feature extraction in 3D time-lapse images",
+    venue: "Scientific Reports 2023",
     summary:
-      "Combines 3D segmentation, cellular and sub-cellular feature extraction, and tracking so time-lapse image stacks can become measurable cell histories.",
+      "Turns time-lapse 3D confocal image stacks into quantitative cell histories with rotation-equivariant 3D segmentation, adjacency-graph feature extraction, and graph-based tracking.",
     evidence:
-      "The repository exposes separate segmentation, feature extraction, and tracking components that can run together or independently.",
-    links: [{ label: "Repository", href: sourceLinks.cellAnalysisRepo }],
+      "The Scientific Reports paper states that code is available on GitHub and the method is available as a service through the BisQue portal.",
+    links: [
+      { label: "Repository", href: sourceLinks.cellAnalysisRepo },
+      { label: "Scientific Reports paper", href: sourceLinks.cellAnalysisPaper },
+    ],
   },
 ];
 

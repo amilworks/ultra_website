@@ -132,14 +132,14 @@ const bisqueJsonLd = canonicalUrl
           <p class="eyebrow">Connected research</p>
           <h2 class="section-title">The same substrate appears across frontier vision programs.</h2>
           <p class="section-lead">
-            MethaneMapper and WildlifeMapper both expose BisQue dataset visualization links in their
-            repositories. EBSD Superresolution describes a BisQue module path for inference. The
-            broader BisQue literature connects the platform to materials, marine, medical, and
-            biological image analysis.
+            MethaneMapper and WildlifeMapper expose BisQue dataset visualization links in their
+            repositories. EBSD Superresolution and Time-lapse 3D Cell Analysis describe BisQue
+            module paths for inference. The clinical neuroimaging papers extend the same lab
+            pattern into MRI tumor segmentation, CT segmentation, and connectome-aware analysis.
           </p>
         </div>
         <div class="bisque-research-list">
-          {researchPrograms.slice(0, 3).map((program) => (
+          {researchPrograms.map((program) => (
             <a class="bisque-research-row" href={program.links[0].href} target="_blank" rel="noreferrer">
               <span>
                 <strong>{program.name}</strong>
