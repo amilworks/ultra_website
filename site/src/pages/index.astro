@@ -1,6 +1,7 @@
 ---
 import SiteShell from "@/layouts/SiteShell.astro";
 import { siteConfig } from "@/data/site";
+import { researchPrograms, sourceLinks } from "@/data/research";
 
 const baseUrl = import.meta.env.BASE_URL;
 const canonicalUrl = Astro.site ? new URL(baseUrl, Astro.site).toString() : undefined;
@@ -9,7 +10,7 @@ const toHref = (href: string) =>
 const homeJsonLd = canonicalUrl
   ? {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "ResearchOrganization",
       name: "Center for Multimodal Learning",
       alternateName: "CML",
       url: canonicalUrl,
@@ -22,128 +23,179 @@ const homeJsonLd = canonicalUrl
         name: "UCSB Electrical and Computer Engineering",
       },
       description:
-        "A UCSB Electrical and Computer Engineering project home for multimodal learning systems, scientific AI infrastructure, and image research workbenches.",
-      sameAs: [siteConfig.vrlUrl, siteConfig.platformUrl],
+        "A UCSB Electrical and Computer Engineering project home for computer vision, multimodal learning, scientific image informatics, and reproducible AI workbenches.",
+      knowsAbout: [
+        "computer vision",
+        "multimodal learning",
+        "scientific image informatics",
+        "hyperspectral methane detection",
+        "aerial wildlife detection",
+        "EBSD super-resolution",
+        "3D cell image analysis",
+      ],
+      sameAs: [
+        siteConfig.vrlUrl,
+        siteConfig.platformUrl,
+        sourceLinks.bisqueRepo,
+        sourceLinks.ultraRepo,
+        sourceLinks.methaneMapperRepo,
+        sourceLinks.wildlifeMapperRepo,
+        sourceLinks.ebsdRepo,
+        sourceLinks.cellAnalysisRepo,
+        sourceLinks.researchOutreach,
+      ],
     }
   : undefined;
 ---
 
 <SiteShell
-  title="Center for Multimodal Learning | UCSB Electrical and Computer Engineering"
-  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for multimodal learning systems, scientific AI infrastructure, BisQue Ultra, and BisQue."
+  title="Center for Multimodal Learning | Frontier Computer Vision at UCSB ECE"
+  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for frontier computer vision, multimodal learning, BisQue image informatics, and scientific AI workbenches."
   canonicalPath="/"
-  image="/images/news/bisque-ultra-launch2.png"
-  imageAlt="BisQue Ultra product interface used as a project preview for Center for Multimodal Learning."
+  image="/images/home/cml-research-atlas.png"
+  imageAlt="Research atlas showing hyperspectral methane sensing, aerial wildlife mapping, materials microscopy, and 3D cell analysis."
   jsonLd={homeJsonLd}
 >
-  <div class="home-editorial lab-home">
-    <section class="lab-hero section-block" aria-label="Center overview">
-      <div class="lab-hero-top">
+  <div class="home-editorial lab-home research-home">
+    <section class="lab-hero research-hero section-block" aria-label="Center overview">
+      <div class="research-hero-grid">
         <div class="section-header lab-hero-copy">
           <h1 class="lab-headline">Center for Multimodal Learning</h1>
           <p class="lab-affiliation">UCSB Electrical and Computer Engineering</p>
           <p class="lab-subhead">
-            A project home for scientific AI systems that keep multimodal data, model-guided tools,
-            durable runs, and inspectable evidence connected.
+            Frontier computer vision for scientific data: hyperspectral methane sensing, aerial
+            wildlife mapping, materials microscopy, time-lapse 3D cell analysis, and the image
+            informatics systems that make those workflows reproducible.
           </p>
           <div class="launch-command-line lab-command-line" aria-label="Research themes">
-            <span>Scientific AI</span>
-            <span>Image research</span>
-            <span>Multimodal systems</span>
-            <span>Reproducible artifacts</span>
+            <span>Computer vision</span>
+            <span>Multimodal learning</span>
+            <span>Scientific image informatics</span>
+            <span>Reproducible AI systems</span>
+          </div>
+          <div class="hero-actions launch-actions">
+            <a class="primary-button" href="#research-programs">Explore research</a>
+            <a class="secondary-button" href={toHref("/bisque")}>Open BisQue platform</a>
+            <a class="secondary-button" href={toHref("/bisque-ultra")}>BisQue Ultra</a>
           </div>
         </div>
-        <aside class="surface-card lab-index-panel" aria-label="Project index">
-          <p class="eyebrow">Project index</p>
-          <a class="lab-index-row" href={toHref("/bisque-ultra")}>
-            <span>
-              <strong>BisQue Ultra</strong>
-              <small>Scientific AI workbench and durable run-control plane.</small>
-            </span>
-            <span class="mono-copy">Live</span>
-          </a>
-          <a class="lab-index-row" href={toHref("/bisque")}>
-            <span>
-              <strong>BisQue</strong>
-              <small>Scientific image platform page reserved for the next content pass.</small>
-            </span>
-            <span class="mono-copy">Soon</span>
-          </a>
-          <a class="lab-index-row" href={toHref("/news")}>
-            <span>
-              <strong>Product news</strong>
-              <small>Launch notes, platform context, and interface updates.</small>
-            </span>
-            <span class="mono-copy">Read</span>
-          </a>
-        </aside>
+        <figure class="research-atlas-frame">
+          <img
+            src={toHref("/images/home/cml-research-atlas.png")}
+            alt="A calm research atlas combining methane hyperspectral imaging, wildlife aerial imagery, EBSD materials maps, and 3D cell microscopy."
+            decoding="async"
+          />
+          <figcaption>
+            Four active research domains, one infrastructure question: how do we make scientific
+            image AI inspectable, shareable, and useful to domain researchers?
+          </figcaption>
+        </figure>
       </div>
 
-      <div class="hero-actions launch-actions">
-        <a class="primary-button" href={toHref("/bisque-ultra")}>Explore BisQue Ultra</a>
-        <a class="secondary-button" href={toHref("/bisque")}>Open BisQue page</a>
-      </div>
-
-      <div class="proof-strip lab-proof" aria-label="Center focus areas">
+      <div class="proof-strip lab-proof research-proof" aria-label="Center focus areas">
         <article class="proof-item">
-          <p class="eyebrow">Systems</p>
-          <h3 class="proof-item-title">Build multimodal tools around real scientific work.</h3>
+          <p class="eyebrow">Science-first AI</p>
+          <h3 class="proof-item-title">Models are built around the measurement, not the other way around.</h3>
           <p class="proof-item-body">
-            The center site foregrounds projects that connect images, metadata, models, code, and artifacts.
+            Spectral absorption, species identification, crystallographic symmetry, and 3D cell
+            structure each shape the method.
           </p>
         </article>
         <article class="proof-item">
-          <p class="eyebrow">Evidence</p>
-          <h3 class="proof-item-title">Treat output as something a researcher can inspect.</h3>
+          <p class="eyebrow">Shared substrate</p>
+          <h3 class="proof-item-title">BisQue keeps data, metadata, annotation, and visualization close.</h3>
           <p class="proof-item-body">
-            Project pages emphasize provenance, reproducibility, durable runs, and readable product surfaces.
+            The platform gives research code a browser-visible path into datasets, modules, and
+            inspectable outputs.
           </p>
         </article>
         <article class="proof-item">
-          <p class="eyebrow">Infrastructure</p>
-          <h3 class="proof-item-title">Make platform boundaries clear before claims get large.</h3>
+          <p class="eyebrow">Run control</p>
+          <h3 class="proof-item-title">BisQue Ultra turns model work into durable scientific runs.</h3>
           <p class="proof-item-body">
-            Each project can explain what is live, what is deployment-configured, and what will come next.
+            The newer workbench connects BisQue resources, Go orchestration, Deep Agents workers,
+            and OpenAI-compatible model endpoints.
           </p>
         </article>
       </div>
     </section>
 
-    <section class="lab-projects section-block" aria-label="Projects">
-      <div class="section-header">
-        <h2 class="section-title">Projects</h2>
+    <section class="research-programs section-block" id="research-programs" aria-label="Research programs">
+      <div class="section-header research-section-heading">
+        <p class="eyebrow">Research programs</p>
+        <h2 class="section-title">Computer vision that stays accountable to scientific evidence.</h2>
         <p class="section-lead">
-          The home page now acts as the center doorway. BisQue Ultra keeps its own launch page, while BisQue
-          has a dedicated page ready for future writing.
+          The lab’s public work spans remote sensing, ecology, materials science, and bioimage
+          analysis. The common thread is not a single benchmark; it is the discipline of turning
+          complex images into usable, reviewable scientific evidence.
         </p>
       </div>
-      <div class="lab-project-grid">
-        <a class="surface-card lab-project-card lab-project-card-featured" href={toHref("/bisque-ultra")}>
-          <img
-            src={toHref("/images/news/bisque-ultra-launch2.png")}
-            alt="BisQue Ultra interface preview."
-            loading="lazy"
-            decoding="async"
-          />
-          <span>
-            <p class="eyebrow">BisQue Ultra</p>
-            <h3>Scientific AI workbench and durable run-control plane.</h3>
-            <p>
-              The launch page explains the React workbench, Go control plane, Deep Agents runtime,
-              BisQue resources, and reproducible artifact record.
-            </p>
-          </span>
+      <div class="research-program-list">
+        {researchPrograms.map((program, index) => (
+          <article class="research-program-card">
+            <div class="research-program-index mono-copy">{String(index + 1).padStart(2, "0")}</div>
+            <div>
+              <p class="eyebrow">{program.domain}</p>
+              <h3>{program.title}</h3>
+              <p class="research-program-summary">{program.summary}</p>
+            </div>
+            <div class="research-program-evidence">
+              <p class="research-program-venue">{program.venue}</p>
+              <p>{program.evidence}</p>
+              <div class="source-links" aria-label={`${program.name} source links`}>
+                {program.links.map((link) => (
+                  <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="research-platform section-block" aria-label="Infrastructure platform">
+      <div class="research-platform-grid">
+        <div class="section-header">
+          <p class="eyebrow">Platform layer</p>
+          <h2 class="section-title">The website is not just a portfolio. It is a map of the lab stack.</h2>
+          <p class="section-lead">
+            BisQue, BisQue Ultra, and the public research repositories form a visible chain:
+            scientific images enter a scalable image platform, analysis modules and models run close
+            to the data, and newer agentic workflows create durable product records.
+          </p>
+        </div>
+        <div class="research-platform-steps" aria-label="Lab platform sequence">
+          <a href={toHref("/bisque")} class="platform-step">
+            <span class="mono-copy">01</span>
+            <strong>BisQue image informatics</strong>
+            <small>Store, annotate, search, visualize, and run scientific image analyses.</small>
+          </a>
+          <a href="#research-programs" class="platform-step">
+            <span class="mono-copy">02</span>
+            <strong>Frontier vision methods</strong>
+            <small>Publish domain-shaped models, datasets, weights, and reproducible code paths.</small>
+          </a>
+          <a href={toHref("/bisque-ultra")} class="platform-step">
+            <span class="mono-copy">03</span>
+            <strong>BisQue Ultra run control</strong>
+            <small>Connect model-guided work to durable state, events, workers, and artifacts.</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-sources section-block" aria-label="Source material">
+      <div class="section-header">
+        <p class="eyebrow">Source material</p>
+        <h2 class="section-title">Primary links behind this landing page.</h2>
+      </div>
+      <div class="source-grid">
+        <a href={sourceLinks.bisqueRepo} target="_blank" rel="noreferrer">BisQue UCSB repository</a>
+        <a href={sourceLinks.ultraRepo} target="_blank" rel="noreferrer">BisQue Ultra repository</a>
+        <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">
+          Research Outreach: reproducible computer vision
         </a>
-        <a class="surface-card lab-project-card" href={toHref("/bisque")}>
-          <span>
-            <p class="eyebrow">BisQue</p>
-            <h3>Scientific image platform page reserved for the next content pass.</h3>
-            <p>
-              This route is live now so the site structure can grow around BisQue, BisQue Ultra, and future
-              multimodal learning systems without changing the navigation model again.
-            </p>
-          </span>
-        </a>
+        <a href={siteConfig.vrlUrl} target="_blank" rel="noreferrer">UCSB Vision Research Lab</a>
       </div>
     </section>
   </div>

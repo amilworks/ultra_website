@@ -11,8 +11,11 @@ test("homepage presents the center project shell and follows system dark mode", 
     })
   ).toBeVisible();
   await expect(page.getByText(/UCSB Electrical and Computer Engineering/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /Explore BisQue Ultra/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Open BisQue page/i })).toBeVisible();
+  await expect(page.getByText(/hyperspectral methane sensing/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore research/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
   await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(
@@ -22,7 +25,7 @@ test("homepage presents the center project shell and follows system dark mode", 
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "BisQue", exact: true })
   ).toBeVisible();
 
-  const primaryButton = page.getByRole("link", { name: /Explore BisQue Ultra/i });
+  const primaryButton = page.getByRole("link", { name: /Explore research/i });
   await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
 });
 
@@ -42,13 +45,18 @@ test("BisQue Ultra landing page moved to its own route", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "OpenAI-compatible model layer", exact: true })).toBeVisible();
 });
 
-test("BisQue placeholder page renders", async ({ page }) => {
+test("BisQue platform page renders research infrastructure content", async ({ page }) => {
   await page.goto("/bisque");
 
+  await expect(page).toHaveTitle("BisQue | Scientific Image Informatics Platform");
   await expect(page.getByRole("heading", { level: 1, name: "BisQue", exact: true })).toBeVisible();
-  await expect(page.getByText(/This page is reserved for the next content pass on BisQue/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /Read BisQue docs/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Explore BisQue Ultra/i })).toBeVisible();
+  await expect(page.getByText(/Scientific image informatics for reproducible computer vision/i)).toBeVisible();
+  const bisqueOverview = page.getByLabel("BisQue overview");
+  await expect(bisqueOverview.getByRole("link", { name: /Open BisQue/i })).toBeVisible();
+  await expect(bisqueOverview.getByRole("link", { name: /Read docs/i })).toBeVisible();
+  await expect(bisqueOverview.getByRole("link", { name: /View repository/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /A scientific image platform built/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /BisQue is the substrate/i })).toBeVisible();
 });
 
 test("white paper route renders content and on-page navigation", async ({ page }) => {

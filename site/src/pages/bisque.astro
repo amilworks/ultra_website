@@ -1,57 +1,196 @@
 ---
 import SiteShell from "@/layouts/SiteShell.astro";
 import { siteConfig } from "@/data/site";
+import { bisqueCapabilities, researchPrograms, sourceLinks } from "@/data/research";
 
 const baseUrl = import.meta.env.BASE_URL;
 const toHref = (href: string) =>
   href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
+const canonicalUrl = Astro.site ? new URL(toHref("/bisque"), Astro.site).toString() : undefined;
+const bisqueJsonLd = canonicalUrl
+  ? {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "BisQue",
+      applicationCategory: "Scientific image informatics platform",
+      operatingSystem: "Web",
+      url: canonicalUrl,
+      codeRepository: sourceLinks.bisqueRepo,
+      creator: {
+        "@type": "Organization",
+        name: "UCSB Vision Research Lab",
+        url: siteConfig.vrlUrl,
+      },
+      description:
+        "BisQue is a web-based platform for scientific image storage, metadata, annotation, visualization, and analysis modules across multimodal research domains.",
+      sameAs: [siteConfig.platformUrl, siteConfig.docsUrl, sourceLinks.researchOutreach],
+    }
+  : undefined;
 ---
 
 <SiteShell
-  title="BisQue | Center for Multimodal Learning"
-  description="A reserved Center for Multimodal Learning page for BisQue, the scientific image platform that anchors future project writing."
+  title="BisQue | Scientific Image Informatics Platform"
+  description="BisQue is the scientific image informatics platform for 5D images, flexible metadata, annotation, visualization, scalable analysis modules, and reproducible computer vision workflows."
   canonicalPath="/bisque"
-  image="/images/news/bisque-platform-features.svg"
-  imageAlt="BisQue platform visual preview."
+  image="/images/home/cml-research-atlas.png"
+  imageAlt="Research atlas representing BisQue-supported scientific image domains."
+  jsonLd={bisqueJsonLd}
 >
-  <div class="home-editorial lab-home">
-    <section class="lab-hero section-block" aria-label="BisQue overview">
-      <div class="section-header lab-hero-copy">
-        <h1 class="lab-headline">BisQue</h1>
-        <p class="lab-affiliation">Scientific image platform</p>
-        <p class="lab-subhead">
-          This page is reserved for the next content pass on BisQue: the platform substrate for scientific
-          image storage, metadata, visualization, modules, and analysis workflows.
-        </p>
-        <div class="hero-actions launch-actions">
-          <a class="primary-button" href={siteConfig.docsUrl} target="_blank" rel="noreferrer">
-            Read BisQue docs
+  <div class="home-editorial lab-home bisque-page">
+    <section class="lab-hero bisque-hero section-block" aria-label="BisQue overview">
+      <div class="bisque-hero-grid">
+        <div class="section-header lab-hero-copy">
+          <h1 class="lab-headline">BisQue</h1>
+          <p class="lab-affiliation">Scientific image informatics for reproducible computer vision.</p>
+          <p class="lab-subhead">
+            BisQue is the lab’s image-platform substrate: a browser-based environment for storing,
+            searching, annotating, visualizing, and analyzing scientific images with extensible
+            modules and flexible metadata.
+          </p>
+          <div class="launch-command-line lab-command-line" aria-label="BisQue capabilities">
+            <span>5D image data</span>
+            <span>Flexible metadata</span>
+            <span>Analysis modules</span>
+            <span>Browser visualization</span>
+          </div>
+          <div class="hero-actions launch-actions">
+            <a class="primary-button" href={siteConfig.platformUrl} target="_blank" rel="noreferrer">
+              Open BisQue
+            </a>
+            <a class="secondary-button" href={siteConfig.docsUrl} target="_blank" rel="noreferrer">
+              Read docs
+            </a>
+            <a class="secondary-button" href={sourceLinks.bisqueRepo} target="_blank" rel="noreferrer">
+              View repository
+            </a>
+          </div>
+        </div>
+        <aside class="bisque-context-panel">
+          <p class="eyebrow">Research objective</p>
+          <p>
+            Research Outreach describes BisQue as an advanced image database and analysis system for
+            large-scale image databases, flexible experimental data management, metadata and
+            content-based search, analysis integration, and knowledge discovery.
+          </p>
+          <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">
+            Read the reproducible computer vision article
           </a>
-          <a class="secondary-button" href={toHref("/bisque-ultra")}>Explore BisQue Ultra</a>
+        </aside>
+      </div>
+
+      <div class="proof-strip lab-proof research-proof" aria-label="BisQue proof points">
+        <article class="proof-item">
+          <p class="eyebrow">Data model</p>
+          <h3 class="proof-item-title">Images, annotations, metadata, and analysis stay together.</h3>
+          <p class="proof-item-body">
+            The platform is designed for scientific datasets where raw pixels are only one part of
+            the research record.
+          </p>
+        </article>
+        <article class="proof-item">
+          <p class="eyebrow">Scale</p>
+          <h3 class="proof-item-title">Large 5D image data can be handled through web infrastructure.</h3>
+          <p class="proof-item-body">
+            The public repository describes PB-scale image management, millions of annotations, and
+            large image processing.
+          </p>
+        </article>
+        <article class="proof-item">
+          <p class="eyebrow">Translation</p>
+          <h3 class="proof-item-title">New methods can move from paper to shared analysis module.</h3>
+          <p class="proof-item-body">
+            BisQue gives domain researchers access to machine-learning tools without requiring them
+            to rebuild the computational stack.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bisque-capabilities section-block" aria-label="BisQue capabilities">
+      <div class="section-header research-section-heading">
+        <p class="eyebrow">Platform capabilities</p>
+        <h2 class="section-title">A scientific image platform built for more than file hosting.</h2>
+        <p class="section-lead">
+          BisQue’s value is the combination of storage, metadata, visualization, annotations, and
+          executable modules. That combination is what lets computer vision research become a
+          reproducible scientific workflow instead of an isolated notebook.
+        </p>
+      </div>
+      <div class="capability-grid">
+        {bisqueCapabilities.map((capability) => (
+          <article class="capability-card">
+            <h3>{capability.name}</h3>
+            <p>{capability.detail}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bisque-research section-block" aria-label="BisQue-connected research">
+      <div class="bisque-research-grid">
+        <div class="section-header">
+          <p class="eyebrow">Connected research</p>
+          <h2 class="section-title">The same substrate appears across frontier vision programs.</h2>
+          <p class="section-lead">
+            MethaneMapper and WildlifeMapper both expose BisQue dataset visualization links in their
+            repositories. EBSD Superresolution describes a BisQue module path for inference. The
+            broader BisQue literature connects the platform to materials, marine, medical, and
+            biological image analysis.
+          </p>
+        </div>
+        <div class="bisque-research-list">
+          {researchPrograms.slice(0, 3).map((program) => (
+            <a class="bisque-research-row" href={program.links[0].href} target="_blank" rel="noreferrer">
+              <span>
+                <strong>{program.name}</strong>
+                <small>{program.domain}</small>
+              </span>
+              <span>{program.venue}</span>
+            </a>
+          ))}
         </div>
       </div>
-      <div class="proof-strip lab-proof" aria-label="BisQue page placeholders">
-        <article class="proof-item">
-          <p class="eyebrow">Platform</p>
-          <h3 class="proof-item-title">Storage, visualization, metadata, and analysis.</h3>
-          <p class="proof-item-body">
-            The page will become the public explanation of the BisQue platform layer.
+    </section>
+
+    <section class="research-platform section-block" aria-label="BisQue to BisQue Ultra">
+      <div class="research-platform-grid">
+        <div class="section-header">
+          <p class="eyebrow">Next layer</p>
+          <h2 class="section-title">BisQue is the substrate. BisQue Ultra is the run-control layer.</h2>
+          <p class="section-lead">
+            The updated Ultra workbench does not replace BisQue. It points at BisQue resources,
+            then adds a React client, Go control plane, durable Postgres and NATS JetStream state,
+            Deep Agents workers, and OpenAI-compatible model routing for long-running scientific AI
+            workflows.
           </p>
-        </article>
-        <article class="proof-item">
-          <p class="eyebrow">Connection</p>
-          <h3 class="proof-item-title">The substrate beneath BisQue Ultra.</h3>
-          <p class="proof-item-body">
-            Future copy can explain how BisQue resources move into the Ultra workbench and run record.
-          </p>
-        </article>
-        <article class="proof-item">
-          <p class="eyebrow">Status</p>
-          <h3 class="proof-item-title">Page live, content intentionally reserved.</h3>
-          <p class="proof-item-body">
-            The route, navigation, canonical metadata, and sitemap entry are ready.
-          </p>
-        </article>
+        </div>
+        <div class="research-platform-steps" aria-label="BisQue and Ultra relationship">
+          <a href={siteConfig.platformUrl} target="_blank" rel="noreferrer" class="platform-step">
+            <span class="mono-copy">BisQue</span>
+            <strong>Scientific resources</strong>
+            <small>Images, datasets, annotations, tables, metadata, modules, and visualization.</small>
+          </a>
+          <a href={toHref("/bisque-ultra")} class="platform-step">
+            <span class="mono-copy">Ultra</span>
+            <strong>Durable AI workbench</strong>
+            <small>Runs, messages, worker leases, model endpoints, artifacts, and product records.</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-sources section-block" aria-label="BisQue source material">
+      <div class="section-header">
+        <p class="eyebrow">Primary sources</p>
+        <h2 class="section-title">Read the platform sources directly.</h2>
+      </div>
+      <div class="source-grid">
+        <a href={sourceLinks.bisqueRepo} target="_blank" rel="noreferrer">BisQue UCSB repository</a>
+        <a href={siteConfig.docsUrl} target="_blank" rel="noreferrer">BisQue documentation</a>
+        <a href={siteConfig.platformUrl} target="_blank" rel="noreferrer">BisQue web platform</a>
+        <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">
+          Research Outreach article
+        </a>
       </div>
     </section>
   </div>
