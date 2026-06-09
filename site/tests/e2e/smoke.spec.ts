@@ -10,6 +10,7 @@ test("homepage presents the center project shell and follows system dark mode", 
       name: /Center for Multimodal Learning/i,
     })
   ).toBeVisible();
+  await expect(page.getByText("UCSB ELECTRICAL & COMPUTER ENGINEERING")).toBeVisible();
   await expect(page.getByText(/UCSB Electrical and Computer Engineering/i)).toBeVisible();
   await expect(page.getByText(/hyperspectral methane sensing/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore research/i })).toBeVisible();
