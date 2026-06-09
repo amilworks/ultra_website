@@ -27,6 +27,8 @@ export async function GET() {
   const siteUpdatedAt = new Date("2026-06-08").toISOString();
   const urls = [
     { loc: toUrl("/"), lastmod: siteUpdatedAt, changefreq: "weekly", priority: "1.0" },
+    { loc: toUrl("/bisque-ultra"), lastmod: siteUpdatedAt, changefreq: "weekly", priority: "0.95" },
+    { loc: toUrl("/bisque"), lastmod: siteUpdatedAt, changefreq: "monthly", priority: "0.75" },
     { loc: toUrl("/news"), lastmod: siteUpdatedAt, changefreq: "weekly", priority: "0.8" },
     ...news.map((entry) => ({
       loc: toUrl(`/news/${entry.data.slug}`),

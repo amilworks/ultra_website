@@ -1,0 +1,58 @@
+---
+import SiteShell from "@/layouts/SiteShell.astro";
+import { siteConfig } from "@/data/site";
+
+const baseUrl = import.meta.env.BASE_URL;
+const toHref = (href: string) =>
+  href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
+---
+
+<SiteShell
+  title="BisQue | Center for Multimodal Learning"
+  description="A reserved Center for Multimodal Learning page for BisQue, the scientific image platform that anchors future project writing."
+  canonicalPath="/bisque"
+  image="/images/news/bisque-platform-features.svg"
+  imageAlt="BisQue platform visual preview."
+>
+  <div class="home-editorial lab-home">
+    <section class="lab-hero section-block" aria-label="BisQue overview">
+      <div class="section-header lab-hero-copy">
+        <h1 class="lab-headline">BisQue</h1>
+        <p class="lab-affiliation">Scientific image platform</p>
+        <p class="lab-subhead">
+          This page is reserved for the next content pass on BisQue: the platform substrate for scientific
+          image storage, metadata, visualization, modules, and analysis workflows.
+        </p>
+        <div class="hero-actions launch-actions">
+          <a class="primary-button" href={siteConfig.docsUrl} target="_blank" rel="noreferrer">
+            Read BisQue docs
+          </a>
+          <a class="secondary-button" href={toHref("/bisque-ultra")}>Explore BisQue Ultra</a>
+        </div>
+      </div>
+      <div class="proof-strip lab-proof" aria-label="BisQue page placeholders">
+        <article class="proof-item">
+          <p class="eyebrow">Platform</p>
+          <h3 class="proof-item-title">Storage, visualization, metadata, and analysis.</h3>
+          <p class="proof-item-body">
+            The page will become the public explanation of the BisQue platform layer.
+          </p>
+        </article>
+        <article class="proof-item">
+          <p class="eyebrow">Connection</p>
+          <h3 class="proof-item-title">The substrate beneath BisQue Ultra.</h3>
+          <p class="proof-item-body">
+            Future copy can explain how BisQue resources move into the Ultra workbench and run record.
+          </p>
+        </article>
+        <article class="proof-item">
+          <p class="eyebrow">Status</p>
+          <h3 class="proof-item-title">Page live, content intentionally reserved.</h3>
+          <p class="proof-item-body">
+            The route, navigation, canonical metadata, and sitemap entry are ready.
+          </p>
+        </article>
+      </div>
+    </section>
+  </div>
+</SiteShell>

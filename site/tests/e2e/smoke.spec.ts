@@ -1,34 +1,59 @@
 import { expect, test } from "@playwright/test";
 
-test("homepage presents the release site shell and follows system dark mode", async ({ page }) => {
+test("homepage presents the center project shell and follows system dark mode", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/");
 
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: /BisQue Ultra/i,
+      name: /Center for Multimodal Learning/i,
     })
   ).toBeVisible();
+  await expect(page.getByText(/UCSB Electrical and Computer Engineering/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore BisQue Ultra/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Open BisQue page/i })).toBeVisible();
+  await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
+  await expect(page.locator("html")).toHaveClass(/dark/);
+  await expect(
+    page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "BisQue Ultra", exact: true })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "BisQue", exact: true })
+  ).toBeVisible();
+
+  const primaryButton = page.getByRole("link", { name: /Explore BisQue Ultra/i });
+  await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
+});
+
+test("BisQue Ultra landing page moved to its own route", async ({ page }) => {
+  await page.goto("/bisque-ultra");
+
+  await expect(page).toHaveTitle("BisQue Ultra | Scientific AI Workbench and Run Control Plane");
+  await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
   await expect(page.getByText(/Scientific AI run control for image research/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /Read the launch brief/i })).toBeVisible();
   await expect(page.getByText(/Created within the UCSB Vision Research Lab/i)).toBeVisible();
-  await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
-  await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(page.locator(".story-tile-large .story-tile-image")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Go control plane", exact: true })).toBeVisible();
   await expect(
     page.getByRole("heading", { name: /Postgres and NATS JetStream keep long work recoverable/i })
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "OpenAI-compatible model layer", exact: true })).toBeVisible();
+});
 
-  const primaryButton = page.getByRole("link", { name: /Read the launch brief/i });
-  await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
+test("BisQue placeholder page renders", async ({ page }) => {
+  await page.goto("/bisque");
+
+  await expect(page.getByRole("heading", { level: 1, name: "BisQue", exact: true })).toBeVisible();
+  await expect(page.getByText(/This page is reserved for the next content pass on BisQue/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Read BisQue docs/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore BisQue Ultra/i })).toBeVisible();
 });
 
 test("white paper route renders content and on-page navigation", async ({ page }) => {
   await page.goto("/news/bisque-ultra");
-  await expect(page).toHaveTitle("Launch brief | BisQue Ultra");
+  await expect(page).toHaveTitle("BisQue Ultra | Center for Multimodal Learning");
 
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
   await expect(
@@ -81,6 +106,12 @@ test("release alias, sitemap, and robots stay publishable", async ({ page, reque
 
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.ok()).toBeTruthy();
+  await expect
+    .poll(async () => await sitemap.text())
+    .toContain("/bisque-ultra");
+  await expect
+    .poll(async () => await sitemap.text())
+    .toContain("/bisque");
   await expect
     .poll(async () => await sitemap.text())
     .toContain("/news/bisque-ultra");

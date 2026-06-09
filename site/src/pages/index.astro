@@ -1,298 +1,150 @@
 ---
 import SiteShell from "@/layouts/SiteShell.astro";
-import { formatLongDate, getFeaturedNews, getLatestNews } from "@/lib/content";
-import ProofStrip from "@/components/ProofStrip.astro";
 import { siteConfig } from "@/data/site";
 
-const featuredStory = await getFeaturedNews();
-const latestNews = await getLatestNews(2, featuredStory?.data.slug);
 const baseUrl = import.meta.env.BASE_URL;
 const canonicalUrl = Astro.site ? new URL(baseUrl, Astro.site).toString() : undefined;
+const toHref = (href: string) =>
+  href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
 const homeJsonLd = canonicalUrl
   ? {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: "BisQue Ultra",
-      description:
-        "BisQue Ultra is a scientific AI control plane for image research, durable autonomous runs, and reproducible artifacts.",
+      "@type": "Organization",
+      name: "Center for Multimodal Learning",
+      alternateName: "CML",
       url: canonicalUrl,
-      about: {
-        "@type": "SoftwareApplication",
-        name: "BisQue Ultra",
-        applicationCategory: "ScientificApplication",
-        operatingSystem: "Web",
-        applicationSubCategory: "Scientific AI workbench",
-        description:
-          "A React workbench, Go control plane, Deep Agents worker runtime, and BisQue data layer for scientific imaging workflows.",
-        codeRepository: siteConfig.repoUrl,
-        softwareVersion: "0.1.0",
-        keywords:
-          "BisQue Ultra, scientific AI, scientific imaging workbench, Go control plane, Deep Agents, run provenance, artifact lineage, BisQue platform",
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InDevelopment",
-        },
+      parentOrganization: {
+        "@type": "CollegeOrUniversity",
+        name: "University of California, Santa Barbara",
       },
-      publisher: {
+      department: {
         "@type": "Organization",
-        name: "UCSB Vision Research Lab",
-        url: "https://vision.ece.ucsb.edu",
+        name: "UCSB Electrical and Computer Engineering",
       },
+      description:
+        "A UCSB Electrical and Computer Engineering project home for multimodal learning systems, scientific AI infrastructure, and image research workbenches.",
+      sameAs: [siteConfig.vrlUrl, siteConfig.platformUrl],
     }
   : undefined;
-
-const toHref = (href: string) =>
-  href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
-
-if (!featuredStory) {
-  throw new Error("Expected at least one news entry for the site homepage.");
-}
-
-const homeImage = "/images/news/bisque-ultra-launch2.png";
-const homeImageAlt =
-  "BisQue Ultra product interface showing a scientific report, integrated prompt composer, and structured analysis surface.";
-const launchHeroImage = homeImage;
-const launchHeroImageAlt = homeImageAlt;
-const primaryTileImage = "/images/news/bisque-ultra-launch2.png";
-const primaryTileImageAlt =
-  "BisQue Ultra showing a prairie dog detection report in a structured interface with a calm sidebar, readable report surface, and integrated prompt composer.";
 ---
 
 <SiteShell
-  title="BisQue Ultra | Scientific AI Workbench and Run Control Plane"
-  description="BisQue Ultra is a scientific AI workbench and durable run-control plane for BisQue image resources, Deep Agents workers, reproducible artifacts, and frontier image research."
+  title="Center for Multimodal Learning | UCSB Electrical and Computer Engineering"
+  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for multimodal learning systems, scientific AI infrastructure, BisQue Ultra, and BisQue."
   canonicalPath="/"
-  image={homeImage}
-  imageAlt={homeImageAlt}
+  image="/images/news/bisque-ultra-launch2.png"
+  imageAlt="BisQue Ultra product interface used as a project preview for Center for Multimodal Learning."
   jsonLd={homeJsonLd}
 >
-  <div class="home-editorial">
-    <section class="launch-hero section-block" aria-label="Launch overview">
-      <div class="launch-hero-top">
-        <div class="section-header launch-hero-copy">
-          <h1 class="launch-headline">BisQue Ultra</h1>
-          <p class="launch-claim">Scientific AI run control for image research.</p>
-          <p class="launch-subhead">
-            BisQue Ultra connects BisQue resources, multidimensional image analysis, model-guided tools,
-            durable autonomous runs, and reproducible artifacts in one inspectable product record.
+  <div class="home-editorial lab-home">
+    <section class="lab-hero section-block" aria-label="Center overview">
+      <div class="lab-hero-top">
+        <div class="section-header lab-hero-copy">
+          <h1 class="lab-headline">Center for Multimodal Learning</h1>
+          <p class="lab-affiliation">UCSB Electrical and Computer Engineering</p>
+          <p class="lab-subhead">
+            A project home for scientific AI systems that keep multimodal data, model-guided tools,
+            durable runs, and inspectable evidence connected.
           </p>
-          <div class="launch-command-line" aria-label="Current stack">
-            <span>React workbench</span>
-            <span>Go run contract</span>
-            <span>Deep Agents runtime</span>
-            <span>Postgres + NATS JetStream</span>
+          <div class="launch-command-line lab-command-line" aria-label="Research themes">
+            <span>Scientific AI</span>
+            <span>Image research</span>
+            <span>Multimodal systems</span>
+            <span>Reproducible artifacts</span>
           </div>
         </div>
-        <a
-          class="launch-hero-art"
-          href={toHref(`/news/${featuredStory.data.slug}`)}
-          aria-label={`Open ${featuredStory.data.title}`}
-        >
-          <img
-            class="launch-hero-art-image"
-            src={toHref(launchHeroImage)}
-            alt={launchHeroImageAlt}
-            loading="eager"
-            decoding="async"
-          />
-        </a>
+        <aside class="surface-card lab-index-panel" aria-label="Project index">
+          <p class="eyebrow">Project index</p>
+          <a class="lab-index-row" href={toHref("/bisque-ultra")}>
+            <span>
+              <strong>BisQue Ultra</strong>
+              <small>Scientific AI workbench and durable run-control plane.</small>
+            </span>
+            <span class="mono-copy">Live</span>
+          </a>
+          <a class="lab-index-row" href={toHref("/bisque")}>
+            <span>
+              <strong>BisQue</strong>
+              <small>Scientific image platform page reserved for the next content pass.</small>
+            </span>
+            <span class="mono-copy">Soon</span>
+          </a>
+          <a class="lab-index-row" href={toHref("/news")}>
+            <span>
+              <strong>Product news</strong>
+              <small>Launch notes, platform context, and interface updates.</small>
+            </span>
+            <span class="mono-copy">Read</span>
+          </a>
+        </aside>
       </div>
+
       <div class="hero-actions launch-actions">
-        <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Read the launch brief</a>
-        <a class="secondary-button" href={siteConfig.repoUrl} target="_blank" rel="noreferrer">View the repository</a>
+        <a class="primary-button" href={toHref("/bisque-ultra")}>Explore BisQue Ultra</a>
+        <a class="secondary-button" href={toHref("/bisque")}>Open BisQue page</a>
       </div>
-      <ProofStrip
-        items={[
-          {
-            label: "Control plane",
-            title: "Go owns the run contract",
-            body: "Threads, messages, runs, events, artifacts, users, organizations, idempotency keys, and worker leases have a durable API spine.",
-          },
-          {
-            label: "Durability",
-            title: "Postgres and NATS JetStream keep long work recoverable",
-            body: "Run state, event streams, worker heartbeats, leases, and dispatch survive refreshes, reconnects, and worker restarts.",
-          },
-          {
-            label: "Model layer",
-            title: "OpenAI-compatible model layer",
-            body: "The worker contract can point at vLLM, Ollama, or another compatible server without rebuilding the product around one vendor.",
-          },
-          {
-            label: "Scientific substrate",
-            title: "BisQue resources stay first-class",
-            body: "Search, load, download, upload, tag, annotate, create datasets, run modules, and inspect scientific resources from the workbench.",
-          },
-        ]}
-      />
+
+      <div class="proof-strip lab-proof" aria-label="Center focus areas">
+        <article class="proof-item">
+          <p class="eyebrow">Systems</p>
+          <h3 class="proof-item-title">Build multimodal tools around real scientific work.</h3>
+          <p class="proof-item-body">
+            The center site foregrounds projects that connect images, metadata, models, code, and artifacts.
+          </p>
+        </article>
+        <article class="proof-item">
+          <p class="eyebrow">Evidence</p>
+          <h3 class="proof-item-title">Treat output as something a researcher can inspect.</h3>
+          <p class="proof-item-body">
+            Project pages emphasize provenance, reproducibility, durable runs, and readable product surfaces.
+          </p>
+        </article>
+        <article class="proof-item">
+          <p class="eyebrow">Infrastructure</p>
+          <h3 class="proof-item-title">Make platform boundaries clear before claims get large.</h3>
+          <p class="proof-item-body">
+            Each project can explain what is live, what is deployment-configured, and what will come next.
+          </p>
+        </article>
+      </div>
     </section>
 
-    <section class="launch-update section-block" aria-label="Product update">
+    <section class="lab-projects section-block" aria-label="Projects">
       <div class="section-header">
-        <h2 class="section-title">BisQue Ultra gives model-guided image work a durable control plane.</h2>
+        <h2 class="section-title">Projects</h2>
         <p class="section-lead">
-          BisQue Ultra now separates the system into a React client, a Go control plane, durable Postgres
-          state, NATS JetStream dispatch, Python Deep Agents workers, deployment-configured vision services,
-          and a replaceable OpenAI-compatible model endpoint.
+          The home page now acts as the center doorway. BisQue Ultra keeps its own launch page, while BisQue
+          has a dedicated page ready for future writing.
         </p>
       </div>
-      <div class="architecture-rail" aria-label="BisQue Ultra architecture">
-        <article>
-          <span class="mono-copy">01</span>
-          <h3>BisQue data layer</h3>
-          <p>Images, datasets, tables, metadata, annotations, and modules remain the scientific record.</p>
-        </article>
-        <article>
-          <span class="mono-copy">02</span>
-          <h3>Go control plane</h3>
-          <p>Auth, threads, runs, leases, events, artifacts, admin state, and the OpenAPI contract live here.</p>
-        </article>
-        <article>
-          <span class="mono-copy">03</span>
-          <h3>Deep Agents runtime</h3>
-          <p>Workers execute long-running tool work, code execution, paper/research routing, and RareSpot flows.</p>
-        </article>
-        <article>
-          <span class="mono-copy">04</span>
-          <h3>React workbench</h3>
-          <p>The interface keeps resource browsing, composer workflows, run steps, artifacts, and viewers visible.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="launch-spotlight" aria-label="Flagship launch and supporting notes">
-      <article class="launch-primary">
-        <a
-          class="story-tile story-tile-large"
-          data-tone="image"
-          data-has-image="true"
-          href={toHref(`/news/${featuredStory.data.slug}`)}
-          aria-label={`Open ${featuredStory.data.title}`}
-        >
+      <div class="lab-project-grid">
+        <a class="surface-card lab-project-card lab-project-card-featured" href={toHref("/bisque-ultra")}>
           <img
-            class="story-tile-image"
-            src={toHref(primaryTileImage)}
-            alt={primaryTileImageAlt}
-            style="object-position: 50% 50%"
-            loading="eager"
+            src={toHref("/images/news/bisque-ultra-launch2.png")}
+            alt="BisQue Ultra interface preview."
+            loading="lazy"
             decoding="async"
           />
+          <span>
+            <p class="eyebrow">BisQue Ultra</p>
+            <h3>Scientific AI workbench and durable run-control plane.</h3>
+            <p>
+              The launch page explains the React workbench, Go control plane, Deep Agents runtime,
+              BisQue resources, and reproducible artifact record.
+            </p>
+          </span>
         </a>
-        <div class="launch-primary-copy">
-          <p class="eyebrow">Launch brief</p>
-          <h2 class="story-headline">{featuredStory.data.title}</h2>
-          <p class="story-summary">{featuredStory.data.excerpt}</p>
-          <p class="story-meta">
-            <span>{featuredStory.data.kind}</span>
-            <span>{formatLongDate(featuredStory.data.date)}</span>
-          </p>
-          <div class="hero-actions">
-            <a class="primary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>
-              Open the launch brief
-            </a>
-            <a class="secondary-button" href={toHref("/news")}>Browse product news</a>
-          </div>
-        </div>
-      </article>
-
-      <aside class="launch-reading">
-        <div class="section-header">
-          <p class="eyebrow">Read next</p>
-          <h2 class="section-title">Then read the platform and interface updates.</h2>
-          <p class="section-lead">
-            The strongest product story is not a slogan. It is the chain from scientific substrate to
-            durable control plane to inspectable product surface.
-          </p>
-        </div>
-        <div class="launch-reading-grid">
-          {latestNews.map((entry) => (
-            <a class="launch-reading-card" href={toHref(`/news/${entry.data.slug}`)}>
-              <p class="launch-reading-meta">
-                <span class="post-card-sequence mono-copy">
-                  {String(entry.data.sequence ?? 0).padStart(2, "0")}
-                </span>
-                <span>{entry.data.kind}</span>
-              </p>
-              <h3 class="story-rail-title">{entry.data.title}</h3>
-              <p class="story-summary story-summary-rail">{entry.data.excerpt}</p>
-            </a>
-          ))}
-        </div>
-      </aside>
-    </section>
-
-    <section class="home-intro section-block">
-      <div class="section-header">
-        <p class="eyebrow">Product surface</p>
-        <h2 class="section-title">A scientific workbench with launch-grade infrastructure underneath.</h2>
-        <p class="section-lead">
-          The current frontend exposes the details that serious image research needs: resource navigation,
-          workflow presets, Pro Mode, run recovery, artifact hydration, scientific result cards, and viewers
-          for image and volume inspection.
-        </p>
+        <a class="surface-card lab-project-card" href={toHref("/bisque")}>
+          <span>
+            <p class="eyebrow">BisQue</p>
+            <h3>Scientific image platform page reserved for the next content pass.</h3>
+            <p>
+              This route is live now so the site structure can grow around BisQue, BisQue Ultra, and future
+              multimodal learning systems without changing the navigation model again.
+            </p>
+          </span>
+        </a>
       </div>
-      <figure class="surface-card home-platform-preview">
-        <img
-          class="home-platform-preview-image home-platform-preview-image-light"
-          src={toHref("/images/home/platform-preview-light.png")}
-          alt="Light mode BisQue Ultra report view showing a transformer report with structured reading layout."
-          loading="lazy"
-          decoding="async"
-        />
-        <img
-          class="home-platform-preview-image home-platform-preview-image-dark"
-          src={toHref("/images/home/platform-preview-dark.png")}
-          alt="Dark mode BisQue Ultra report view showing a transformer report with structured reading layout."
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
-      <div class="home-notes-grid">
-        <article class="flat-note">
-          <p class="eyebrow">Resource operations</p>
-          <h3 class="flat-note-title">Search, stage, modify, and run against BisQue resources.</h3>
-          <p class="flat-note-copy">
-            The composer includes workflows for BisQue search, metadata loading, downloads, uploads,
-            dataset creation, tag updates, annotations, XML inspection, deletion, and module execution.
-          </p>
-        </article>
-        <article class="flat-note">
-          <p class="eyebrow">Vision workflows</p>
-          <h3 class="flat-note-title">Domain tools are routed through the same run record.</h3>
-          <p class="flat-note-copy">
-            Deployment-configured vision workflows, RareSpot prairie analysis, scientific calculators,
-            chemistry tools, and code execution can produce structured outputs and artifacts.
-          </p>
-        </article>
-        <article class="flat-note">
-          <p class="eyebrow">Run memory</p>
-          <h3 class="flat-note-title">The answer is not detached from the system that produced it.</h3>
-          <p class="flat-note-copy">
-            Past chats hydrate from durable thread messages, run artifacts remain downloadable, stream
-            recovery survives refreshes, and scientific result groups retain reports, figures, and metrics.
-          </p>
-        </article>
-      </div>
-
-      <aside class="surface-card home-acknowledgement">
-        <div class="home-acknowledgement-copy">
-          <p class="eyebrow">About BisQue Ultra</p>
-          <h3 class="flat-note-title">Created within the UCSB Vision Research Lab.</h3>
-          <p class="flat-note-copy">
-            BisQue Ultra was created by Amil Khan, a PhD student in the UCSB Vision Research Lab. The lab
-            is led by Professor <a href="https://scholar.google.com/citations?user=wRYM4qgAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">B.S. Manjunath</a> in the Department of Electrical and Computer Engineering,
-            with research spanning computer vision, image processing, and machine learning applications.
-          </p>
-        </div>
-        <div class="home-acknowledgement-links">
-          <a class="subtle-link" href="https://vision.ece.ucsb.edu" target="_blank" rel="noreferrer">
-            Visit UCSB VRL
-          </a>
-          <a class="subtle-link" href="https://bisque.gitbook.io/docs/" target="_blank" rel="noreferrer">
-            Read BisQue docs
-          </a>
-        </div>
-      </aside>
     </section>
   </div>
 </SiteShell>
