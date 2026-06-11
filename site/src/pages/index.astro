@@ -23,13 +23,15 @@ const homeJsonLd = canonicalUrl
         name: "UCSB Electrical and Computer Engineering",
       },
       description:
-        "A UCSB Electrical and Computer Engineering project home for Bright 4B, computer vision, multimodal learning, scientific image informatics, and reproducible AI workbenches.",
+        "A UCSB Electrical and Computer Engineering project home for Bright 4B, hyperspherical learning, computer vision, multimodal learning, scientific image informatics, and reproducible AI workbenches.",
       knowsAbout: [
         "Bright 4B",
+        "hyperspherical learning",
         "computer vision",
         "multimodal learning",
         "scientific image informatics",
         "3D brightfield microscopy",
+        "label-free 3D segmentation",
         "hyperspectral methane detection",
         "aerial wildlife detection",
         "clinical neuroimaging",
@@ -47,6 +49,7 @@ const homeJsonLd = canonicalUrl
         sourceLinks.wildlifeMapperRepo,
         sourceLinks.ebsdRepo,
         sourceLinks.cellAnalysisRepo,
+        sourceLinks.bright4bPaper,
         sourceLinks.brainTumorPaper,
         sourceLinks.hydrocephalusPaper,
         sourceLinks.cellAnalysisPaper,
@@ -58,7 +61,7 @@ const homeJsonLd = canonicalUrl
 
 <SiteShell
   title="Center for Multimodal Learning | Bright 4B and Frontier Computer Vision at UCSB ECE"
-  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for Bright 4B, frontier computer vision, multimodal learning, BisQue image informatics, and scientific AI workbenches."
+  description="Center for Multimodal Learning is a UCSB Electrical and Computer Engineering project home for Bright 4B hyperspherical learning, frontier computer vision, BisQue image informatics, and scientific AI workbenches."
   canonicalPath="/"
   image="/images/home/ultra-hero.png"
   imageAlt="Abstract BisQue Ultra hero image with a soft frontier-lab color field."
@@ -71,7 +74,7 @@ const homeJsonLd = canonicalUrl
           <h1 class="lab-headline">Center for Multimodal Learning</h1>
           <p class="lab-affiliation">UCSB Electrical and Computer Engineering</p>
           <p class="lab-subhead">
-            Frontier computer vision for scientific data: Bright 4B microscopy foundation models,
+            Frontier computer vision for scientific data: Bright 4B hyperspherical learning for 3D brightfield microscopy,
             hyperspectral methane sensing, aerial wildlife mapping, clinical neuroimaging,
             materials microscopy, and the image informatics systems that make those workflows
             reproducible.
@@ -97,7 +100,7 @@ const homeJsonLd = canonicalUrl
           <div class="research-ultra-hero-panel" aria-hidden="true">
             <span class="mono-copy">BRIGHT 4B</span>
             <strong>3D brightfield microscopy</strong>
-            <small>Foundation-model evidence routed through BisQue Ultra run control.</small>
+            <small>Label-free 3D segmentation evidence routed through BisQue Ultra run control.</small>
           </div>
           <figcaption>
             A visual field for the lab stack: scientific vision models, BisQue image informatics,
@@ -116,8 +119,8 @@ const homeJsonLd = canonicalUrl
           </p>
         </article>
         <article class="proof-item">
-          <p class="eyebrow">Shared substrate</p>
-          <h3 class="proof-item-title">BisQue keeps data, metadata, annotation, and visualization close.</h3>
+          <p class="eyebrow">Shared image platform</p>
+          <h3 class="proof-item-title">BisQue keeps images, metadata, annotation, and visualization close.</h3>
           <p class="proof-item-body">
             The platform gives research code a browser-visible path into datasets, modules, and
             inspectable outputs.
@@ -127,7 +130,7 @@ const homeJsonLd = canonicalUrl
           <p class="eyebrow">Run control</p>
           <h3 class="proof-item-title">BisQue Ultra turns model work into durable scientific runs.</h3>
           <p class="proof-item-body">
-            The newer workbench connects BisQue resources, Go orchestration, Deep Agents workers,
+            Ultra connects BisQue resources, Go orchestration, Deep Agents workers,
             and OpenAI-compatible model endpoints.
           </p>
         </article>
@@ -137,11 +140,12 @@ const homeJsonLd = canonicalUrl
     <section class="bright4b-feature section-block" id="bright-4b" aria-label="Bright 4B research">
       <div class="section-header research-section-heading">
         <p class="eyebrow">Bright 4B</p>
-        <h2 class="section-title">Scaling hyperspectral learning into 3D brightfield microscopy.</h2>
+        <h2 class="section-title">Scaling hyperspherical learning for 3D brightfield microscopy.</h2>
         <p class="section-lead">
-          Bright 4B frames microscopy as a foundation-model problem with the measurement physics left
-          intact: anisotropic 3D stacks, point-spread behavior, label-free segmentation targets, and
-          biological outputs that need to survive scientific review.
+          Bright 4B uses unit-hypersphere representation learning to stabilize billion-parameter 3D
+          brightfield segmentation while keeping the measurement physics intact: anisotropic stacks,
+          point-spread behavior, sparse volumetric context, label-free targets, and biological outputs
+          that need to survive scientific review.
         </p>
       </div>
 
@@ -170,10 +174,10 @@ const homeJsonLd = canonicalUrl
             </figure>
             <div>
               <p class="eyebrow">Representation</p>
-              <h3>Patch embeddings respect confocal geometry.</h3>
+              <h3>PSF-aware patch embeddings preserve axial structure.</h3>
               <p>
-                The model preserves fine structure across depth before global reasoning begins,
-                instead of flattening 3D microscopy into generic image tokens.
+                The model respects point-spread behavior and axial thinning before global reasoning
+                begins, preserving fine structure across depth.
               </p>
             </div>
           </article>
@@ -236,11 +240,11 @@ const homeJsonLd = canonicalUrl
       <div class="research-platform-grid">
         <div class="section-header">
           <p class="eyebrow">Platform layer</p>
-          <h2 class="section-title">The website is not just a portfolio. It is a map of the lab stack.</h2>
+          <h2 class="section-title">A public map of the lab’s research stack.</h2>
           <p class="section-lead">
-            BisQue, BisQue Ultra, and the public research repositories form a visible chain:
-            scientific images enter a scalable image platform, analysis modules and models run close
-            to the data, and newer agentic workflows create durable product records.
+            BisQue, Bright 4B, BisQue Ultra, and the public research repositories form a visible chain:
+            scientific images enter a scalable image platform, domain-shaped models run close to the
+            data, and agentic workflows create durable, inspectable run records.
           </p>
         </div>
         <div class="research-platform-steps" aria-label="Lab platform sequence">
@@ -269,6 +273,7 @@ const homeJsonLd = canonicalUrl
         <h2 class="section-title">Primary links behind this landing page.</h2>
       </div>
       <div class="source-grid">
+        <a href={sourceLinks.bright4bPaper} target="_blank" rel="noreferrer">Bright 4B arXiv paper</a>
         <a href={sourceLinks.bisqueRepo} target="_blank" rel="noreferrer">BisQue UCSB repository</a>
         <a href={sourceLinks.ultraRepo} target="_blank" rel="noreferrer">BisQue Ultra repository</a>
         <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">

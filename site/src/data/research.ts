@@ -18,6 +18,7 @@ export const sourceLinks = {
   hydrocephalusPaper: "https://pmc.ncbi.nlm.nih.gov/articles/PMC10521674/",
   hydrocephalusPublisherPaper: "https://spj.science.org/doi/10.34133/2022/9783128",
   cellAnalysisPaper: "https://www.nature.com/articles/s41598-023-29149-z",
+  bright4bPaper: "https://arxiv.org/abs/2512.22423",
 };
 
 export const researchPrograms = [

@@ -6,7 +6,7 @@ summary: "A scientific AI control plane and workbench for BisQue resources, dura
 excerpt: "The 2026.04 launch brief for BisQue Ultra: what changed in the updated stack, what is live in the product, and why it matters for frontier image research."
 ogImage: "/images/news/bisque-ultra-launch2.png"
 coverImage: "/images/news/bisque-ultra-launch2.png"
-coverImageAlt: "BisQue Ultra product interface showing a scientific report, integrated prompt composer, and structured analysis surface."
+coverImageAlt: "BisQue Ultra product interface showing a scientific report, integrated prompt composer, and structured analysis record."
 coverPosition: "50% 50%"
 kind: "Launch brief"
 featured: true
@@ -20,9 +20,9 @@ tags:
   - Deep Agents
 ---
 
-Released April 6, 2026, BisQue Ultra is a scientific AI control plane wrapped in a workbench for frontier image research. It gives scientists one place to inspect BisQue resources, launch model-guided tools, watch durable runs, and recover the artifacts that prove what happened.
+Released April 6, 2026, BisQue Ultra is a scientific AI workbench with a durable control plane for frontier image research. It gives scientists one place to inspect BisQue resources, launch model-guided tools, watch durable runs, and recover the artifacts that prove what happened.
 
-The updated app is not a prettier chat box over old infrastructure. It is a production-shaped system: a React workbench, a Go control plane, Postgres as durable state, NATS JetStream as dispatch, Python Deep Agents workers for long-running tool work, and a replaceable OpenAI-compatible model endpoint.
+The current app centers the run record. A React workbench, Go control plane, durable Postgres state, NATS JetStream dispatch, Python Deep Agents workers, and a replaceable OpenAI-compatible model endpoint all cooperate around the same scientific workflow.
 
 That architecture is the point. Scientific AI becomes useful when the answer stays attached to the resource, the run, the tool events, the generated files, and the evidence trail.
 
@@ -30,7 +30,7 @@ That architecture is the point. Scientific AI becomes useful when the answer sta
   items={[
     {
       label: "Data layer",
-      title: "BisQue remains the scientific substrate",
+      title: "BisQue remains the scientific image platform",
       body: "Images, datasets, tables, metadata, annotations, and modules stay first-class instead of becoming loose chat attachments.",
     },
     {
@@ -53,8 +53,8 @@ That architecture is the point. Scientific AI becomes useful when the answer sta
 
 <FigureWithCaption
   src="/images/news/bisque-ultra-launch2.png"
-  alt="BisQue Ultra showing a structured scientific report, prompt composer, and product workbench surface."
-  title="The product surface is built around the record, not only the answer."
+  alt="BisQue Ultra showing a structured scientific report, prompt composer, and research workbench."
+  title="The workbench is built around the record, not only the answer."
   caption="The interface keeps the prompt, run context, generated result, and downstream evidence close enough to inspect."
   span="wide"
   frame={false}
@@ -62,7 +62,7 @@ That architecture is the point. Scientific AI becomes useful when the answer sta
 
 ## What BisQue Ultra is
 
-BisQue Ultra is a scientific imaging workbench over BisQue data and durable autonomous runs. The user-facing surface is React and Vite. The run-control spine is Go. The long-running worker runtime is Deep Agents. The data layer is an existing BisQue deployment. The model layer is intentionally replaceable through OpenAI-compatible configuration.
+BisQue Ultra is a scientific imaging workbench over BisQue data and durable autonomous runs. The user-facing application is React and Vite. The run-control spine is Go. The long-running worker runtime is Deep Agents. The data layer is an existing BisQue deployment. The model layer is intentionally replaceable through OpenAI-compatible configuration.
 
 That separation makes the system easier to operate and easier to trust. If the frontend loads but a run stalls, the control plane, worker, NATS transport, model endpoint, or BisQue connection can be inspected independently. If a result is produced, the output does not have to be reconstructed from prose. It can stay tied to the thread, run, event stream, and artifacts that produced it.
 
@@ -77,13 +77,13 @@ BisQue Ultra is built for the kinds of work where a frontier lab cannot accept a
 
 ## What changed in the updated stack
 
-The current app moves the product story from “AI interface” to “scientific run-control system.”
+The current app makes the scientific run-control system explicit.
 
 <FeatureGrid
   items={[
     {
       title: "React workbench",
-      body: "The frontend keeps chat, resource browsing, workflow presets, run steps, artifacts, admin surfaces, and scientific viewers in one product shell.",
+      body: "The frontend keeps chat, resource browsing, workflow presets, run steps, artifacts, admin views, and scientific viewers in one product shell.",
       metric: "frontend/",
     },
     {
@@ -104,17 +104,17 @@ The current app moves the product story from “AI interface” to “scientific
   ]}
 />
 
-The old way to describe BisQue Ultra was to emphasize a calm scientific AI surface. The current way is more direct: the product has a control plane. It persists the work. It dispatches workers. It hydrates prior runs. It lets the model be swapped without rewriting the product around a single vendor.
+BisQue Ultra persists the work, dispatches workers, hydrates prior runs, and lets the model be swapped without rebuilding the product around a single vendor.
 
 That matters for serious research because long work fails in ordinary ways: browsers refresh, workers restart, streams disconnect, model endpoints change, and users return later. BisQue Ultra is being built so those ordinary failures do not erase the scientific record.
 
 ## Scientific file and viewer support
 
-BisQue already provides the platform substrate for scientific images, datasets, tables, metadata, annotations, and modules. BisQue Ultra builds on that instead of bypassing it.
+BisQue already provides the platform foundation for scientific images, datasets, tables, metadata, annotations, and modules. BisQue Ultra builds on that foundation.
 
-Inside the product, scientific resources can be searched, staged, loaded, downloaded, uploaded, tagged, annotated, grouped into datasets, and passed into analysis workflows. The frontend also includes scientific viewer surfaces for direct image and volume work, with image and OME-TIFF-oriented manifests, NIfTI-style scalar-volume inspection, slices, histograms, physical spacing, channel controls, transfer presets, and voxel probing.
+Inside the product, scientific resources can be searched, staged, loaded, downloaded, uploaded, tagged, annotated, grouped into datasets, and passed into analysis workflows. The frontend also includes scientific viewer components for direct image and volume work, with image and OME-TIFF-oriented manifests, NIfTI-style scalar-volume inspection, slices, histograms, physical spacing, channel controls, transfer presets, and voxel probing.
 
-The important design choice is simple: the file is not treated as an ornament for a model prompt. It remains a scientific object with structure, metadata, viewer state, and downstream artifacts.
+The important design choice is simple: every file remains a scientific object with structure, metadata, viewer state, and downstream artifacts.
 
 ## Run provenance, artifacts, and replay
 
@@ -137,10 +137,10 @@ The product is designed for real scientific breadth without flattening every dom
 
 The current composer exposes resource workflows for BisQue search, advanced tag-aware search, metadata loading, downloads, uploads, dataset creation, dataset updates, annotations, tags, XML inspection, deletion, and module execution. It also exposes computation and expert-workflow controls including Pro Mode, a NumPy-backed calculator, chemistry tools, sandboxed code execution, and deployment-configured vision paths such as RareSpot ecology inference.
 
-Some tool paths depend on deployment-configured model weights or services. That is the right boundary for a research platform: the workbench can expose the control surface while operators decide which specialized assets are provisioned in a given environment.
+Some tool paths depend on deployment-configured model weights or services. That is the right boundary for a research platform: the workbench can expose the control layer while operators decide which specialized assets are provisioned in a given environment.
 
 <Callout title="What this launch proves">
-  BisQue Ultra is not betting that one model can absorb a lab. It is building the control plane where data systems, model endpoints, workers, tools, and artifacts can cooperate without losing the scientific record.
+  BisQue Ultra assumes no single model can absorb a lab. It builds the control plane where data systems, model endpoints, workers, tools, and artifacts can cooperate without losing the scientific record.
 </Callout>
 
 ## What teams can safely claim now
@@ -154,10 +154,12 @@ For frontier labs, the strongest claims are operational:
 - BisQue resources remain central: search, inspect, upload, download, annotate, tag, dataset, and module workflows are product concepts, not external footnotes.
 - Runs and artifacts are designed to remain recoverable after browser refresh, reconnect, and worker restart paths.
 
-What we should not overclaim is equally important. A given deployment’s exact model, weights, GPU services, and domain checkpoints depend on operator configuration. The website should describe the product architecture and supported surfaces, then let deployment-specific runbooks make environment claims.
+## Deployment-specific boundaries
+
+A given deployment’s exact model, weights, GPU services, and domain checkpoints depend on operator configuration. The public site should describe the product architecture and supported workflows; deployment runbooks can make environment-specific claims.
 
 ## Built in the UCSB Vision Research Lab
 
 BisQue Ultra was created by Amil Khan, a PhD student in the UCSB Vision Research Lab. The lab is led by Professor <a href="https://scholar.google.com/citations?user=wRYM4qgAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">B.S. Manjunath</a> in the Department of Electrical and Computer Engineering, with research spanning computer vision, image processing, and machine learning applications.
 
-That origin matters. The product is not trying to make research look like ordinary chat. It is trying to make model-guided work behave like research infrastructure: inspectable, replayable, extensible, and tied to the data that made the answer possible.
+That origin matters. The product makes model-guided work behave like research infrastructure: inspectable, replayable, extensible, and tied to the data that made the answer possible.

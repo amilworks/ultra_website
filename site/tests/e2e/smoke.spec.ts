@@ -16,8 +16,8 @@ test("homepage presents the center project shell and follows system dark mode", 
   await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Explore research/i })).toHaveCount(0);
   await expect(page.locator(".research-ultra-hero-frame img")).toHaveAttribute("src", "/images/home/ultra-hero.png");
-  await expect(page.getByRole("heading", { name: /Scaling hyperspectral learning/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Patch embeddings respect confocal geometry/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Scaling hyperspherical learning/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /PSF-aware patch embeddings/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Location-aware patch-based CNNs/i })).toBeVisible();
@@ -49,8 +49,8 @@ test("BisQue Ultra landing page moved to its own route", async ({ page }) => {
     page.getByRole("heading", { name: /Postgres and NATS JetStream keep long work recoverable/i })
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "OpenAI-compatible model layer", exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /A frontier microscopy model/i })).toBeVisible();
-  await expect(page.getByText(/Bright 4B output evidence becomes stronger/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Bright 4B shows why frontier microscopy/i })).toBeVisible();
+  await expect(page.getByText(/Bright 4B results are easier to review/i)).toBeVisible();
 });
 
 test("BisQue platform page renders research infrastructure content", async ({ page }) => {
@@ -70,7 +70,7 @@ test("BisQue platform page renders research infrastructure content", async ({ pa
   await expect(page.getByRole("heading", { name: /A scientific image platform built/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /BisQue turns scientific image work/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Large mosaics stay inspectable/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /BisQue is the substrate/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /BisQue organizes scientific resources/i })).toBeVisible();
   await expect(page.getByText(/Frontiers in Neuroscience 2020/i)).toBeVisible();
   await expect(page.getByText(/BME Frontiers 2022/i)).toBeVisible();
   await expect(page.getByText(/Scientific Reports 2023/i)).toBeVisible();
@@ -82,7 +82,7 @@ test("white paper route renders content and on-page navigation", async ({ page }
 
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
   await expect(
-    page.getByText(/BisQue Ultra is a scientific AI control plane wrapped in a workbench/i)
+    page.getByText(/BisQue Ultra is a scientific AI workbench with a durable control plane/i)
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: /What changed in the updated stack/i })).toBeVisible();
 
@@ -98,7 +98,7 @@ test("white paper route renders content and on-page navigation", async ({ page }
   await expect(jumpMenu).not.toHaveAttribute("open", "");
   await jumpMenu.locator(".article-jump-summary").click();
   await expect(jumpMenu).toHaveAttribute("open", "");
-  await expect(jumpMenu.getByRole("link", { name: /What teams can safely claim now/i })).toBeVisible();
+  await expect(jumpMenu.getByRole("link", { name: /Deployment-specific boundaries/i })).toBeVisible();
 });
 
 test("news index and a follow-up post both render", async ({ page }) => {
@@ -157,6 +157,6 @@ test("frontend showcase article renders embedded interface demos", async ({ page
   await expect(
     page.getByText(/A shell that orients the user without competing with the work/i)
   ).toBeVisible();
-  await expect(page.getByText(/A control surface that makes priority obvious/i)).toBeVisible();
+  await expect(page.getByText(/A control layout that makes priority obvious/i)).toBeVisible();
   await expect(page.getByText(/Language and proof stay close to each other/i)).toBeVisible();
 });
