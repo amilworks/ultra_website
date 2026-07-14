@@ -16,7 +16,7 @@ const { items } = Astro.props;
   {items.map((item) => (
     <article class="proof-item">
       <p class="eyebrow">{item.label}</p>
-      <h3 class="proof-item-title">{item.title}</h3>
+      <p class="proof-item-title">{item.title}</p>
       <p class="proof-item-body">{item.body}</p>
     </article>
   ))}

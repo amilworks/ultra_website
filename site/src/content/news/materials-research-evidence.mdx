@@ -1,0 +1,112 @@
+---
+title: "Evidence-aware materials research in BisQue Ultra"
+seoTitle: "Evidence-aware materials research in Ultra"
+slug: "materials-research-evidence"
+date: 2026-07-10
+summary: "How BisQue Ultra exposes bounded materials tools across microstructure, thermodynamics, kinetics, characterization, degradation, and sensors without overstating readiness."
+excerpt: "A research note on typed materials tools, deterministic validation, provenance, and the release boundaries that keep scientific capability separate from unsupported claims."
+ogImage: "/images/releases/bisque-ultra-og-2026-07.png"
+kind: "Research note"
+sequence: 4
+tags:
+  - Materials science
+  - CALPHAD
+  - Scientific evidence
+  - Provenance
+  - BisQue Ultra
+---
+
+Materials research is a demanding test for scientific AI. The data is heterogeneous, the terminology is precise, software authority varies by method, and a plausible numerical answer can be dangerously easy to mistake for a validated result.
+
+BisQue Ultra's materials work starts from a narrower premise: expose qualified operations as typed tools, bind the result to deterministic validation and provenance, and fail closed when the required solver, data, or evidence is absent.
+
+The current implementation spans microstructure and EBSD workflows, DREAM.3D and HDF5 inspection, crystal structure and thermodynamics, CALPHAD, selected processing kinetics, crystal-plasticity geometry, bounded degradation calculations, advanced characterization metrics, and selected sensor-series inspection.
+
+It is a broad research capability. It is not a claim that one agent can autonomously solve materials engineering.
+
+## One coordinator, domain-shaped tools
+
+Ultra keeps one general coordinator rather than introducing a monolithic materials agent. Routing selects only the tools relevant to the request, and each tool declares a bounded contract.
+
+<FeatureGrid
+  items={[
+    {
+      title: "Microstructure and EBSD",
+      body: "DREAM.3D/HDF5 structure, stereology, orientation analysis, and materials-aware viewing keep measured data close to derived evidence.",
+      metric: "image + structure",
+    },
+    {
+      title: "Structure and thermodynamics",
+      body: "Crystal structure, symmetry, defects, phase-diagram work, and CALPHAD paths use explicit inputs and qualified numerical engines where available.",
+      metric: "typed contracts",
+    },
+    {
+      title: "Kinetics and processing",
+      body: "Qualified Scheil and isolated diffusion, back-diffusion, and precipitation paths are distinguished from unsupported coupled HPC simulation.",
+      metric: "support discovery",
+    },
+    {
+      title: "Characterization and sensors",
+      body: "Diffraction metrics, rigid registration, spectroscopy-oriented workflows, and bounded sensor-series inspection preserve conventions, calibration identity, and limits.",
+      metric: "evidence bounded",
+    },
+  ]}
+/>
+
+This design prevents a generic materials question from receiving every available schema. Applicable requests get a narrow tool set. Unsupported requests do not receive a toy numerical substitute presented as scientific output.
+
+## Validation is part of the result
+
+The implementation treats validation identity as a first-class artifact. Inputs are canonicalized, results are content-addressed, and deterministic checks produce records that can be tied to the output they assessed.
+
+For CALPHAD and kinetics paths, evidence includes canonical artifacts and exact hashes. Cross-language parity checks compare control-plane and worker interpretations. The revision ledger records governed changes. Evidence closures bind the set of files and records used by a release decision.
+
+For other bounded tools, validation distinguishes what the calculation actually establishes from what it does not. Examples include:
+
+- a Schmid-factor analysis is not a constitutive CPFE solution
+- a Paris-law calibration is not a component-life prediction
+- diffraction profile metrics are not Rietveld refinement or phase identity
+- rigid registration is not feature discovery, segmentation, or indexing validation
+- a sensor-series read does not prove cross-resource clock synchronization
+
+These are not disclaimers added after generation. They are part of the tool and evidence contract.
+
+## Software authority must remain visible
+
+Materials methods often depend on external databases, solver packages, instrument conventions, and calibrated inputs. Ultra records those dependencies instead of letting the model imply authority it does not have.
+
+CALPHAD work, for example, is meaningful only with an identified thermodynamic database, declared components and phases, governed conditions, and a qualified solver path. A package fixture can prove that the software route works; it cannot establish transferability to a commercial alloy system or validate a publication claim.
+
+The same principle applies across the stack. A successful numerical function is evidence about that function under those inputs. It is not automatic evidence about a material, component, or manufacturing decision.
+
+<Callout title="Current release boundary" tone="proof">
+  The materials surface is an evidence-gated research capability. It is not production-promoted. Full promotion still requires the designated live traces, live PostgreSQL ledger qualification, production sandbox and isolation evidence, external evaluation thresholds, and an attested promotion envelope.
+</Callout>
+
+## Why the boundary strengthens the platform
+
+Frontier scientific software should be ambitious about capability and conservative about authority. Hiding the release boundary would make the product easier to market for a moment and harder to trust in practice.
+
+Ultra's readiness contract names the evidence still required before a stronger claim can be made. The readiness aggregator can assemble an evidence-qualified candidate, but it is not the final release authority. The final verifier must validate the attestation policy and revalidate the restricted evidence closure.
+
+That architecture supports a larger goal: a research team should be able to distinguish three things that generic AI systems often collapse:
+
+1. the model's proposed interpretation
+2. the deterministic computation or scientific tool output
+3. the evidence and authority that permit a claim
+
+Keeping those layers separate makes collaboration easier. Domain experts can inspect the method and boundaries. Infrastructure teams can inspect the execution and provenance. Model researchers can improve planning and interpretation without silently inheriting numerical authority.
+
+## What we want to evaluate next
+
+The next materials collaborations should be built around real evidence:
+
+- a qualified thermodynamic database and a held-out alloy system
+- a DREAM.3D or EBSD dataset with known structure and expected measurements
+- a characterization workflow with explicit conventions and reference outputs
+- a sensor-series dataset with calibration and lineage information
+- an evaluation campaign that tests both tool execution and strict scientific task success
+
+The useful question is not "can the agent answer a materials question?" It is "can the system produce a result whose method, inputs, limits, and evidence survive expert review?"
+
+[Request research access](../../access/) if your lab has a materials workflow that can help answer that question.

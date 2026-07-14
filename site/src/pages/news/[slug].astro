@@ -30,7 +30,7 @@ const articleImageUrl =
 const articlePageTitle =
   entry.data.title === siteConfig.name
     ? `${entry.data.kind} | ${siteConfig.name}`
-    : `${entry.data.title} | ${siteConfig.name}`;
+    : `${entry.data.seoTitle ?? entry.data.title} | UCSB CML`;
 const articleJsonLd = canonicalUrl
   ? [
       {

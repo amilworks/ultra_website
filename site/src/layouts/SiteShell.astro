@@ -3,6 +3,8 @@ import "@/styles/global.css";
 import { siteConfig, siteNav } from "@/data/site";
 import BrandMark from "@/components/BrandMark.astro";
 import ArticleJumpMenu from "@/components/ArticleJumpMenu.astro";
+import interRegularUrl from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import jetBrainsMonoRegularUrl from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url";
 
 type Props = {
   title?: string;
@@ -21,7 +23,7 @@ type Props = {
 const {
   title = `${siteConfig.name} ${siteConfig.releaseLabel}`,
   description = siteConfig.description,
-  image = "/images/releases/bisque-ultra-og.svg",
+  image = "/images/releases/bisque-ultra-og-2026-07.png",
   imageAlt = title,
   canonicalPath = "/",
   ogType = "website",
@@ -73,10 +75,14 @@ const themeScript = `
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="author" content={siteConfig.authorName} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="en_US" />
     {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:alt" content={imageAlt} />
@@ -92,6 +98,8 @@ const themeScript = `
       ? articleTags.map((tag) => <meta property="article:tag" content={tag} />)
       : null}
     {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+    <link rel="preload" href={interRegularUrl} as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href={jetBrainsMonoRegularUrl} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
     <title>{title}</title>
     <script is:inline set:html={themeScript}></script>
@@ -127,6 +135,9 @@ const themeScript = `
                 <a href={siteConfig.repoUrl} target="_blank" rel="noreferrer">
                   GitHub
                 </a>
+                <a class="shell-nav-cta" href={withBase(siteConfig.accessPath)}>
+                  Request access
+                </a>
               </nav>
             </div>
             {
@@ -160,6 +171,7 @@ const themeScript = `
                 View repository
               </a>
               <a class="subtle-link" href={withBase("/news")}>Read product news</a>
+              <a class="subtle-link" href={withBase(siteConfig.accessPath)}>Collaborate with us</a>
             </div>
           </div>
         </div>

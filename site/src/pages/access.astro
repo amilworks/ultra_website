@@ -1,0 +1,120 @@
+---
+import SiteShell from "@/layouts/SiteShell.astro";
+import { siteConfig } from "@/data/site";
+
+const baseUrl = import.meta.env.BASE_URL;
+const toHref = (href: string) =>
+  href.startsWith("/") ? `${baseUrl}${href.replace(/^\//, "")}` : href;
+const canonicalUrl = Astro.site
+  ? new URL(toHref(siteConfig.accessPath), Astro.site).toString()
+  : undefined;
+const subject = encodeURIComponent("BisQue Ultra research access");
+const body = encodeURIComponent(
+  [
+    "Name:",
+    "Organization or lab:",
+    "Scientific domain:",
+    "Data formats or instruments:",
+    "Workflow you want to run:",
+    "Deployment preference (local, institutional, or undecided):",
+    "",
+    "Anything else we should know:",
+  ].join("\n"),
+);
+const contactHref = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`;
+const accessJsonLd = canonicalUrl
+  ? {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      name: "BisQue Ultra research access",
+      url: canonicalUrl,
+      description:
+        "Request BisQue Ultra research access, discuss a scientific collaboration, or evaluate an institutional deployment.",
+      about: {
+        "@type": "SoftwareApplication",
+        name: "BisQue Ultra",
+        applicationCategory: "ScientificApplication",
+      },
+    }
+  : undefined;
+---
+
+<SiteShell
+  title="Request BisQue Ultra Access | Center for Multimodal Learning"
+  description="Request BisQue Ultra research access, bring a scientific workflow to the lab, or discuss an institutional deployment and collaboration."
+  canonicalPath={siteConfig.accessPath}
+  image="/images/releases/bisque-ultra-og-2026-07.png"
+  imageAlt="BisQue Ultra scientific AI workbench"
+  jsonLd={accessJsonLd}
+>
+  <div class="home-editorial access-page">
+    <section class="access-hero section-block">
+      <div class="section-header">
+        <p class="eyebrow">Research access</p>
+        <h1>Bring your scientific workflow to BisQue Ultra.</h1>
+        <p class="access-lead">
+          We are working with teams whose data, models, and evidence demand an integrated scientific
+          environment. Tell us what you measure, what you need to run, and what must remain
+          inspectable when the work is complete.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-button" href={contactHref}>Request research access</a>
+          <a class="secondary-button" href={siteConfig.repoUrl} target="_blank" rel="noreferrer">Run the local stack</a>
+        </div>
+      </div>
+      <aside class="access-signal" aria-label="Good fit for BisQue Ultra">
+        <p class="eyebrow">A strong fit</p>
+        <p>
+          Multidimensional scientific data, long-running analysis, domain-specific tools, model
+          evaluation, reproducible artifacts, or an existing BisQue deployment.
+        </p>
+        <span class="mono-copy">CZI · ND2 · OME-TIFF · NIfTI · DICOM · HDF5 · ZARR · VIDEO</span>
+      </aside>
+    </section>
+
+    <section class="access-tracks section-block" aria-label="Ways to work together">
+      <div class="section-header access-section-heading">
+        <p class="eyebrow">Ways to work together</p>
+        <h2 class="section-title">Start with the scientific requirement, then choose the right path.</h2>
+      </div>
+      <div class="access-grid">
+        <article class="access-track">
+          <span class="mono-copy">01</span>
+          <h3>Research access</h3>
+          <p>Evaluate the workbench on a real dataset, viewer requirement, model workflow, or reproducibility problem.</p>
+        </article>
+        <article class="access-track">
+          <span class="mono-copy">02</span>
+          <h3>Scientific collaboration</h3>
+          <p>Connect a new method, domain tool, benchmark, or publication workflow to BisQue and Ultra.</p>
+        </article>
+        <article class="access-track">
+          <span class="mono-copy">03</span>
+          <h3>Institutional deployment</h3>
+          <p>Discuss local infrastructure, model endpoints, authentication, data governance, workers, and an existing BisQue service.</p>
+        </article>
+        <article class="access-track">
+          <span class="mono-copy">04</span>
+          <h3>Strategic partnership</h3>
+          <p>Explore translational, infrastructure, and investment partnerships around scientific AI systems and multimodal research data.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="access-brief section-block" aria-label="What to include">
+      <div class="section-header">
+        <p class="eyebrow">What helps us respond</p>
+        <h2 class="section-title">A useful first note is concrete.</h2>
+        <p class="section-lead">
+          Include the scientific domain, example data or formats, the analysis or model workflow,
+          expected outputs, and whether the work must run locally or inside institutional infrastructure.
+          A short description is enough to begin.
+        </p>
+      </div>
+      <div class="access-contact-line">
+        <a class="primary-button" href={contactHref}>Email {siteConfig.contactEmail}</a>
+        <a class="subtle-link" href={toHref("/bisque-ultra")}>Review the BisQue Ultra release</a>
+      </div>
+    </section>
+  </div>
+</SiteShell>

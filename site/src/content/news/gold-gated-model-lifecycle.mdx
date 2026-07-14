@@ -1,0 +1,117 @@
+---
+title: "From retraining to rollback: the GoldGate model lifecycle"
+seoTitle: "GoldGate model lifecycle in BisQue Ultra"
+slug: "gold-gated-model-lifecycle"
+date: 2026-07-11
+summary: "BisQue Ultra turns model updates into durable, evidence-gated decisions with frozen inputs, benchmarks, canary routing, promotion, and rollback."
+excerpt: "Why a scientific workbench needs more than a training button, and how GoldGate makes model versions, evaluation failures, canaries, and rollback visible."
+ogImage: "/images/news/bisque-ultra-training-2026-07.png"
+coverImage: "/images/news/bisque-ultra-training-2026-07.png"
+coverImageAlt: "BisQue Ultra Training view showing a failed candidate model and the evaluation checks that blocked promotion."
+coverPosition: "50% 8%"
+kind: "Model lifecycle"
+sequence: 3
+tags:
+  - Model training
+  - Continual finetuning
+  - Evaluation gates
+  - Canary deployment
+  - BisQue Ultra
+---
+
+A model can finish training and still be unfit to serve.
+
+That distinction is easy to say and surprisingly easy for software to hide. A pipeline writes a checkpoint, a deployment points at the new path, and the product quietly equates newer with better. The scientific risk appears later, when a rare class regresses, an old cohort is forgotten, or the serving model cannot be tied back to the data and evaluation that justified it.
+
+BisQue Ultra's GoldGate lifecycle makes that decision visible. Training produces a candidate. Evaluation produces evidence. Promotion changes the serving state only after the declared gates pass.
+
+<FigureWithCaption
+  src="/images/news/bisque-ultra-training-2026-07.png"
+  alt="BisQue Ultra Training view showing a candidate model that failed two evaluation gates and was not promoted."
+  title="The active model stays active when a candidate fails."
+  caption="This candidate missed a class-recall floor and a prior-data tolerance. Ultra records the failed checks and leaves the current serving model unchanged."
+  span="wide"
+/>
+
+## Begin with frozen evidence
+
+Continual finetuning creates a moving-data problem. New annotations arrive, review decisions change, and resource collections evolve. If a training run only points at a live query, the inputs can drift between dispatch, execution, evaluation, and later audit.
+
+GoldGate therefore separates data synchronization from input freezing. Reviewed examples can be synchronized into the training domain, then captured as an immutable gold-set identity before a retraining job begins. The resulting job is connected to a stable input record rather than a description of what the data probably contained.
+
+This is the first governance boundary: **the system should be able to identify the data that produced a candidate.**
+
+## Training is durable work
+
+Retraining is dispatched as a job through the control plane instead of being tied to the browser session. The compute service is model-agnostic: the training contract describes the work and artifacts without hard-coding one remote shell path or one detector implementation into the frontend.
+
+The UI can follow live epoch progress and best observed metrics while the durable job state remains authoritative. When execution finishes, the candidate version, weights reference, training inputs, metrics, and downstream benchmark record become related objects in the model lineage.
+
+The user sees model states that match the real decision process:
+
+- **candidate**: trained, but not yet approved
+- **canary**: serving a bounded fraction for observation
+- **active**: the current default version
+- **retired**: previously active and retained in lineage
+- **rejected**: evaluated and blocked or explicitly dismissed
+
+These states are not labels painted over a checkpoint directory. They are control-plane state used by the serving resolver and the Training interface.
+
+## Gates turn metrics into policy
+
+A benchmark table is useful, but it does not decide what a lab is willing to risk. GoldGate evaluates metrics against explicit clauses.
+
+<FeatureGrid
+  items={[
+    {
+      title: "Absolute floors",
+      body: "A critical class can require a minimum recall or another metric regardless of aggregate performance.",
+      metric: "fail closed",
+    },
+    {
+      title: "Regression tolerances",
+      body: "The candidate can be compared with the active version on prior data, false positives, or overall quality.",
+      metric: "candidate vs active",
+    },
+    {
+      title: "Held-out slices",
+      body: "Geography, cohort, instrument, or another declared slice can be required, excluded with a reason, or left pending instead of silently omitted.",
+      metric: "slice aware",
+    },
+    {
+      title: "Promotion evidence",
+      body: "The benchmark report, clause outcomes, reasons, and version identities stay attached to the promotion decision.",
+      metric: "auditable",
+    },
+  ]}
+/>
+
+The screenshot shows why this matters. The candidate's aggregate mAP is close to the active version, but prairie-dog recall falls below an absolute floor and prior-data mAP exceeds the allowed regression. A single headline score would make the candidate look acceptable. The gates preserve the requirements that the headline score hides.
+
+## Canary and rollback continue the evidence path
+
+Passing an offline benchmark is not the end of model operations. A candidate can enter canary state, where the serving resolver assigns a deterministic fraction of runs by run identity. This produces stable routing behavior that can be observed without sending every request to the new version.
+
+When the evidence supports promotion, the active pointer changes explicitly. Prior versions remain in the lineage so rollback is a controlled state transition, not a search through filenames and deployment history.
+
+This produces a complete operational sequence:
+
+1. Freeze the inputs.
+2. Train a candidate.
+3. Evaluate declared gates.
+4. Reject or canary.
+5. Promote explicitly.
+6. Observe the serving version.
+7. Roll back when needed.
+
+## Why this belongs in a scientific workbench
+
+Scientific models are used to measure, segment, detect, rank, or classify phenomena that have asymmetric consequences. A small loss on a scarce class can matter more than a small gain in the aggregate. A model trained on new data can forget old cohorts. A held-out slice can be missing for a legitimate reason, but that absence must be visible.
+
+GoldGate is built around those realities. It does not guarantee that a model is scientifically valid. It gives teams the control surface to state what evidence they require, see when a candidate fails, and preserve the identity of the version that produced a result.
+
+<Callout title="Product principle" tone="proof">
+  Training creates a candidate. Evidence and an explicit decision change the model that serves research work.
+</Callout>
+
+The current lifecycle is being exercised first on detection and scientific vision workflows, with a model-agnostic contract underneath. [Request research access](../../access/) to evaluate the lifecycle against your model, data slices, and promotion requirements.

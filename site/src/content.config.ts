@@ -4,6 +4,7 @@ import { z } from "astro/zod";
 
 const sharedFields = {
   title: z.string().min(3),
+  seoTitle: z.string().min(3).optional(),
   slug: z.string().min(2),
   date: z.coerce.date(),
   summary: z.string().min(20),
@@ -22,7 +23,15 @@ const news = defineCollection({
   }),
   schema: z.object({
     ...sharedFields,
-    kind: z.enum(["Launch brief", "White paper", "Platform foundation", "Design language"]).default("Platform foundation"),
+    kind: z.enum([
+      "Launch brief",
+      "White paper",
+      "Platform foundation",
+      "Design language",
+      "Engineering note",
+      "Research note",
+      "Model lifecycle",
+    ]).default("Platform foundation"),
     featured: z.boolean().default(false),
     sequence: z.number().int().positive().optional(),
     version: z.string().min(1).optional(),

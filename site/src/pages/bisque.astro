@@ -30,7 +30,7 @@ const bisqueJsonLd = canonicalUrl
 
 <SiteShell
   title="BisQue | Scientific Image Informatics Platform"
-  description="BisQue is the scientific image informatics platform for 5D images, flexible metadata, annotation, visualization, scalable analysis modules, and reproducible computer vision workflows."
+  description="BisQue unifies 5D scientific images, metadata, annotations, visualization, scalable analysis modules, and reproducible computer vision workflows."
   canonicalPath="/bisque"
   image="/images/bisque/workshop/store-share-collaborate.png"
   imageAlt="BisQue workshop slide showing the platform as a place to store, share, and collaborate on scientific images."
@@ -68,9 +68,14 @@ const bisqueJsonLd = canonicalUrl
         <aside class="bisque-hero-visual">
           <figure class="bisque-workshop-frame">
             <img
-              src={toHref("/images/bisque/workshop/store-share-collaborate.png")}
+              src={toHref("/images/bisque/workshop/store-share-collaborate-800.webp")}
+              srcset={`${toHref("/images/bisque/workshop/store-share-collaborate-800.webp")} 800w, ${toHref("/images/bisque/workshop/store-share-collaborate-1400.webp")} 1400w`}
+              sizes="(max-width: 820px) calc(100vw - 28px), 50vw"
+              width="1400"
+              height="788"
               alt="BisQue workshop slide showing store, share, and collaborate next to the BisQue browser interface."
               loading="eager"
+              fetchpriority="high"
               decoding="async"
             />
             <figcaption>
@@ -95,7 +100,7 @@ const bisqueJsonLd = canonicalUrl
       <div class="proof-strip lab-proof research-proof" aria-label="BisQue proof points">
         <article class="proof-item">
           <p class="eyebrow">Data model</p>
-          <h3 class="proof-item-title">Images, annotations, metadata, and analysis stay together.</h3>
+          <p class="proof-item-title">Images, annotations, metadata, and analysis stay together.</p>
           <p class="proof-item-body">
             The platform is designed for scientific datasets where raw pixels are only one part of
             the research record.
@@ -103,7 +108,7 @@ const bisqueJsonLd = canonicalUrl
         </article>
         <article class="proof-item">
           <p class="eyebrow">Scale</p>
-          <h3 class="proof-item-title">Large 5D image data can be handled through web infrastructure.</h3>
+          <p class="proof-item-title">Large 5D image data can be handled through web infrastructure.</p>
           <p class="proof-item-body">
             The public repository describes PB-scale image management, millions of annotations, and
             large image processing.
@@ -111,7 +116,7 @@ const bisqueJsonLd = canonicalUrl
         </article>
         <article class="proof-item">
           <p class="eyebrow">Translation</p>
-          <h3 class="proof-item-title">New methods can move from paper to shared analysis module.</h3>
+          <p class="proof-item-title">New methods can move from paper to shared analysis module.</p>
           <p class="proof-item-body">
             BisQue gives domain researchers access to machine-learning tools without requiring them
             to rebuild the computational stack.
@@ -134,7 +139,11 @@ const bisqueJsonLd = canonicalUrl
         <article class="bisque-workshop-card bisque-workshop-card-large">
           <figure>
             <img
-              src={toHref("/images/bisque/workshop/large-scale-visualization.png")}
+              src={toHref("/images/bisque/workshop/large-scale-visualization-800.webp")}
+              srcset={`${toHref("/images/bisque/workshop/large-scale-visualization-800.webp")} 800w, ${toHref("/images/bisque/workshop/large-scale-visualization-1400.webp")} 1400w`}
+              sizes="(max-width: 720px) calc(100vw - 28px), 1180px"
+              width="1400"
+              height="788"
               alt="BisQue workshop slide showing a 90K by 90K image mosaic visualized inside a web browser."
               loading="lazy"
               decoding="async"
@@ -152,7 +161,11 @@ const bisqueJsonLd = canonicalUrl
         <article class="bisque-workshop-card">
           <figure>
             <img
-              src={toHref("/images/bisque/workshop/materials-workflow.png")}
+              src={toHref("/images/bisque/workshop/materials-workflow-800.webp")}
+              srcset={`${toHref("/images/bisque/workshop/materials-workflow-800.webp")} 800w, ${toHref("/images/bisque/workshop/materials-workflow-1400.webp")} 1400w`}
+              sizes="(max-width: 720px) calc(100vw - 28px), 590px"
+              width="1400"
+              height="788"
               alt="BisQue workshop slide showing materials-science modules stitched into a containerized workflow."
               loading="lazy"
               decoding="async"
@@ -170,7 +183,11 @@ const bisqueJsonLd = canonicalUrl
         <article class="bisque-workshop-card">
           <figure>
             <img
-              src={toHref("/images/bisque/workshop/bioimaging-module.png")}
+              src={toHref("/images/bisque/workshop/bioimaging-module-800.webp")}
+              srcset={`${toHref("/images/bisque/workshop/bioimaging-module-800.webp")} 800w, ${toHref("/images/bisque/workshop/bioimaging-module-1400.webp")} 1400w`}
+              sizes="(max-width: 720px) calc(100vw - 28px), 590px"
+              width="1400"
+              height="788"
               alt="BisQue workshop slide showing CellECT bioimaging segmentation and output tables."
               loading="lazy"
               decoding="async"
@@ -212,7 +229,7 @@ const bisqueJsonLd = canonicalUrl
       <div class="bisque-research-grid">
         <div class="section-header">
           <p class="eyebrow">Connected research</p>
-          <h2 class="section-title">The same platform foundation appears across frontier vision programs.</h2>
+          <h2 class="section-title">Published lab systems reuse the same image-informatics foundation.</h2>
           <p class="section-lead">
             MethaneMapper and WildlifeMapper expose BisQue dataset visualization links in their
             repositories. EBSD Superresolution and Time-lapse 3D Cell Analysis describe BisQue
@@ -238,11 +255,11 @@ const bisqueJsonLd = canonicalUrl
       <div class="research-platform-grid">
         <div class="section-header">
           <p class="eyebrow">Next layer</p>
-          <h2 class="section-title">BisQue organizes scientific resources. BisQue Ultra controls AI runs.</h2>
+          <h2 class="section-title">BisQue organizes scientific resources. BisQue Ultra turns them into durable AI work.</h2>
           <p class="section-lead">
-            Ultra extends BisQue by pointing at BisQue resources, then adding a React client, Go control
-            plane, durable Postgres and NATS JetStream state, Deep Agents workers, and OpenAI-compatible
-            model routing for long-running scientific AI workflows.
+            Ultra can connect to BisQue, then adds a modern resource browser, multidimensional viewers,
+            a React workbench, Go control plane, durable Postgres and NATS JetStream state, Deep Agents
+            workers, gated model training, and OpenAI-compatible model routing.
           </p>
         </div>
         <div class="research-platform-steps" aria-label="BisQue and Ultra relationship">
@@ -253,10 +270,25 @@ const bisqueJsonLd = canonicalUrl
           </a>
           <a href={toHref("/bisque-ultra")} class="platform-step">
             <span class="mono-copy">Ultra</span>
-            <strong>Durable AI workbench</strong>
-            <small>Runs, messages, worker leases, model endpoints, artifacts, and product records.</small>
+            <strong>Scientific AI workbench</strong>
+            <small>Viewers, tools, runs, model versions, training gates, artifacts, and evidence.</small>
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="ultra-conversion" aria-label="BisQue collaboration">
+      <div>
+        <p class="eyebrow">Extend the platform</p>
+        <h2>Connect a new dataset, analysis module, or scientific workflow.</h2>
+        <p>
+          We work with teams that need shared image infrastructure, browser-visible analysis, or a
+          durable path from BisQue resources into BisQue Ultra.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <a class="primary-button" href={toHref(siteConfig.accessPath)}>Collaborate with us</a>
+        <a class="secondary-button" href={toHref("/bisque-ultra")}>Explore BisQue Ultra</a>
       </div>
     </section>
 

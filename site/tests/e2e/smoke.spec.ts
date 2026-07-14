@@ -12,11 +12,12 @@ test("homepage presents the center project shell and follows system dark mode", 
   ).toBeVisible();
   await expect(page.getByText("UCSB ELECTRICAL & COMPUTER ENGINEERING")).toBeVisible();
   await expect(page.getByText(/UCSB Electrical and Computer Engineering/i)).toBeVisible();
-  await expect(page.getByText(/hyperspectral methane sensing/i)).toBeVisible();
+  await expect(page.getByText("Hyperspectral remote sensing", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Explore BisQue Ultra/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Explore research/i })).toHaveCount(0);
-  await expect(page.locator(".research-ultra-hero-frame img")).toHaveAttribute("src", "/images/home/ultra-hero.png");
-  await expect(page.getByRole("heading", { name: /Scaling hyperspherical learning/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Collaborate with us/i }).first()).toBeVisible();
+  await expect(page.locator(".research-ultra-hero-frame img")).toHaveAttribute("src", "/images/home/ultra-hero-960.webp");
+  await expect(page.getByRole("heading", { name: /Bright 4B scales hyperspherical learning/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /PSF-aware patch embeddings/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
@@ -31,26 +32,26 @@ test("homepage presents the center project shell and follows system dark mode", 
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "BisQue", exact: true })
   ).toBeVisible();
 
-  const primaryButton = page.getByRole("link", { name: /Open BisQue platform/i });
+  const primaryButton = page.getByRole("link", { name: /Explore BisQue Ultra/i });
   await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
 });
 
-test("BisQue Ultra landing page moved to its own route", async ({ page }) => {
+test("BisQue Ultra landing page communicates the current product release", async ({ page }) => {
   await page.goto("/bisque-ultra");
 
-  await expect(page).toHaveTitle("BisQue Ultra | Scientific AI Workbench and Run Control Plane");
+  await expect(page).toHaveTitle("BisQue Ultra | Scientific AI Workbench");
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
-  await expect(page.getByText(/Scientific AI run control for image research/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /Read the launch brief/i })).toBeVisible();
-  await expect(page.getByText(/Created within the UCSB Vision Research Lab/i)).toBeVisible();
-  await expect(page.locator(".story-tile-large .story-tile-image")).toBeVisible();
+  await expect(page.getByText(/scientific AI workbench for data, models, and evidence/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /Request research access/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /Run locally/i })).toBeVisible();
+  await expect(page.getByText(/Built in the UCSB Vision Research Lab/i)).toBeVisible();
+  await expect(page.locator(".launch-hero-art-image")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Go control plane", exact: true })).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: /Postgres and NATS JetStream keep long work recoverable/i })
-  ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "OpenAI-compatible model layer", exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Bright 4B shows why frontier microscopy/i })).toBeVisible();
-  await expect(page.getByText(/Bright 4B results are easier to review/i)).toBeVisible();
+  await expect(page.getByText("Open the files research actually produces", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Model improvement becomes a reviewable/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /4B-parameter vision model becomes more useful/i })).toBeVisible();
+  await expect(page.getByText("Can BisQue Ultra run locally?", { exact: true })).toBeVisible();
+  await expect(page.getByAltText(/candidate model that failed two evaluation gates/i)).toBeVisible();
 });
 
 test("BisQue platform page renders research infrastructure content", async ({ page }) => {
@@ -65,7 +66,7 @@ test("BisQue platform page renders research infrastructure content", async ({ pa
   await expect(bisqueOverview.getByRole("link", { name: /View repository/i })).toBeVisible();
   await expect(page.locator(".bisque-workshop-frame img")).toHaveAttribute(
     "src",
-    "/images/bisque/workshop/store-share-collaborate.png"
+    "/images/bisque/workshop/store-share-collaborate-800.webp"
   );
   await expect(page.getByRole("heading", { name: /A scientific image platform built/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /BisQue turns scientific image work/i })).toBeVisible();
@@ -76,15 +77,15 @@ test("BisQue platform page renders research infrastructure content", async ({ pa
   await expect(page.getByText(/Scientific Reports 2023/i)).toBeVisible();
 });
 
-test("white paper route renders content and on-page navigation", async ({ page }) => {
+test("launch brief renders current content and on-page navigation", async ({ page }) => {
   await page.goto("/news/bisque-ultra");
-  await expect(page).toHaveTitle("BisQue Ultra | Center for Multimodal Learning");
+  await expect(page).toHaveTitle("BisQue Ultra 2026.07 research release | UCSB CML");
 
-  await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra 2026.07", exact: true })).toBeVisible();
   await expect(
-    page.getByText(/BisQue Ultra is a scientific AI workbench with a durable control plane/i)
+    page.getByText(/scientific AI workbench for the full path from complex data to reviewable result/i)
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: /What changed in the updated stack/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /What changed in 2026.07/i })).toBeVisible();
 
   const jumpMenu = page.locator("[data-article-jump]");
   await expect(jumpMenu).toHaveAttribute("data-visible", "false");
@@ -98,12 +99,15 @@ test("white paper route renders content and on-page navigation", async ({ page }
   await expect(jumpMenu).not.toHaveAttribute("open", "");
   await jumpMenu.locator(".article-jump-summary").click();
   await expect(jumpMenu).toHaveAttribute("open", "");
-  await expect(jumpMenu.getByRole("link", { name: /Deployment-specific boundaries/i })).toBeVisible();
+  await expect(jumpMenu.getByRole("link", { name: /Run the stack locally/i })).toBeVisible();
 });
 
 test("news index and a follow-up post both render", async ({ page }) => {
   await page.goto("/news");
-  await expect(page.getByRole("heading", { name: /Read the launch, the platform proof, and the interface update/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /systems that make it credible/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /scientific image engine behind BisQue Ultra/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /GoldGate model lifecycle/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Evidence-aware materials research/i })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /BisQue Platform: storage, visualization, analysis, and extensibility/i })
   ).toBeVisible();
@@ -139,7 +143,13 @@ test("release alias, sitemap, and robots stay publishable", async ({ page, reque
     .toContain("/bisque");
   await expect
     .poll(async () => await sitemap.text())
+    .toContain("/access");
+  await expect
+    .poll(async () => await sitemap.text())
     .toContain("/news/bisque-ultra");
+  await expect
+    .poll(async () => await sitemap.text())
+    .toContain("/news/gold-gated-model-lifecycle");
 
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
@@ -159,4 +169,36 @@ test("frontend showcase article renders embedded interface demos", async ({ page
   ).toBeVisible();
   await expect(page.getByText(/A control layout that makes priority obvious/i)).toBeVisible();
   await expect(page.getByText(/Language and proof stay close to each other/i)).toBeVisible();
+});
+
+test("research access page presents honest collaboration paths", async ({ page }) => {
+  await page.goto("/access");
+
+  await expect(page).toHaveTitle("Request BisQue Ultra Access | Center for Multimodal Learning");
+  await expect(page.getByRole("heading", { level: 1, name: /Bring your scientific workflow/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Request research access/i }).first()).toHaveAttribute(
+    "href",
+    /mailto:amil@ucsb\.edu/,
+  );
+  await expect(page.getByRole("heading", { name: "Research access", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Scientific collaboration", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Institutional deployment", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Strategic partnership", exact: true })).toBeVisible();
+});
+
+test("current engineering notes preserve implementation and readiness boundaries", async ({ page }) => {
+  await page.goto("/news/scientific-imaging-engine");
+  await expect(page.getByRole("heading", { level: 1, name: /scientific image engine/i })).toBeVisible();
+  await expect(page.getByText(/more than 90 scientific formats/i).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Viewers preserve different kinds of evidence/i })).toBeVisible();
+
+  await page.goto("/news/gold-gated-model-lifecycle");
+  await expect(page.getByRole("heading", { level: 1, name: /GoldGate model lifecycle/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Gates turn metrics into policy/i })).toBeVisible();
+  await expect(page.getByText(/active model stays active when a candidate fails/i)).toBeVisible();
+
+  await page.goto("/news/materials-research-evidence");
+  await expect(page.getByRole("heading", { level: 1, name: /Evidence-aware materials research/i })).toBeVisible();
+  await expect(page.getByText(/evidence-gated research capability/i)).toBeVisible();
+  await expect(page.getByText(/It is not production-promoted/i)).toBeVisible();
 });
