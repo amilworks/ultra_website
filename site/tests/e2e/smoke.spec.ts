@@ -86,7 +86,7 @@ test("launch brief renders current content and on-page navigation", async ({ pag
 
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra 2026.07", exact: true })).toBeVisible();
   await expect(
-    page.getByText(/scientific AI workbench for the full path from complex data to reviewable result/i)
+    page.getByText(/agentic system for science, built for the full path from complex data to reviewable result/i)
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: /What changed in 2026.07/i })).toBeVisible();
 

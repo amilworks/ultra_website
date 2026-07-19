@@ -30,7 +30,7 @@ const bisqueJsonLd = canonicalUrl
 
 <SiteShell
   title="BisQue | Scientific Image Informatics Platform"
-  description="BisQue unifies 5D scientific images, metadata, annotations, visualization, scalable analysis modules, and reproducible computer vision workflows."
+  description="BisQue unifies 5D scientific images, metadata, annotations, visualization, and scalable analysis modules — nearly six million uploads and 12.3 million annotations in pilot use, and the data substrate of the BisQue Ultra agentic system."
   canonicalPath="/bisque"
   image="/images/bisque/workshop/store-share-collaborate.png"
   imageAlt="BisQue workshop slide showing the platform as a place to store, share, and collaborate on scientific images."
@@ -45,7 +45,9 @@ const bisqueJsonLd = canonicalUrl
           <p class="lab-subhead">
             BisQue is the lab’s scientific image platform: a browser-based environment for storing,
             searching, annotating, visualizing, and analyzing scientific images with extensible
-            modules and flexible metadata.
+            modules and flexible metadata. In production pilot use it has absorbed nearly six million
+            image uploads and 12.3 million annotations — and it is the catalog BisQue Ultra's
+            research agent operates on.
           </p>
           <div class="launch-command-line lab-command-line" aria-label="BisQue capabilities">
             <span>5D image data</span>
@@ -84,11 +86,11 @@ const bisqueJsonLd = canonicalUrl
             </figcaption>
           </figure>
           <div class="bisque-context-panel">
-            <p class="eyebrow">Research objective</p>
+            <p class="eyebrow">Why it matters</p>
             <p>
-              Research Outreach describes BisQue as an advanced image database and analysis system for
-              large-scale image databases, flexible experimental data management, metadata and
-              content-based search, analysis integration, and knowledge discovery.
+              An image is only one part of a measurement. BisQue keeps large image collections,
+              experimental metadata, content-based search, executable analysis, and discovery in one
+              system — the shape of platform that turns a published method into shared science.
             </p>
             <a href={sourceLinks.researchOutreach} target="_blank" rel="noreferrer">
               Read the reproducible computer vision article
@@ -102,24 +104,24 @@ const bisqueJsonLd = canonicalUrl
           <p class="eyebrow">Data model</p>
           <p class="proof-item-title">Images, annotations, metadata, and analysis stay together.</p>
           <p class="proof-item-body">
-            The platform is designed for scientific datasets where raw pixels are only one part of
-            the research record.
+            Raw pixels are one part of the research record. BisQue keeps the rest — annotations,
+            provenance, derived results — attached to the same resource.
           </p>
         </article>
         <article class="proof-item">
-          <p class="eyebrow">Scale</p>
-          <p class="proof-item-title">Large 5D image data can be handled through web infrastructure.</p>
+          <p class="eyebrow">Demonstrated scale</p>
+          <p class="proof-item-title">Nearly 6M image uploads and 12.3M annotations.</p>
           <p class="proof-item-body">
-            The public repository describes PB-scale image management, millions of annotations, and
-            large image processing.
+            The production pilot has absorbed real demand at that scale, on an architecture built
+            for PB-scale collections and large 5D images.
           </p>
         </article>
         <article class="proof-item">
           <p class="eyebrow">Translation</p>
-          <p class="proof-item-title">New methods can move from paper to shared analysis module.</p>
+          <p class="proof-item-title">New methods move from paper to shared analysis module.</p>
           <p class="proof-item-body">
-            BisQue gives domain researchers access to machine-learning tools without requiring them
-            to rebuild the computational stack.
+            A published method becomes a module other researchers run in the browser — no rebuilt
+            computational stack, no private pipeline.
           </p>
         </article>
       </div>
@@ -255,11 +257,11 @@ const bisqueJsonLd = canonicalUrl
       <div class="research-platform-grid">
         <div class="section-header">
           <p class="eyebrow">Next layer</p>
-          <h2 class="section-title">BisQue organizes scientific resources. BisQue Ultra turns them into durable AI work.</h2>
+          <h2 class="section-title">BisQue organizes scientific resources. BisQue Ultra sends an agent to work on them.</h2>
           <p class="section-lead">
-            Ultra can connect to BisQue, then adds a modern resource browser, multidimensional viewers,
-            a React workbench, Go control plane, durable Postgres and NATS JetStream state, Deep Agents
-            workers, gated model training, and OpenAI-compatible model routing.
+            Ultra connects to BisQue and adds the agentic layer: a governed research agent with durable
+            runs on Postgres and NATS JetStream, gated model training, multidimensional viewers, and a
+            replaceable OpenAI-compatible model endpoint — measured live at 59&nbsp;ms to first token.
           </p>
         </div>
         <div class="research-platform-steps" aria-label="BisQue and Ultra relationship">
@@ -270,8 +272,8 @@ const bisqueJsonLd = canonicalUrl
           </a>
           <a href={toHref("/bisque-ultra")} class="platform-step">
             <span class="mono-copy">Ultra</span>
-            <strong>Scientific AI workbench</strong>
-            <small>Viewers, tools, runs, model versions, training gates, artifacts, and evidence.</small>
+            <strong>Agentic research system</strong>
+            <small>A governed agent, durable runs, model gates, artifacts, and inspectable evidence.</small>
           </a>
         </div>
       </div>
@@ -282,8 +284,8 @@ const bisqueJsonLd = canonicalUrl
         <p class="eyebrow">Extend the platform</p>
         <h2>Connect a new dataset, analysis module, or scientific workflow.</h2>
         <p>
-          We work with teams that need shared image infrastructure, browser-visible analysis, or a
-          durable path from BisQue resources into BisQue Ultra.
+          We work with teams that need shared image infrastructure, browser-visible analysis, or an
+          agent that can operate on their BisQue resources with the evidence attached.
         </p>
       </div>
       <div class="hero-actions">

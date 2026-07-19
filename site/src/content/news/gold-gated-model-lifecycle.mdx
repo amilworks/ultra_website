@@ -23,7 +23,7 @@ A model can finish training and still be unfit to serve.
 
 That distinction is easy to say and surprisingly easy for software to hide. A pipeline writes a checkpoint, a deployment points at the new path, and the product quietly equates newer with better. The scientific risk appears later, when a rare class regresses, an old cohort is forgotten, or the serving model cannot be tied back to the data and evaluation that justified it.
 
-BisQue Ultra's GoldGate lifecycle makes that decision visible. Training produces a candidate. Evaluation produces evidence. Promotion changes the serving state only after the declared gates pass.
+BisQue Ultra's GoldGate lifecycle makes that decision visible. Training produces a candidate. Evaluation produces evidence. Promotion changes the serving state only after the declared gates pass. It is the promotion half of the Intelligence Loop: reviewer corrections become candidates, and only evidence — never recency — changes what the system serves.
 
 <FigureWithCaption
   src="/images/news/bisque-ultra-training-2026-07.png"
