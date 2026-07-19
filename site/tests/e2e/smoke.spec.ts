@@ -39,17 +39,20 @@ test("homepage presents the center project shell and follows system dark mode", 
 test("BisQue Ultra landing page communicates the current product release", async ({ page }) => {
   await page.goto("/bisque-ultra");
 
-  await expect(page).toHaveTitle("BisQue Ultra | Scientific AI Workbench");
+  await expect(page).toHaveTitle("BisQue Ultra | Agentic System for Science");
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
-  await expect(page.getByText(/scientific AI workbench for data, models, and evidence/i)).toBeVisible();
+  await expect(page.getByText(/agentic distributed system that runs real research where the data live/i)).toBeVisible();
   await expect(page.getByRole("link", { name: /Request research access/i }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /Run locally/i })).toBeVisible();
   await expect(page.getByText(/Built in the UCSB Vision Research Lab/i)).toBeVisible();
   await expect(page.locator(".launch-hero-art-image")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Go control plane", exact: true })).toBeVisible();
-  await expect(page.getByText("Open the files research actually produces", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Model improvement becomes a reviewable/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /4B-parameter vision model becomes more useful/i })).toBeVisible();
+  await expect(page.getByText(/The hard part is already built, deployed, and measured/i)).toBeVisible();
+  await expect(page.locator(".ultra-metric-value").filter({ hasText: "59 ms" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Model improvement is a reviewable/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /closed human-in-the-loop cycle is implemented/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /evaluate the orchestration tier the way a lab evaluates a model/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /4B-parameter vision model is more useful/i })).toBeVisible();
   await expect(page.getByText("Can BisQue Ultra run locally?", { exact: true })).toBeVisible();
   await expect(page.getByAltText(/candidate model that failed two evaluation gates/i)).toBeVisible();
 });
@@ -105,6 +108,9 @@ test("launch brief renders current content and on-page navigation", async ({ pag
 test("news index and a follow-up post both render", async ({ page }) => {
   await page.goto("/news");
   await expect(page.getByRole("heading", { name: /systems that make it credible/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /The performance envelope/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Evaluate the system like a model/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Making sensor data safe for autonomous agents/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /scientific image engine behind BisQue Ultra/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /GoldGate model lifecycle/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Evidence-aware materials research/i })).toBeVisible();
@@ -112,6 +118,21 @@ test("news index and a follow-up post both render", async ({ page }) => {
     page.getByRole("link", { name: /BisQue Platform: storage, visualization, analysis, and extensibility/i })
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /Why the BisQue Ultra frontend looks the way it does/i })).toBeVisible();
+});
+
+test("new research and engineering notes render their core claims", async ({ page }) => {
+  await page.goto("/news/production-performance-envelope");
+  await expect(page.getByRole("heading", { level: 1, name: /The performance envelope/i })).toBeVisible();
+  await expect(page.getByText(/59 ms to first token/i).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: /the gigapixel case is the ordinary case/i })).toBeVisible();
+
+  await page.goto("/news/ngff-sensor-hardening");
+  await expect(page.getByRole("heading", { level: 1, name: /Making sensor data safe for autonomous agents/i })).toBeVisible();
+  await expect(page.getByText(/23 malformed stores all fail closed/i).first()).toBeVisible();
+
+  await page.goto("/news/ultra-mode-research");
+  await expect(page.getByRole("heading", { level: 1, name: /Evaluate the system like a model/i })).toBeVisible();
+  await expect(page.getByText(/Coverage.Compression.Verification/i).first()).toBeVisible();
 });
 
 test("BisQue platform feature article renders docs imagery and platform links", async ({ page }) => {

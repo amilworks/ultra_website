@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="34" fill="#F7F7F5"/>
+  <rect x="34" y="34" width="1132" height="562" rx="28" fill="#FCFCFB" stroke="#E4E4E1"/>
+
+  <text x="114" y="96" fill="#171717" font-size="22" font-family="JetBrains Mono, monospace">BisQue Ultra · engineering note</text>
+  <text x="112" y="188" fill="#171717" font-size="58" font-family="Inter, sans-serif" font-weight="700">Safe sensor data for</text>
+  <text x="112" y="250" fill="#171717" font-size="58" font-family="Inter, sans-serif" font-weight="700">autonomous agents</text>
+  <text x="114" y="304" fill="#6B6B6B" font-size="25" font-family="Inter, sans-serif">An OME-NGFF stress test across seven scientific domains — and the six defects it closed.</text>
+
+  <!-- axis cube motif -->
+  <g stroke="#171717" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none" opacity="0.85">
+    <rect x="905" y="118" width="150" height="150" rx="10" fill="#EFE3D5"/>
+    <path d="M905 118 L945 82 L1095 82 L1055 118"/>
+    <path d="M1055 118 L1095 82 L1095 232 L1055 268"/>
+  </g>
+
+  <rect x="114" y="392" width="316" height="150" rx="22" fill="#FDFDFC" stroke="#E5E5E2"/>
+  <rect x="454" y="392" width="316" height="150" rx="22" fill="#FDFDFC" stroke="#E5E5E2"/>
+  <rect x="794" y="392" width="292" height="150" rx="22" fill="#171717"/>
+
+  <text x="138" y="458" fill="#171717" font-size="46" font-family="Inter, sans-serif" font-weight="700">29 / 29</text>
+  <text x="138" y="500" fill="#6B6B6B" font-size="20" font-family="Inter, sans-serif">valid stores open + render</text>
+
+  <text x="478" y="458" fill="#171717" font-size="46" font-family="Inter, sans-serif" font-weight="700">23 / 23</text>
+  <text x="478" y="500" fill="#6B6B6B" font-size="20" font-family="Inter, sans-serif">malformed stores fail closed</text>
+
+  <text x="818" y="452" fill="#F5F5F5" font-size="40" font-family="Inter, sans-serif" font-weight="700">4.7 GB → 46 MB</text>
+  <text x="818" y="496" fill="#A1A1AA" font-size="20" font-family="Inter, sans-serif">gigapixel read, bounded</text>
+</svg>

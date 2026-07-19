@@ -3391,3 +3391,107 @@ button {
     font-size: 1.65rem;
   }
 }
+
+/* ---- BisQue Ultra: measured-receipts band + autonomy figure (2026.07 story) ---- */
+.ultra-metrics {
+  gap: 1.2rem;
+  border-top: 1px solid var(--line-strong);
+  padding-top: 1.25rem;
+}
+
+.ultra-metric-grid {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.ultra-metric {
+  display: grid;
+  gap: 0.28rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ultra-metric-value {
+  margin: 0;
+  font-size: clamp(1.85rem, 3vw, 2.45rem);
+  line-height: 1.02;
+  font-weight: var(--font-weight-reading-heading);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  font-feature-settings: "tnum" 1, "liga" 1, "calt" 1;
+}
+
+.ultra-metric-label {
+  margin: 0;
+  max-width: 32ch;
+  color: color-mix(in oklab, var(--text-main) 82%, var(--text-muted) 18%);
+  font-size: 0.9rem;
+  line-height: 1.46;
+  text-wrap: pretty;
+}
+
+.ultra-metric-note {
+  margin: 0.1rem 0 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.ultra-metrics-foot {
+  margin: 0;
+  max-width: 60rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.ultra-loop-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.72rem;
+}
+
+.ultra-loop-figure img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-panel-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.ultra-loop-figure figcaption {
+  max-width: 52rem;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.52;
+  text-wrap: pretty;
+}
+
+@media (min-width: 860px) {
+  .ultra-metric-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ultra-metric {
+    padding: 1.1rem 1.15rem 1.2rem;
+    border-right: 1px solid var(--line);
+  }
+
+  .ultra-metric:nth-child(3n + 1) {
+    padding-left: 0;
+  }
+
+  .ultra-metric:nth-child(3n) {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .ultra-metric:nth-last-child(-n + 3) {
+    border-bottom: 0;
+  }
+}

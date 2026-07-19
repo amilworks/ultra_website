@@ -1,0 +1,94 @@
+---
+title: "Evaluate the system like a model: the Ultra Mode research program"
+seoTitle: "Ultra Mode research program and the CCV thesis"
+slug: "ultra-mode-research"
+date: 2026-07-16
+summary: "Ultra Mode is a durable, typed orchestration tier under a preregistered evaluation. Its guiding theory says orchestration wins only under measurable conditions, and its early results already overturned an assumption."
+excerpt: "When does orchestrating agents beat a single strong trajectory, and which mechanism causes the gain? A falsifiable theory, a typed workflow algebra, and a preregistered evaluation with honest negative results."
+ogImage: "/images/news/ultra-mode-research.svg"
+coverImage: "/images/news/ultra-mode-research.svg"
+coverImageAlt: "The Ultra Mode research program: coverage, compression, and verification linked as a falsifiable theory."
+kind: "White paper"
+sequence: 3
+version: "research"
+tags:
+  - Agent orchestration
+  - Evaluation
+  - Distributed systems
+  - Research methodology
+  - BisQue Ultra
+---
+
+Most agent frameworks are shipped on a vibe: more agents, more thinking, more recursion, and a demo that looks impressive. We think an agentic system deserves the same treatment a serious lab gives a model — a falsifiable theory of when it helps, a preregistered evaluation, and the discipline to report the results that contradict you. Ultra Mode is BisQue Ultra's durable orchestration tier, and this note is about how we are proving whether it earns its place, not asserting that it does.
+
+Ultra Mode is not yet a public feature. It runs behind fail-closed admission and independently gated services while it is qualified. What follows is the research program, its guiding theory, and what the evidence says so far — including the assumption it has already broken.
+
+## The question, stated so it can be wrong
+
+> Under what measurable workload conditions does an orchestrated run produce a better *verified* outcome than a single strong trajectory, and which mechanism creates the gain?
+
+That phrasing matters. "Does Ultra beat Pro?" is unfalsifiable marketing. The real question isolates a mechanism and names the conditions under which it should fail. Our working answer is deliberately narrow, and we call it the **Coverage–Compression–Verification (CCV) thesis**:
+
+> Orchestration should win when a task has a high coverage burden, decomposable semantic work, compressible intermediate results, and an observable acceptance test. Its advantage should come from coverage, controlled composition, and verification — not from unrestricted recursion or maximum reasoning on every call.
+
+<ProofStrip
+  items={[
+    {
+      label: "Coverage",
+      title: "Enumerate every unit deterministically",
+      body: "Code, not model memory, owns the manifest of work units, deduplication, and completion accounting. The planner may choose the operation, but it cannot silently drop items.",
+    },
+    {
+      label: "Compression",
+      title: "Return the narrowest sufficient typed result",
+      body: "Workers emit typed classifications, bounded claims with provenance, or explicit unknowns — not lossy prose — so downstream stages aggregate deterministically.",
+    },
+    {
+      label: "Verification",
+      title: "Accept only on evidence, never on self-approval",
+      body: "Executable checks, conservation rules, and independent replication carry more weight than a model grading its own answer.",
+    },
+    {
+      label: "Not this",
+      title: "More agents is not the theory",
+      body: "When workers share a model and evidence, correlated error means extra agents can add near-zero information. Depth-one composition is the default, not deep recursion.",
+    },
+  ]}
+/>
+
+## A typed workflow, not an arbitrary scheduler
+
+The central architectural bet is that the model should *propose* a plan, never *command* the queue. For each durable reasoning cycle, the agent proposes a finite typed directed graph over a closed set of operators — map a role across a manifest, filter, reduce, join, branch, replicate, select, verify, wait. The Go control plane then validates the graph's typed ports, authorization, cardinality, completion policy, and worst-case budget *before* compiling only the next ready frontier into durable work. Repetition is a server-owned outer cycle policy with hard limits, not a recursive operator the model can spin.
+
+This is what separates Ultra Mode from a model writing free-form orchestration code and hoping it terminates. The model's creativity chooses *which* typed plan to run; the control plane guarantees the plan is bounded, authorized, and durable. Model output is a plan proposal. It is never a queue command.
+
+## An evaluation designed to disprove us
+
+A two-arm "Pro versus Ultra" score cannot tell you *why* one won — whether the gain came from verification, external state, static coverage, dynamic topology, or simply spending more. So the program runs seven arms, from a plain direct trajectory through plan-and-verify, externalized state, fixed typed map-reduce, adaptive typed orchestration, and free-form dynamic subagents, each under the same budget. It uses strict partitions: a development set where everything may change, a calibration set frozen before the outcome, and an **untouched lockbox** opened once, only after the algebra, prompts, budgets, and scorers are signed. The gates — minimum superiority margins, cost and latency ceilings, zero-tolerance safety conditions — are registered before the lockbox is opened. Inspecting an outcome and then changing the system consumes that lockbox and requires a new one.
+
+That is more evaluation machinery than most products ever apply to themselves. It exists because the failure mode we are guarding against — a plausible improvement that is really noise, or a coverage gain bought with silently lower quality — is exactly the one that looks like success in a demo.
+
+## What the evidence already says
+
+The early matched-live development results are small, synthetic, and drawn from cases visible during harness iteration; they are a mechanism signal, not a release gate, and we treat them that way. But two of them already changed the design.
+
+| Mechanism | Correct | Mean calls | Verifier false accepts |
+|---|---:|---:|---:|
+| Direct trajectory | 5 / 15 | 1.0 | — |
+| Plan, answer, verify | 5 / 15 | 3.0 | 10 |
+| Externalized state | 13 / 15 | 3.0 | 2 |
+| Fixed typed map-reduce | 15 / 15 | 9.7 | 0 |
+
+The first lesson is a **negative result we did not want**: adding a generic planning-and-verification step spent roughly four times the tokens of a direct trajectory and did not improve quality at all. "Add a planner" is not the mechanism. Typed, per-unit work with a deterministic reducer was — it took every case from 5-of-15 to 15-of-15 correct, at a measured cost in calls that is the price of that robustness.
+
+The second lesson is sharper. Across the runs, the model's own verifier **accepted twelve answers that were externally wrong**. In a system that trusted model self-approval, those twelve would have shipped as successes. This is not an embarrassment to hide; it is empirical proof of why the architecture is built the way it is. A model verdict can trigger more evidence or review, but only typed output validation, criterion evidence, and a server-owned terminal seal can commit success. We also had one in-memory fan-out run abort on an unmetered worker fault — direct evidence that durable attempts and reconciliation, not in-process concurrency, have to be the correctness boundary.
+
+<Callout title="Exactly what this evidence is, and is not" tone="warning">
+  These are small, temperature-zero development samples from a single endpoint, using cases seen during harness iteration, without independent attestation of the serving host. They qualify the mechanism and the harness. They are not a production quality claim, a service-level guarantee, or the preregistered release gate — and Ultra Mode stays behind fail-closed admission until that gate is cleared on an untouched lockbox.
+</Callout>
+
+## Why a frontier lab should care
+
+The interesting thing here is not a leaderboard number. It is the method. We are treating our own agent system as an object of study: a theory precise enough to be wrong, an evaluation built to catch our own mistakes, and a willingness to publish the result that killed our first idea. That is the same posture a serious model lab takes toward its models, applied to the orchestration layer — and it is the posture that makes an autonomy claim trustworthy instead of decorative.
+
+The mechanisms this program is qualifying already run, durably, on the production control plane. What remains is not to build them but to prove, on evidence we cannot peek at first, that they are worth their cost. The [performance envelope](../production-performance-envelope/) shows the infrastructure they run on; the [GoldGate model lifecycle](../gold-gated-model-lifecycle/) shows the same evidence discipline applied to model weights.

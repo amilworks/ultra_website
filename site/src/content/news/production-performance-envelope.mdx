@@ -1,0 +1,125 @@
+---
+title: "The performance envelope: what a self-hosted scientific agent actually costs to run"
+seoTitle: "BisQue Ultra production performance envelope"
+slug: "production-performance-envelope"
+date: 2026-07-15
+summary: "A live load and latency study of the BisQue Ultra production cluster: first-token latency, generation throughput, native OME-Zarr serving, and the concurrency envelope, measured end to end."
+excerpt: "First token in 59 ms, 263 tokens per second sustained, OME-Zarr metadata in two milliseconds, and zero errors across every owned-tier load ramp. The numbers behind an agent that runs where the data live."
+ogImage: "/images/news/production-performance-envelope.svg"
+coverImage: "/images/news/production-performance-envelope.svg"
+coverImageAlt: "BisQue Ultra production performance envelope with first-token latency, throughput, imaging, and capacity figures."
+kind: "White paper"
+sequence: 2
+version: "2026.07"
+tags:
+  - Performance
+  - Distributed systems
+  - Scientific imaging
+  - Self-hosted inference
+  - BisQue Ultra
+---
+
+An agentic system is only as credible as the cluster underneath it. A model can reason beautifully and still be unusable if the first token takes two seconds, if opening a gigapixel image stalls the browser, or if the second concurrent user degrades the first. So before we make any claim about autonomy, here is the part that is easiest to check and hardest to fake: what the deployed system measures under load.
+
+Everything below was measured live on the BisQue Ultra production cluster — five nodes, one public entry point — while the system served real traffic. Every owned-tier ramp ran to its breaking point at **zero errors**. Where a number depends on shared hardware we stopped at the first sign of strain rather than saturating resources other researchers were using, and we say so.
+
+<ProofStrip
+  items={[
+    {
+      label: "Responsiveness",
+      title: "59 ms to first token, 263 tokens per second sustained",
+      body: "A self-hosted open-weight reasoning model with speculative decoding answers faster than most hosted frontier APIs return their first token at all.",
+    },
+    {
+      label: "Scientific imaging",
+      title: "Native OME-Zarr metadata in ~2 ms, cold equals warm",
+      body: "Terabyte-scale stores are served by chunk, not decoded, at roughly 80 MB of memory. The gigapixel case that breaks other viewers is the ordinary case here.",
+    },
+    {
+      label: "Throughput",
+      title: "Tens of thousands of requests per second, 0% error",
+      body: "51,625 rps of static delivery and ~39,000 rps of authenticated API on the control plane, with headroom, across the full load ramp.",
+    },
+    {
+      label: "Envelope",
+      title: "10,000+ concurrent users, dozens of live agent runs",
+      body: "The measured knees put the practical ceiling well beyond current demand, with one clear hardware lever on each axis.",
+    },
+  ]}
+/>
+
+## Method, stated plainly
+
+We drove HTTP throughput with a keep-alive load generator and captured latency percentiles with a separate threaded ramp harness, streaming first-token timing with its own probe. Postgres was measured with `pgbench` against a throwaway database that was dropped afterward. Two vantage points were used: an in-cluster generator, to read true server capacity without a wide-area network cap, and a real-user path over the public internet, to read what a browser actually feels.
+
+Each tier was ramped from 1 to 400 concurrent clients to find two points: the **knee**, where the 99th-percentile latency departs from linear, and the **ceiling**, where throughput goes flat or errors begin. For the two GPU services that are shared with other work, we ramped only to the first SLO breach — a knee, not a ceiling — to avoid disrupting other researchers.
+
+## Responsiveness: the number users feel first
+
+The coordinator is a self-hosted, open-weight reasoning model running on cluster hardware beside the data. With speculative decoding enabled, first-token latency and sustained generation both improve across the whole concurrency ladder.
+
+| Concurrent streams | Time to first token | Generation rate |
+|---|---:|---:|
+| 1 | 59 ms | 328 tok/s |
+| 2 | 70 ms | 289 tok/s |
+| 4 | 123 ms | 237 tok/s |
+| 8 | 178 ms | 189 tok/s |
+
+Sustained over longer generations, the model holds about **263 tokens per second** at a single stream. Token counts here are read from the server's own usage accounting rather than by counting streamed chunks, because speculative decoding batches multiple tokens per event and chunk-counting would undercount.
+
+Two honest framings matter. First, the 59 ms first token is partly a **deployment property**: the model is co-located with the application, so there is no wide-area hop between them. That is an argument for self-hosting scientific infrastructure, not a trick of the model. Second, responsiveness is not intelligence. We are not claiming this model out-reasons a frontier flagship; we are showing that a self-hosted stack can deliver frontier-*tier* responsiveness on hardware a lab controls.
+
+For external context, third-party medians of output speed (Artificial Analysis and BenchLM, accessed July 2026) place the deployed stack near the top of the field on the one metric that is network-independent — tokens per second generated:
+
+| System | Output tok/s (third-party median) |
+|---|---:|
+| Gemini 3.5 Flash | 284 |
+| **BisQue Ultra (self-hosted)** | **263 sustained / 328 burst** |
+| GPT-5.4 mini | 201 |
+| Claude 3 Haiku | 138 |
+| GPT-4o | 131 |
+| GPT-5.1 | 111 |
+| Gemini 3 Pro | 109 |
+| DeepSeek V4 Pro (hosted) | 70 |
+| Claude Sonnet 4.6 | 44 |
+
+The deployed stack sits second on output speed behind one purpose-built flash model, and three to eight times ahead of several hosted flagships. On time to first token, hosted first-token medians run from roughly 0.3 s for the fastest "flash" services to 0.7–1.8 s for frontier and hosted reasoning models; the co-located stack answers in 59 ms.
+
+## Scientific imaging: the gigapixel case is the ordinary case
+
+Most platforms cannot open the files scientific instruments produce, so they never have to serve them fast. BisQue Ultra serves native OME-Zarr and gigapixel imagery as a first-class path, and that path is the standout result of the whole study.
+
+| Operation | p50 | p99 | Throughput |
+|---|---:|---:|---:|
+| viewer metadata, native OME-Zarr | 1.7 ms | 3.2 ms | 1,304 / s |
+| viewer metadata, decoded formats (warm) | 5.4 ms | 5.8 ms | 516 / s |
+| image slice, native OME-Zarr | 125–183 ms | 230 ms | 174 / s |
+| tile decode, general formats (warm) | 151 ms | 208 ms | 107 / s |
+
+Native OME-Zarr metadata resolves in under two milliseconds, and cold requests cost the same as warm ones because the store is served by chunk rather than decoded whole — roughly **80 MB of resident memory even on terabyte-scale stores**. The general decode engine is CPU-bound at about 100 tiles per second per node, with a 99th-percentile under 360 ms even at 32-way concurrency, and it scales linearly as imaging nodes are added.
+
+## Throughput, storage, and the one real ceiling
+
+On the edge and API tiers, capacity is generous. Static delivery peaked at **51,625 requests per second**, authenticated session and thread APIs at roughly **38,000–39,000 rps**, every ramp at zero errors, all bounded by CPU with headroom to spare. Postgres served **103,948 read transactions per second** at 32-way concurrency.
+
+Exactly one hard ceiling appeared in the entire study: a single hashed JavaScript asset went flat at about 910 requests per second, which works out to line rate on a 1 GbE link. It bites only in the pathological case of hundreds of simultaneous cold first-loads; immutable caching makes every repeat visit free. Real users over the wide-area network saw a **43 ms** first byte, a full page in about **100 ms**, and a 109 KB initial JavaScript payload — against a typical single-page app that ships half a megabyte to a megabyte.
+
+<Callout title="Where the envelope moves next" tone="proof">
+  Two upgrades lift the only limits we found. A second public network interface or a CDN edge lifts the 1 GbE asset ceiling — the single hard ceiling in the study. Faster storage on the data node lifts write throughput, which is the one tier bounded by spinning-disk today. Neither is on the critical path for current demand.
+</Callout>
+
+## The derived envelope
+
+Translating the knees into capacity, the deployed cluster comfortably supports **more than 10,000 concurrent browsing users** (limited in practice to a few hundred cold full-page loads per second over the current link, with repeats free), **8 to 30 simultaneous agent turns** with dozens of concurrent sandboxes and many more sessions in think-time behind them, and **hundreds of active viewer sessions**, scaling linearly with imaging nodes.
+
+## What real use looked like
+
+Load tests find ceilings; they do not tell you whether the system behaves under a scientist's actual hands. Separately, we observed the live cluster for half an hour while it was used for real work: an explanation of Toeplitz matrices that ran 36 tool calls and streamed 3,887 events with generated code and figures, an Otsu threshold on an uploaded image, and a prairie-dog detection run over aerial imagery, alongside interactive viewing of a Zeiss `.czi`, an OME-TIFF, and deep z-scrubbing through a pyramid volume.
+
+Across that window there were **zero failed, errored, or cancelled runs**. Time to first streamed event was effectively instantaneous — the user sees reasoning and tool activity immediately, not a blank wait. One worker hit a transient message-bus reconnect mid-run; the redelivery and reconnect machinery absorbed it and the run completed successfully with **zero user-visible impact**. The deploy had by then soaked for about eleven hours with no restarts. Durability is not a slide in this system; it is observable behavior under ordinary faults.
+
+## Why these numbers are the argument
+
+An autonomous research agent lives or dies on the infrastructure beneath it. It has to answer immediately so a scientist stays in the loop, open the data other tools cannot, survive the worker crash that happens at hour eleven, and do all of it without a cloud bill that scales with curiosity. The envelope above is the evidence that the hard part — operating a governed agent on production-grade cyberinfrastructure — is not a promise. It is deployed, measured, and running today.
+
+The companion notes go deeper on the pieces this rests on: the [scientific image engine](../scientific-imaging-engine/), the [GoldGate model lifecycle](../gold-gated-model-lifecycle/), and the [Ultra Mode research program](../ultra-mode-research/) that studies when orchestration is worth its cost.

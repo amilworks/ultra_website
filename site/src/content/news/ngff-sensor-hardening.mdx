@@ -1,0 +1,113 @@
+---
+title: "Making sensor data safe for autonomous agents: an OME-NGFF stress test"
+seoTitle: "OME-NGFF sensor-data hardening in BisQue Ultra"
+slug: "ngff-sensor-hardening"
+date: 2026-07-17
+summary: "BisQue Ultra reads OME-NGFF across seven scientific domains and fails closed on adversarial stores. A synthetic sensor-data corpus and stress harness proved the coverage and closed six reliability defects."
+excerpt: "29 spec-correct stores across seven domains all render; 23 malformed stores all fail closed with precise errors; a gigapixel read that once cost 4.7 GB now costs 46 MB. The stress test that got us there."
+ogImage: "/images/news/ngff-sensor-hardening.svg"
+coverImage: "/images/news/ngff-sensor-hardening.svg"
+coverImageAlt: "OME-NGFF sensor-data hardening: valid stores render, malformed stores fail closed, gigapixel reads stay bounded."
+kind: "Engineering note"
+sequence: 4
+tags:
+  - Scientific imaging
+  - OME-NGFF
+  - Security
+  - Multimodal sensor data
+  - BisQue Ultra
+---
+
+An autonomous agent cannot choose its inputs. If it is going to read the data that instruments actually produce — across microscopy, remote sensing, medicine, geophysics, astronomy, and more — it will eventually be handed a file that is malformed, mislabeled, or deliberately hostile. The question is not whether that happens. It is whether the system opens the file correctly when it is valid, and refuses it precisely when it is not, without ever crashing, hanging, or leaking data it was never meant to read.
+
+We put that question to the test directly. OME-NGFF, the next-generation file format for bioimaging, is an n-dimensional array format with canonical axes `t, c, z, y, x`. BisQue Ultra's reader is strict about that geometry, which is exactly what lets it carry radically different scientific modalities through one code path. To prove it, we built a synthetic **sensor-data corpus** spanning seven scientific domains and a stress harness that drives every store through the production reader, renderer, viewer contract, and live image service.
+
+<ProofStrip
+  items={[
+    {
+      label: "Coverage",
+      title: "29 spec-correct stores across 7 domains, all render",
+      body: "Materials, biology, environmental, medical, geophysics, astronomy, and non-image sensor streams — every valid store opens, reports a correct viewer contract, and renders.",
+    },
+    {
+      label: "Safety",
+      title: "23 malformed stores all fail closed",
+      body: "Every adversarial store returns a precise error and an HTTP 422 — never a crash, a hang, a host-file read, or a silent misread.",
+    },
+    {
+      label: "Bounded",
+      title: "A gigapixel read went from 4.7 GB to 46 MB",
+      body: "Six reliability defects the stress test found are fixed and guarded in CI, including one security host-file read and one decompression bomb.",
+    },
+    {
+      label: "Under load",
+      title: "400 concurrent requests, 16 threads, zero errors",
+      body: "A mixed valid-and-malformed concurrency storm at roughly 500 requests per second stayed healthy with clean cache accounting.",
+    },
+  ]}
+/>
+
+## One geometry, every modality
+
+The reason a single reader can serve a hyperspectral cube, a climate reanalysis grid, a radio interferometry cube, and an audio spectrogram is that the geometry is always canonical and the scientific meaning lives in four other places: the channel axis and its labels, the axis units, the physical calibration in the coordinate transformations, and the data type. A spectral band becomes a labeled `c` axis. A survey line becomes a `t` axis with a unit. Two-way travel time becomes a `z` axis in milliseconds. A microphone's frequency-versus-time spectrogram repurposes `y` and `x` as hertz and seconds.
+
+That discipline is what the corpus exercises. It contains **29 spec-correct OME-Zarr stores** covering micro-CT alloys, EDS and EBSD maps, 4D-STEM detector images, confocal and light-sheet volumes, whole-slide histology, calcium imaging, Sentinel-2 multispectral and AVIRIS-style hyperspectral scenes, climate reanalysis, weather radar, clinical CT and multi-sequence MRI, cardiac ultrasound, 3-D seismic volumes, ground-penetrating radar, radio and optical astronomy cubes, solar EUV timelapses, thermography, and mass-spectrometry imaging. It spans NGFF 0.4 and 0.5, Zarr v2 and v3, five data types, and seven distinct axis orders — and every one of them opens, reports a consistent viewer contract, and renders a correct thumbnail, slice, and tile.
+
+## Failing closed is a feature, not an accident
+
+Coverage is half the contract. The other half is what happens when a store is wrong. The harness includes **23 adversarial and malformed stores**, and every one of them fails closed with a specific, actionable error and an HTTP 422 — never an exception that reaches the user as a 500, never a hang, and never a read outside the store. A store that is broken should tell you exactly how it is broken and stop. That is the behavior an autonomous system needs, because it turns an unbounded class of bad inputs into a bounded, typed outcome.
+
+## The six defects the stress test closed
+
+A stress test earns its keep by finding real defects. This one found six, each now fixed, default-on, and guarded by regression tests. The numbers are measured peak memory for a single request.
+
+<FeatureGrid
+  items={[
+    {
+      title: "Host-file read via symlinked chunk",
+      body: "A crafted store whose chunk was a symlink to a host file leaked that file's bytes through the rendered image. The reader now refuses symlinked chunks before every read.",
+      metric: "leak → 422",
+    },
+    {
+      title: "Chunk decompression bomb",
+      body: "A 3 KB store declaring enormous chunks forced one small tile to decode hundreds of megabytes — 18.6 GB in the worst declared case. A per-chunk decoded-footprint cap refuses it at open.",
+      metric: "763 MB → refused",
+    },
+    {
+      title: "Unbounded full-plane read",
+      body: "A single scrub frame on a gigapixel store read the whole level-0 plane before downscaling. A per-read element budget bounds it.",
+      metric: "4.7 GB → 46 MB",
+    },
+    {
+      title: "Unbounded tile size",
+      body: "A tile request clamped only its lower bound, so an oversized request read the whole level. The size is now clamped to a safe maximum.",
+      metric: "whole level → ≤2048",
+    },
+    {
+      title: "Deep or oversized attributes",
+      body: "Attacker-controlled metadata with no depth or size cap raised an uncaught error and a 500. A bounded loader enforces size and depth limits.",
+      metric: "500 → 422",
+    },
+    {
+      title: "Non-renderable data types",
+      body: "Complex arrays rendered a misleading real-part-only image and structured types crashed the renderer. A type guard rejects them cleanly at open.",
+      metric: "silent-wrong → 422",
+    },
+  ]}
+/>
+
+The headline consequence is the third row. After the fix, a gigapixel slice or thumbnail request peaks at about **46 MB instead of 2.5 to 4.7 GB**, and a symlinked chunk is refused rather than leaking host bytes end to end. Under a concurrency storm of 400 mixed valid and malformed requests across 16 threads at roughly 500 requests per second, the service returned zero errors with healthy cache accounting.
+
+## The boundary we are honest about
+
+A separate multi-agent audit independently reproduced the resource findings and surfaced twelve more items — interoperability, correctness, and frontend issues such as multi-series and high-content-screening store layouts, RGB auto-contrast, and label rendering — all catalogued in an open punch list with recommended directions. They involve product decisions and cross-service changes owned by the respective teams, so they are documented, not quietly closed.
+
+<Callout title="What this note claims, and what it does not" tone="warning">
+  This is evidence that BisQue Ultra reads a broad, spec-correct sensor corpus and fails closed on a broad adversarial one, with six proven fixes under CI. It is not a claim that every OME-NGFF layout in the wild is supported; the open punch list names the layouts that are not yet, on purpose.
+</Callout>
+
+## Why an agent platform needs this
+
+Governed autonomy is usually discussed at the level of the model — sandboxes, confidence gates, provenance. This is the same discipline one layer down, at the data. An agent that can be handed any instrument file needs a format layer that is correct across domains and safe against the malformed and the malicious. That is the difference between a demo that works on the maintainer's three files and a system that can be pointed at a stranger's data and trusted to either read it right or refuse it cleanly.
+
+For the layer above this, see the [scientific image engine](../scientific-imaging-engine/) and the [performance envelope](../production-performance-envelope/) that serves it.

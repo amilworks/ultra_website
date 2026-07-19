@@ -14,29 +14,34 @@ const canonicalUrl = Astro.site
   : undefined;
 const faqItems = [
   {
+    question: "Is BisQue Ultra really autonomous, or a chatbot with tools?",
+    answer:
+      "It plans and acts through the platform's own services. The agent searches a researcher's catalog, stages named data into its workspace, runs modules and code, calls domain models, and publishes results back through account-scoped, run-bound tools. Long trajectories are durably checkpointed and keyed to the run, so a worker restart resumes from the last completed step instead of re-executing the work.",
+  },
+  {
+    question: "How is the autonomy bounded?",
+    answer:
+      "Agent-generated code runs only inside a locked-down container with no network, dropped Linux capabilities, a read-only root filesystem, bounded CPU and memory, and a wall-clock ceiling the model cannot extend. Independent guards halt runaway loops, every delegated result carries a machine-checked confidence level, and the agent can read but never rewrite its own skills or the organization's policy.",
+  },
+  {
+    question: "Can a lab use its own model, and its own hardware?",
+    answer:
+      "Yes. The worker uses an OpenAI-compatible contract and can point at Ollama, vLLM, or another compatible server, self-hosted beside the data. The stable product contract is the data, tools, runs, artifacts, and evaluation logic; the model can change while the scientific record stays legible.",
+  },
+  {
     question: "Can BisQue Ultra run locally?",
     answer:
-      "Yes. Docker Compose launches Postgres, NATS JetStream, the scientific image service and conversion worker, the Go control plane, a Deep Agents worker, and the React frontend. You provide a compatible model endpoint.",
+      "Yes. Docker Compose launches Postgres, NATS JetStream, the scientific image service and conversion worker, the Go control plane, a Deep Agents worker, and the React frontend. You provide a compatible model endpoint. An existing BisQue deployment is optional and adds shared images, datasets, metadata, and modules.",
   },
   {
-    question: "Does BisQue Ultra require an existing BisQue deployment?",
+    question: "Is the orchestration tier (Ultra Mode) available now?",
     answer:
-      "No. The local stack supports direct uploads and local resources. An existing BisQue deployment is optional and adds shared images, datasets, metadata, annotations, modules, and institutional workflows.",
-  },
-  {
-    question: "Which scientific files can it open?",
-    answer:
-      "The image service decodes more than 90 formats, including CZI, ND2, OME-TIFF, NIfTI, DICOM, multi-page TIFF stacks, HDF5 workflows, large tiled images, and video.",
-  },
-  {
-    question: "Can a lab use its own model endpoint?",
-    answer:
-      "Yes. The worker uses an OpenAI-compatible contract and can point at Ollama, vLLM, or another compatible server. Specialized vision weights and scientific checkpoints remain operator-provisioned.",
+      "Ultra Mode — the durable, typed multi-agent orchestration tier — runs behind fail-closed admission while it is qualified against a preregistered evaluation. It is a research program with honest, published early results, not yet a public feature. The single-agent workbench described here is what runs today.",
   },
   {
     question: "Is the materials capability production-ready?",
     answer:
-      "The current materials surface is an evidence-gated research capability. Production promotion still requires the designated live traces, ledger qualification, production sandbox and isolation evidence, external evaluation thresholds, and an attested promotion envelope.",
+      "The materials surface is an evidence-gated research capability. Production promotion still requires designated live traces, ledger qualification, production sandbox and isolation evidence, external evaluation thresholds, and an attested promotion envelope.",
   },
 ];
 const ultraJsonLd = canonicalUrl
@@ -46,15 +51,15 @@ const ultraJsonLd = canonicalUrl
         "@type": "SoftwareApplication",
         name: "BisQue Ultra",
         applicationCategory: "ScientificApplication",
-        applicationSubCategory: "Scientific AI workbench",
+        applicationSubCategory: "Agentic scientific research system",
         operatingSystem: "Web",
         url: canonicalUrl,
         description:
-          "BisQue Ultra is a scientific AI workbench for multidimensional data, tool-guided analysis, durable runs, gated model training, and inspectable evidence.",
+          "BisQue Ultra is an agentic distributed system for science: a governed research agent that opens complex scientific data, runs tool-guided analysis, trains and gates models, and preserves inspectable evidence on production-grade infrastructure.",
         codeRepository: siteConfig.repoUrl,
         softwareVersion: "2026.07",
         keywords:
-          "BisQue Ultra, scientific AI workbench, scientific imaging, model training, run provenance, artifact lineage, BisQue platform, Deep Agents",
+          "BisQue Ultra, agentic system, autonomous research, scientific AI, scientific imaging, model training, run provenance, governed autonomy, BisQue platform, Deep Agents",
         creator: {
           "@type": "ResearchOrganization",
           name: siteConfig.organizationName,
@@ -90,32 +95,67 @@ if (!featuredStory) {
 const heroImage = "/images/news/bisque-ultra-launch2-960.webp";
 const heroImageAlt =
   "BisQue Ultra showing a scientific analysis report, quantitative table, prompt composer, and run context in one workbench.";
+
+const metrics = [
+  {
+    value: "59 ms",
+    label: "Median time to first token from the self-hosted coordinator model.",
+    note: "263 tok/s sustained",
+  },
+  {
+    value: "~2 ms",
+    label: "Native OME-Zarr metadata on terabyte-scale stores. Cold equals warm.",
+    note: "~80 MB resident",
+  },
+  {
+    value: "0 errors",
+    label: "Across every owned-tier load ramp, and every real run in a 30-minute live observation.",
+    note: "zero failed runs",
+  },
+  {
+    value: "51,625 rps",
+    label: "Static delivery at the edge; roughly 39,000 rps of authenticated API with headroom.",
+    note: "CPU-bound, not saturated",
+  },
+  {
+    value: "10,000+",
+    label: "Concurrent browsing users in the derived envelope, with dozens of simultaneous agent runs.",
+    note: "measured knees",
+  },
+  {
+    value: "4.7 GB → 46 MB",
+    label: "A gigapixel image read, bounded after the sensor-data hardening pass.",
+    note: "fails closed on malformed input",
+  },
+];
 ---
 
 <SiteShell
-  title="BisQue Ultra | Scientific AI Workbench"
-  description="BisQue Ultra opens complex scientific data, runs model-guided analysis, preserves inspectable evidence, and manages gated model training in one durable workbench."
+  title="BisQue Ultra | Agentic System for Science"
+  description="BisQue Ultra is an agentic distributed system that runs real research where the data live: a governed autonomous agent with durable runs, gated model training, and inspectable evidence, measured on a production cluster."
   canonicalPath="/bisque-ultra"
   image="/images/releases/bisque-ultra-og-2026-07.png"
-  imageAlt="BisQue Ultra scientific AI workbench"
+  imageAlt="BisQue Ultra agentic system for science"
   jsonLd={ultraJsonLd}
 >
   <div class="home-editorial ultra-page">
     <section class="launch-hero section-block" aria-label="BisQue Ultra overview">
       <div class="launch-hero-top">
         <div class="section-header launch-hero-copy">
-          <p class="eyebrow">2026.07 research release</p>
+          <p class="eyebrow">Agentic system for science · live on a 5-node cluster</p>
           <h1 class="launch-headline">BisQue Ultra</h1>
-          <p class="launch-claim">A scientific AI workbench for data, models, and evidence.</p>
+          <p class="launch-claim">An agentic distributed system that runs real research where the data live.</p>
           <p class="launch-subhead">
-            Open complex scientific files, run tool-guided analyses, inspect every result, and move
-            models from retraining to canary and rollback while preserving the scientific context.
+            A governed research agent that plans and acts through the platform's own services: it opens
+            the files instruments produce, runs tools, code, and domain models against them, trains and
+            gates its own models, and keeps every result attached to the evidence that produced it. Not a
+            chatbot beside the data — an agent that operates on it.
           </p>
-          <div class="launch-command-line" aria-label="Current product capabilities">
-            <span>90+ scientific formats</span>
+          <div class="launch-command-line" aria-label="Current capabilities">
+            <span>Governed autonomy</span>
             <span>Durable runs</span>
-            <span>Gated training</span>
-            <span>Replaceable models</span>
+            <span>Continual learning</span>
+            <span>Self-hosted models</span>
           </div>
           <div class="hero-actions launch-actions">
             <a class="primary-button" href={toHref(siteConfig.accessPath)}>Request research access</a>
@@ -146,37 +186,63 @@ const heroImageAlt =
       <ProofStrip
         items={[
           {
-            label: "Scientific data",
-            title: "Open the files research actually produces",
-            body: "CZI, ND2, OME-TIFF, NIfTI, DICOM, HDF5, z-stacks, large tiled images, video, and more enter one resource model.",
+            label: "Operates the platform",
+            title: "An agent that acts, not a chatbot that answers",
+            body: "It searches the catalog, stages data, runs modules and sandboxed code, and publishes results through account-scoped, run-bound tools.",
           },
           {
-            label: "Inspectable work",
-            title: "Keep the answer attached to its evidence",
-            body: "Prompts, tool steps, figures, tables, math, reports, source files, and run events remain part of the same record.",
+            label: "Governed autonomy",
+            title: "Bounded by measured confidence and hard limits",
+            body: "Sandboxed execution, independent runaway guards, per-result confidence, and a trust boundary the agent cannot rewrite.",
           },
           {
-            label: "Model lifecycle",
-            title: "Train, benchmark, canary, promote, or roll back",
-            body: "Gold-gated continual finetuning turns model updates into explicit decisions instead of silent weight swaps.",
+            label: "The Intelligence Loop",
+            title: "Corrections become safely promoted models",
+            body: "Reviewer feedback drives gated finetuning, a deterministic canary, and instant rollback — implemented, not illustrated.",
           },
           {
-            label: "Deployment control",
-            title: "Own the data path and choose the model endpoint",
-            body: "Run locally with Docker Compose, connect BisQue, and point the worker contract at an OpenAI-compatible server.",
+            label: "Measured, not promised",
+            title: "Frontier-tier responsiveness, self-hosted",
+            body: "59 ms to first token and 263 tokens per second on hardware the lab controls, with zero errors under load.",
           },
         ]}
       />
     </section>
 
-    <section class="ultra-workflow section-block" aria-label="BisQue Ultra workflow">
+    <section class="ultra-metrics section-block" aria-label="Measured performance">
+      <div class="section-header ultra-section-heading">
+        <p class="eyebrow">Demonstrated today</p>
+        <h2 class="section-title">The hard part is already built, deployed, and measured.</h2>
+        <p class="section-lead">
+          Governed autonomy, uncertainty-bounded reasoning, and a closed human-in-the-loop cycle are
+          not a roadmap here. They run on a five-node production cluster. These numbers were measured
+          live, end to end, with zero errors across every owned-tier ramp.
+        </p>
+      </div>
+      <div class="ultra-metric-grid" role="list">
+        {metrics.map((metric) => (
+          <article class="ultra-metric" role="listitem">
+            <p class="ultra-metric-value">{metric.value}</p>
+            <p class="ultra-metric-label">{metric.label}</p>
+            <p class="ultra-metric-note mono-copy">{metric.note}</p>
+          </article>
+        ))}
+      </div>
+      <p class="ultra-metrics-foot">
+        Responsiveness is a deployment property, not a claim to out-reason a frontier flagship: the
+        model is co-located with the data, so there is no wide-area hop. Full method, tables, and the
+        third-party output-speed comparison are in the <a class="subtle-link" href={toHref("/news/production-performance-envelope")}>performance envelope</a>.
+      </p>
+    </section>
+
+    <section class="ultra-workflow section-block" aria-label="How a run works">
       <div class="section-header ultra-section-heading">
         <p class="eyebrow">One scientific record</p>
-        <h2 class="section-title">From difficult file to defensible result, with scientific context intact.</h2>
+        <h2 class="section-title">From a difficult file to a defensible result, with the reasoning attached.</h2>
         <p class="section-lead">
-          BisQue Ultra unifies the core elements of scientific AI: source data,
-          multidimensional viewing, tool execution, model reasoning, generated artifacts, evaluation,
-          and the operational history needed to return to the work later.
+          A run is not a single request and response. It is staging, inspection, tool selection, code
+          execution, model calls, generated figures, and review — carried out where the data live and
+          kept intact through the ordinary failures of browsers, workers, and services.
         </p>
       </div>
       <div class="architecture-rail ultra-workflow-rail" aria-label="Scientific workflow sequence">
@@ -187,18 +253,46 @@ const heroImageAlt =
         </article>
         <article>
           <span class="mono-copy">02</span>
-          <h3>Inspect before inference</h3>
-          <p>Use tiles, slices, z-scrub, histograms, scalar-volume controls, HDF5 structure, and video previews to understand the data.</p>
+          <h3>The agent plans and acts</h3>
+          <p>It reasons over the request, stages named data, and runs specialized tools, code, vision services, and workers against the selected resources.</p>
         </article>
         <article>
           <span class="mono-copy">03</span>
-          <h3>Run tools and models</h3>
-          <p>Compose analysis in natural language while specialized tools, code, vision services, and workers execute against the selected resources.</p>
+          <h3>Autonomy stays bounded</h3>
+          <p>Execution is sandboxed and durably checkpointed; a worker restart resumes from the last completed step instead of repeating the work.</p>
         </article>
         <article>
           <span class="mono-copy">04</span>
-          <h3>Review and reuse the evidence</h3>
+          <h3>Evidence stays attached</h3>
           <p>Return to the report, figures, tables, metrics, run events, and downloadable artifacts without reconstructing the experiment from memory.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ultra-research-surface section-block" aria-label="Governed autonomy">
+      <div class="section-header ultra-section-heading">
+        <p class="eyebrow">Governed autonomy</p>
+        <h2 class="section-title">We concede the premise: language models hallucinate. We answer it with mechanism, not assurance.</h2>
+        <p class="section-lead">
+          An autonomous agent that touches real data and real compute has to be bounded structurally, not
+          asked nicely. Every claim below is enforced in code, and every action is recorded.
+        </p>
+      </div>
+      <div class="ultra-domain-grid">
+        <article>
+          <p class="eyebrow">Sandboxed execution</p>
+          <h3>Generated code runs in a cage the model cannot open.</h3>
+          <p>No network, all Linux capabilities dropped, a read-only root filesystem, bounded CPU and memory, and a wall-clock ceiling the model itself cannot extend — from an image pinned by cryptographic digest and stamped into the run's provenance.</p>
+        </article>
+        <article>
+          <p class="eyebrow">Bounded reasoning</p>
+          <h3>Independent guards stop runaway loops.</h3>
+          <p>A progress-stall detector, an idle watchdog, and a bounded completion cap halt trajectories that stop making progress. Every delegated result carries a machine-checked confidence level governed by an explicit decision rule.</p>
+        </article>
+        <article>
+          <p class="eyebrow">Structural trust boundary</p>
+          <h3>The agent may read its skills, never rewrite them.</h3>
+          <p>A run-bound worker can touch only the resources its own run authorized; the agent cannot alter its own skills or the organization's policy; and generated charts and workflows pass a reject-by-default validator before they render.</p>
         </article>
       </div>
     </section>
@@ -206,10 +300,10 @@ const heroImageAlt =
     <section class="ultra-product-proof section-block" aria-label="Current product surfaces">
       <div class="section-header ultra-section-heading">
         <p class="eyebrow">Current product</p>
-        <h2 class="section-title">The workbench now spans data operations and the model lifecycle.</h2>
+        <h2 class="section-title">The agent operates a real workbench, from data operations to the model lifecycle.</h2>
         <p class="section-lead">
-          These current interfaces come from the same frontend used by the local stack, with each
-          surface backed by the Go control plane and its durable contracts.
+          These are the current interfaces of the deployed system, each backed by the Go control plane
+          and its durable contracts — the same frontend the local stack runs.
         </p>
       </div>
 
@@ -221,15 +315,15 @@ const heroImageAlt =
             loading="lazy"
             decoding="async"
           />
-          <figcaption>Resources keeps uploaded files, BisQue data, collections, previews, sharing, and downstream actions in one operational surface.</figcaption>
+          <figcaption>Resources keeps uploaded files, BisQue data, collections, previews, sharing, and downstream actions in one operational surface the agent acts through.</figcaption>
         </figure>
         <div class="ultra-product-copy">
           <p class="eyebrow">Resources</p>
-          <h3>Scientific data remains a research object across the workflow.</h3>
+          <h3>Scientific data stays a research object the agent can operate on.</h3>
           <p>
             Search, filter, preview, organize, share, rename, restore, and move resources into analysis.
             The same system handles upload progress and recovery, collections, BisQue imports, direct
-            viewers, and derived pyramids for large images.
+            viewers, and derived pyramids for large images — the catalog the agent searches and stages from.
           </p>
           <ul class="ultra-detail-list">
             <li>90+ scientific image formats through the libbioimage service</li>
@@ -251,8 +345,8 @@ const heroImageAlt =
           <figcaption>A failed candidate is visible by design. The active model remains unchanged until the configured evidence gates pass.</figcaption>
         </figure>
         <div class="ultra-product-copy">
-          <p class="eyebrow">Gold-gated training</p>
-          <h3>Model improvement becomes a reviewable, evidence-gated decision.</h3>
+          <p class="eyebrow">GoldGate training</p>
+          <h3>Model improvement is a reviewable, evidence-gated decision.</h3>
           <p>
             Freeze a gold set, launch retraining, follow live progress, compare a candidate against the
             active model, and promote only when the declared gates pass. Canary routing and rollback
@@ -268,25 +362,63 @@ const heroImageAlt =
       </article>
     </section>
 
+    <section class="ultra-bright4b section-block" aria-label="The Intelligence Loop">
+      <div class="ultra-bright4b-grid">
+        <div class="section-header">
+          <p class="eyebrow">The Intelligence Loop</p>
+          <h2 class="section-title">The closed human-in-the-loop cycle is implemented, not illustrated.</h2>
+          <p class="section-lead">
+            Domain models run where the data live and return results with quality flags. Confident
+            results proceed with a full audit trail; low-confidence, high-value cases escalate to a
+            targeted expert; validated corrections train the next model — safely. The loop below is the
+            one BisQue Ultra runs, bounded at every step by measured confidence.
+          </p>
+          <ul class="ultra-detail-list">
+            <li>Warm-started continual finetuning with a BatchNorm-freeze correction that prevents silent forgetting of prior sites</li>
+            <li>A frozen, content-hashed gold set with fail-closed leakage defenses</li>
+            <li>A regression-veto gate — with per-class forgetting detection — re-enforced inside the promotion database transaction</li>
+            <li>A deterministic 10% canary before activation, instant ungated rollback, and SHA-256 provenance on every version</li>
+          </ul>
+          <a class="subtle-link" href={toHref("/news/gold-gated-model-lifecycle")}>Read how GoldGate governs promotion</a>
+        </div>
+        <figure class="ultra-loop-figure">
+          <img
+            src={toHref("/images/news/intelligence-loop.png")}
+            width="2100"
+            height="1245"
+            alt="The Intelligence Loop: run inference, quantify uncertainty, gate on confidence, escalate low-confidence high-value cases to expert review, and train updated models safely before promotion."
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            Every model version starts life guilty — candidate, unbenchmarked — and only a passed gate,
+            not a newer checkpoint, changes what the system serves.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section class="ultra-research-surface section-block" aria-label="Scientific domains">
       <div class="section-header ultra-section-heading">
         <p class="eyebrow">Research breadth</p>
-        <h2 class="section-title">A shared workbench, with methods shaped by each measurement.</h2>
+        <h2 class="section-title">One agent, one control layer — methods shaped by each measurement.</h2>
         <p class="section-lead">
-          Ultra does not pretend every domain is the same prompt. It supplies a common control layer
-          while domain tools retain their own data contracts, validation logic, and evidence boundaries.
+          Ultra keeps a single general coordinator and routes only the tools a request needs. Each domain
+          tool keeps its own data contract, validation logic, and evidence boundary; the breadth is real,
+          and so are the limits.
         </p>
       </div>
       <div class="ultra-domain-grid">
         <article>
-          <p class="eyebrow">Imaging</p>
-          <h3>Lens keeps multidimensional data inspectable.</h3>
-          <p>Microscopy, neuroimaging, remote sensing, large mosaics, scalar volumes, and time series keep their dimensions and viewing semantics.</p>
+          <p class="eyebrow">Imaging &amp; sensors</p>
+          <h3>Multidimensional data stays inspectable and safe to ingest.</h3>
+          <p>Microscopy, neuroimaging, remote sensing, large mosaics, scalar volumes, and time series keep their dimensions and viewing semantics — across a sensor corpus that fails closed on malformed input.</p>
+          <a class="subtle-link" href={toHref("/news/ngff-sensor-hardening")}>Read the sensor-data hardening note</a>
         </article>
         <article>
           <p class="eyebrow">Analysis</p>
           <h3>Language routes into tools, code, papers, and vision services.</h3>
-          <p>Structured results can include rendered math, GFM tables, charts, plots, images, masks, metrics, and downloadable reports.</p>
+          <p>Structured results can include rendered math, tables, charts, plots, images, masks, metrics, and downloadable reports — with the reasoning kept beside the answer.</p>
         </article>
         <article>
           <p class="eyebrow">Materials research</p>
@@ -301,7 +433,7 @@ const heroImageAlt =
       <div class="ultra-bright4b-grid">
         <div class="section-header">
           <p class="eyebrow">Bright 4B workload</p>
-          <h2 class="section-title">A 4B-parameter vision model becomes more useful when its evidence remains reviewable.</h2>
+          <h2 class="section-title">A 4B-parameter vision model is more useful when its evidence stays reviewable.</h2>
           <p class="section-lead">
             Bright 4B learns on the unit hypersphere to segment subcellular structures directly from
             3D brightfield volumes. Native Sparse Attention, residual HyperConnections, soft
@@ -347,13 +479,50 @@ const heroImageAlt =
       </div>
     </section>
 
+    <section class="launch-update section-block" aria-label="Ultra Mode research program">
+      <div class="section-header ultra-section-heading">
+        <p class="eyebrow">Research program</p>
+        <h2 class="section-title">We evaluate the orchestration tier the way a lab evaluates a model.</h2>
+        <p class="section-lead">
+          Ultra Mode is BisQue Ultra's durable, typed multi-agent tier. Rather than ship it on a
+          promise, we hold it to a falsifiable theory of when orchestration helps and a preregistered
+          evaluation — and we publish the results that contradict us. It runs behind fail-closed
+          admission while it is qualified.
+        </p>
+      </div>
+      <div class="architecture-rail" aria-label="Ultra Mode research pillars">
+        <article>
+          <span class="mono-copy">01</span>
+          <h3>A falsifiable theory</h3>
+          <p>Orchestration should win only with high coverage burden, decomposable work, compressible results, and an observable test — not from more agents or more thinking.</p>
+        </article>
+        <article>
+          <span class="mono-copy">02</span>
+          <h3>A typed workflow, not a free-for-all</h3>
+          <p>The model proposes a finite typed plan; the control plane validates ports, authorization, budget, and termination before any durable work runs. A plan proposal is never a queue command.</p>
+        </article>
+        <article>
+          <span class="mono-copy">03</span>
+          <h3>Preregistered, with a lockbox</h3>
+          <p>Seven arms isolate the mechanism; gates and margins are signed before an untouched lockbox is opened once. Inspecting an outcome and changing the system consumes it.</p>
+        </article>
+        <article>
+          <span class="mono-copy">04</span>
+          <h3>Honest negative results</h3>
+          <p>A generic planner did not beat a direct run; typed map-reduce took quality from 5-of-15 to 15-of-15; a model verifier accepted twelve wrong answers, so only a server seal commits success.</p>
+        </article>
+      </div>
+      <a class="subtle-link" href={toHref("/news/ultra-mode-research")}>Read the Ultra Mode research program</a>
+    </section>
+
     <section class="launch-update section-block" aria-label="System architecture">
       <div class="section-header ultra-section-heading">
         <p class="eyebrow">Open architecture</p>
         <h2 class="section-title">Change the model without changing the scientific record.</h2>
         <p class="section-lead">
-          The product separates data, run control, worker execution, model serving, and interface state.
-          That makes the system operable, debuggable, and adaptable to a lab's infrastructure.
+          Data, run control, worker execution, model serving, and interface state are separate concerns
+          on durable infrastructure. Postgres is the ordering authority; a partitioned NATS JetStream
+          spine carries work with effectively-once semantics; the model layer stays replaceable.
         </p>
       </div>
       <div class="architecture-rail" aria-label="BisQue Ultra architecture">
@@ -365,12 +534,12 @@ const heroImageAlt =
         <article>
           <span class="mono-copy">02</span>
           <h3>Go control plane</h3>
-          <p>Auth, threads, runs, leases, training state, events, artifacts, and the OpenAPI contract sit on durable Postgres state.</p>
+          <p>Auth, threads, runs, leases, training state, events, artifacts, and the OpenAPI contract sit on durable Postgres state, with multi-tenant isolation on every serving path.</p>
         </article>
         <article>
           <span class="mono-copy">03</span>
           <h3>NATS and Deep Agents</h3>
-          <p>JetStream dispatches long work to scalable workers that execute tools, code, paper workflows, and domain services.</p>
+          <p>JetStream dispatches long work to scalable workers that execute tools, code, paper workflows, and domain services, with idempotent redelivery.</p>
         </article>
         <article>
           <span class="mono-copy">04</span>
@@ -398,10 +567,11 @@ const heroImageAlt =
     <section class="ultra-reading section-block" aria-label="BisQue Ultra product notes">
       <div class="section-header ultra-section-heading">
         <p class="eyebrow">Release notes</p>
-        <h2 class="section-title">Read the product through the systems that make it credible.</h2>
+        <h2 class="section-title">Read the system through the evidence that makes it credible.</h2>
         <p class="section-lead">
-          The launch brief gives the complete release view. The engineering notes go deeper on imaging,
-          model operations, materials evidence, the BisQue substrate, and interface design.
+          The launch brief gives the complete release view. The engineering and research notes go deeper
+          on the performance envelope, sensor-data safety, model operations, and how we evaluate the
+          orchestration tier.
         </p>
       </div>
       <div class="ultra-reading-grid">
@@ -427,11 +597,11 @@ const heroImageAlt =
     <section class="ultra-conversion" aria-label="BisQue Ultra access">
       <div>
         <p class="eyebrow">Work with us</p>
-        <h2>Bring us the scientific workflow that deserves a connected system.</h2>
+        <h2>Bring us the research workflow that deserves a system this serious.</h2>
         <p>
-          We are opening BisQue Ultra to research teams working with complex scientific data,
-          domain models, and reproducibility requirements. Tell us what you measure, what you need to
-          run, and where the evidence currently breaks apart.
+          We are opening BisQue Ultra to research teams and frontier labs working with complex scientific
+          data, domain models, autonomous computation, and reproducibility requirements. Tell us what you
+          measure, what you need to run, and where the evidence currently breaks apart.
         </p>
       </div>
       <div class="hero-actions">
