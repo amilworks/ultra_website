@@ -1,0 +1,107 @@
+---
+// The Intelligence Loop, drawn inline so it inherits the site's light/dark tokens.
+// Status hues are defined in site.css (.ultra-loop) with per-theme values and are
+// never the only carrier of meaning — every colored path has a text label.
+---
+
+<div class="ultra-loop-scroll">
+  <svg
+    class="ultra-loop-svg"
+    viewBox="0 0 1120 524"
+    role="img"
+    aria-labelledby="iloop-title iloop-desc"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <title id="iloop-title">The Intelligence Loop</title>
+    <desc id="iloop-desc">
+      Run inference with domain models beside the data, quantify uncertainty, and gate on
+      confidence. Within threshold, validated output proceeds with a complete audit trail.
+      Below threshold, high-value cases go to targeted expert review; validated corrections
+      update models safely, and only a promoted model returns to inference.
+    </desc>
+
+    <defs>
+      <marker id="il-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" class="il-arrowhead" />
+      </marker>
+      <marker id="il-arrow-good" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" class="il-arrowhead-good" />
+      </marker>
+      <marker id="il-arrow-warn" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="9" refY="5" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 Z" class="il-arrowhead-warn" />
+      </marker>
+    </defs>
+
+    <!-- Orchestration banner -->
+    <rect x="1" y="1" width="1118" height="62" rx="12" class="il-panel" />
+    <text x="22" y="28" class="il-title">LLM / VLM reasoning layer</text>
+    <text x="22" y="49" class="il-sub">orchestrates tools · explains decisions · reports results · requests review</text>
+    <rect x="981" y="19" width="123" height="26" rx="13" class="il-chip" />
+    <text x="1042.5" y="36" text-anchor="middle" class="il-chip-text">model-agnostic</text>
+
+    <!-- 01 Inference -->
+    <rect x="1" y="110" width="248" height="130" rx="12" class="il-panel" />
+    <text x="21" y="137" class="il-eyebrow">01 · INFERENCE</text>
+    <text x="21" y="164" class="il-heading">Run inference</text>
+    <text x="21" y="189" class="il-sub">Domain models run beside the</text>
+    <text x="21" y="207" class="il-sub">data and return quality flags.</text>
+
+    <line x1="249" y1="175" x2="281" y2="175" class="il-flow" marker-end="url(#il-arrow)" />
+
+    <!-- 02 Uncertainty -->
+    <rect x="289" y="110" width="250" height="130" rx="12" class="il-panel" />
+    <text x="309" y="137" class="il-eyebrow">02 · UNCERTAINTY</text>
+    <text x="309" y="164" class="il-heading">Quantify uncertainty</text>
+    <text x="309" y="189" class="il-sub">Score each result; localize</text>
+    <text x="309" y="207" class="il-sub">low-confidence regions.</text>
+
+    <line x1="539" y1="175" x2="571" y2="175" class="il-flow" marker-end="url(#il-arrow)" />
+
+    <!-- Confidence gate -->
+    <path d="M635 122 L690 175 L635 228 L580 175 Z" class="il-gate" />
+    <text x="635" y="172" text-anchor="middle" class="il-gate-text">CONFIDENCE</text>
+    <text x="635" y="188" text-anchor="middle" class="il-gate-text">GATE</text>
+
+    <line x1="690" y1="175" x2="750" y2="175" class="il-flow-good" marker-end="url(#il-arrow-good)" />
+
+    <!-- Validated output -->
+    <rect x="760" y="110" width="359" height="130" rx="12" class="il-panel-good" />
+    <text x="784" y="142" class="il-eyebrow-good">WITHIN THRESHOLD</text>
+    <text x="784" y="172" class="il-heading">Confident results proceed</text>
+    <text x="784" y="196" class="il-sub">with a complete audit trail.</text>
+    <circle cx="1077" cy="175" r="16" class="il-check-circle" />
+    <path d="M1069.5 175.5 l5.5 5.5 l12 -13" class="il-check-mark" />
+
+    <!-- Gate: below threshold path -->
+    <line x1="635" y1="228" x2="635" y2="292" class="il-flow-warn" marker-end="url(#il-arrow-warn)" />
+    <text x="649" y="268" class="il-flow-label-warn">below threshold · high-value case</text>
+
+    <!-- 03 Expert review -->
+    <rect x="560" y="300" width="300" height="130" rx="12" class="il-panel-warn" />
+    <text x="584" y="327" class="il-eyebrow-warn">03 · HUMAN-IN-THE-LOOP</text>
+    <text x="584" y="354" class="il-heading">Targeted expert review</text>
+    <text x="584" y="379" class="il-sub">Escalate only low-confidence,</text>
+    <text x="584" y="397" class="il-sub">high-value cases.</text>
+
+    <line x1="560" y1="365" x2="528" y2="365" class="il-flow" marker-end="url(#il-arrow)" />
+
+    <!-- 04 Continual learning -->
+    <rect x="220" y="300" width="300" height="130" rx="12" class="il-panel-good" />
+    <text x="244" y="327" class="il-eyebrow-good">04 · CONTINUAL LEARNING</text>
+    <text x="244" y="354" class="il-heading">Update models safely</text>
+    <text x="244" y="379" class="il-sub">Train on validated corrections;</text>
+    <text x="244" y="397" class="il-sub">test before model promotion.</text>
+
+    <!-- Promoted model returns to inference -->
+    <path d="M220 365 L141 365 Q129 365 129 353 L129 250" fill="none" class="il-flow-good" marker-end="url(#il-arrow-good)" />
+    <text x="10" y="320" class="il-flow-label-good">promoted model</text>
+
+    <!-- Footer -->
+    <text x="1" y="504" class="il-foot-strong">RUNS WHERE THE DATA LIVE</text>
+    <text x="196" y="504" class="il-foot-muted">data · models · metadata · provenance · workflows</text>
+    <rect x="661" y="486" width="235" height="28" rx="14" class="il-chip" />
+    <text x="778.5" y="504" text-anchor="middle" class="il-chip-text">bounded by measured confidence</text>
+    <rect x="906" y="486" width="214" height="28" rx="14" class="il-chip-solid" />
+    <text x="1013" y="504" text-anchor="middle" class="il-chip-text-solid">implemented in BisQue Ultra</text>
+  </svg>
+</div>

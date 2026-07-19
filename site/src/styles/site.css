@@ -3454,15 +3454,6 @@ button {
   gap: 0.72rem;
 }
 
-.ultra-loop-figure img {
-  display: block;
-  width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--bg-panel-strong);
-  box-shadow: var(--shadow-md);
-}
-
 .ultra-loop-figure figcaption {
   max-width: 52rem;
   margin: 0;
@@ -3470,6 +3461,193 @@ button {
   font-size: 0.88rem;
   line-height: 1.52;
   text-wrap: pretty;
+}
+
+.ultra-loop {
+  --loop-good-ink: #2f6b46;
+  --loop-good-tint: rgba(47, 107, 70, 0.06);
+  --loop-warn-ink: #8a5a28;
+  --loop-warn-tint: rgba(154, 91, 43, 0.06);
+}
+
+.dark .ultra-loop {
+  --loop-good-ink: #8fca9f;
+  --loop-good-tint: rgba(143, 202, 159, 0.08);
+  --loop-warn-ink: #d9a877;
+  --loop-warn-tint: rgba(217, 168, 119, 0.07);
+}
+
+.ultra-loop-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.ultra-loop-svg {
+  display: block;
+  width: 100%;
+  min-width: 56rem;
+  height: auto;
+}
+
+.il-panel,
+.il-panel-good,
+.il-panel-warn,
+.il-gate {
+  fill: color-mix(in oklab, var(--bg-panel-strong) 62%, transparent);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.il-panel-good {
+  fill: var(--loop-good-tint);
+  stroke: color-mix(in oklab, var(--loop-good-ink) 38%, var(--line-strong));
+}
+
+.il-panel-warn {
+  fill: var(--loop-warn-tint);
+  stroke: color-mix(in oklab, var(--loop-warn-ink) 38%, var(--line-strong));
+}
+
+.il-gate {
+  stroke: color-mix(in oklab, var(--text-main) 55%, var(--line-strong));
+  stroke-width: 1.25;
+  stroke-linejoin: round;
+}
+
+.il-title {
+  fill: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.il-heading {
+  fill: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 16.5px;
+  font-weight: 600;
+}
+
+.il-sub {
+  fill: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+.il-eyebrow,
+.il-eyebrow-good,
+.il-eyebrow-warn,
+.il-gate-text,
+.il-flow-label-good,
+.il-flow-label-warn,
+.il-chip-text,
+.il-chip-text-solid,
+.il-foot-strong,
+.il-foot-muted {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+}
+
+.il-eyebrow {
+  fill: var(--text-muted);
+}
+
+.il-eyebrow-good,
+.il-flow-label-good {
+  fill: var(--loop-good-ink);
+}
+
+.il-eyebrow-warn,
+.il-flow-label-warn {
+  fill: var(--loop-warn-ink);
+}
+
+.il-gate-text {
+  fill: var(--text-main);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.il-flow,
+.il-flow-good,
+.il-flow-warn {
+  stroke: color-mix(in oklab, var(--text-muted) 80%, var(--line-strong));
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.il-flow-good {
+  stroke: var(--loop-good-ink);
+}
+
+.il-flow-warn {
+  stroke: var(--loop-warn-ink);
+}
+
+.il-arrowhead {
+  fill: color-mix(in oklab, var(--text-muted) 80%, var(--line-strong));
+}
+
+.il-arrowhead-good {
+  fill: var(--loop-good-ink);
+}
+
+.il-arrowhead-warn {
+  fill: var(--loop-warn-ink);
+}
+
+.il-check-circle {
+  fill: none;
+  stroke: var(--loop-good-ink);
+  stroke-width: 1.5;
+}
+
+.il-check-mark {
+  fill: none;
+  stroke: var(--loop-good-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.il-chip {
+  fill: color-mix(in oklab, var(--bg-panel-strong) 86%, transparent);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+
+.il-chip-text {
+  fill: var(--text-muted);
+}
+
+.il-chip-solid {
+  fill: var(--brand);
+}
+
+.il-chip-text-solid {
+  fill: var(--brand-ink);
+}
+
+.il-foot-strong {
+  fill: var(--text-main);
+  font-size: 11px;
+}
+
+.il-foot-muted {
+  fill: var(--text-muted);
+  font-size: 11px;
+}
+
+.ultra-loop-notes {
+  margin-top: 0.35rem;
+}
+
+@media (min-width: 860px) {
+  .ultra-loop-notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2.6rem;
+  }
 }
 
 @media (min-width: 860px) {

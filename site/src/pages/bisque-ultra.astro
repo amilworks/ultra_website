@@ -1,6 +1,7 @@
 ---
 import SiteShell from "@/layouts/SiteShell.astro";
 import { formatLongDate, getFeaturedNews, getLatestNews } from "@/lib/content";
+import IntelligenceLoop from "@/components/IntelligenceLoop.astro";
 import ProofStrip from "@/components/ProofStrip.astro";
 import { siteConfig } from "@/data/site";
 
@@ -362,40 +363,31 @@ const metrics = [
       </article>
     </section>
 
-    <section class="ultra-bright4b section-block" aria-label="The Intelligence Loop">
-      <div class="ultra-bright4b-grid">
-        <div class="section-header">
-          <p class="eyebrow">The Intelligence Loop</p>
-          <h2 class="section-title">The closed human-in-the-loop cycle is implemented, not illustrated.</h2>
-          <p class="section-lead">
-            Domain models run where the data live and return results with quality flags. Confident
-            results proceed with a full audit trail; low-confidence, high-value cases escalate to a
-            targeted expert; validated corrections train the next model — safely. The loop below is the
-            one BisQue Ultra runs, bounded at every step by measured confidence.
-          </p>
-          <ul class="ultra-detail-list">
-            <li>Warm-started continual finetuning with a BatchNorm-freeze correction that prevents silent forgetting of prior sites</li>
-            <li>A frozen, content-hashed gold set with fail-closed leakage defenses</li>
-            <li>A regression-veto gate — with per-class forgetting detection — re-enforced inside the promotion database transaction</li>
-            <li>A deterministic 10% canary before activation, instant ungated rollback, and SHA-256 provenance on every version</li>
-          </ul>
-          <a class="subtle-link" href={toHref("/news/gold-gated-model-lifecycle")}>Read how GoldGate governs promotion</a>
-        </div>
-        <figure class="ultra-loop-figure">
-          <img
-            src={toHref("/images/news/intelligence-loop.png")}
-            width="2100"
-            height="1245"
-            alt="The Intelligence Loop: run inference, quantify uncertainty, gate on confidence, escalate low-confidence high-value cases to expert review, and train updated models safely before promotion."
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption>
-            Every model version starts life guilty — candidate, unbenchmarked — and only a passed gate,
-            not a newer checkpoint, changes what the system serves.
-          </figcaption>
-        </figure>
+    <section class="ultra-bright4b ultra-loop section-block" aria-label="The Intelligence Loop">
+      <div class="section-header ultra-section-heading">
+        <p class="eyebrow">The Intelligence Loop</p>
+        <h2 class="section-title">The closed human-in-the-loop cycle is implemented, not illustrated.</h2>
+        <p class="section-lead">
+          Domain models run where the data live and return results with quality flags. Confident
+          results proceed with a full audit trail; low-confidence, high-value cases escalate to a
+          targeted expert; validated corrections train the next model — safely. This is the loop
+          BisQue Ultra runs, bounded at every step by measured confidence.
+        </p>
       </div>
+      <figure class="ultra-loop-figure">
+        <IntelligenceLoop />
+        <figcaption>
+          Every model version starts life guilty — candidate, unbenchmarked — and only a passed gate,
+          not a newer checkpoint, changes what the system serves.
+        </figcaption>
+      </figure>
+      <ul class="ultra-detail-list ultra-loop-notes">
+        <li>Warm-started continual finetuning with a BatchNorm-freeze correction that prevents silent forgetting of prior sites</li>
+        <li>A frozen, content-hashed gold set with fail-closed leakage defenses</li>
+        <li>A regression-veto gate — with per-class forgetting detection — re-enforced inside the promotion database transaction</li>
+        <li>A deterministic 10% canary before activation, instant ungated rollback, and SHA-256 provenance on every version</li>
+      </ul>
+      <a class="subtle-link" href={toHref("/news/gold-gated-model-lifecycle")}>Read how GoldGate governs promotion</a>
     </section>
 
     <section class="ultra-research-surface section-block" aria-label="Scientific domains">
