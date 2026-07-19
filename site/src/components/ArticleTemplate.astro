@@ -11,13 +11,14 @@ type Props = {
 };
 
 const { title, summary, date, kind = "Article", version, tags = [] } = Astro.props;
+const titleScale = title.length > 44 ? "long" : title.length > 22 ? "medium" : "short";
 ---
 
 <article class="release-page" data-article-root>
   <header class="release-title-card" data-article-title>
     <div class="release-title-card-inner">
       <p class="eyebrow release-card-label">{kind}</p>
-      <h1 class="release-title">{title}</h1>
+      <h1 class="release-title" data-title-scale={titleScale}>{title}</h1>
       <p class="release-summary">{summary}</p>
       <ArticleMeta date={date} kind={kind} version={version} tags={tags} />
     </div>

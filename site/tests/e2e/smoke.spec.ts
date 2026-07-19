@@ -110,7 +110,7 @@ test("news index and a follow-up post both render", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /systems that make it credible/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /The performance envelope/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Evaluate the system like a model/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Making sensor data safe for autonomous agents/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Safe sensor data for autonomous agents/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /scientific image engine behind BisQue Ultra/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /GoldGate model lifecycle/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Evidence-aware materials research/i })).toBeVisible();
@@ -127,7 +127,7 @@ test("new research and engineering notes render their core claims", async ({ pag
   await expect(page.getByRole("heading", { name: /the gigapixel case is the ordinary case/i })).toBeVisible();
 
   await page.goto("/news/ngff-sensor-hardening");
-  await expect(page.getByRole("heading", { level: 1, name: /Making sensor data safe for autonomous agents/i })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: /Safe sensor data for autonomous agents/i })).toBeVisible();
   await expect(page.getByText(/23 malformed stores all fail closed/i).first()).toBeVisible();
 
   await page.goto("/news/ultra-mode-research");

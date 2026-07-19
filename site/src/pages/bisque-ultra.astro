@@ -143,25 +143,23 @@ const metrics = [
     <section class="launch-hero section-block" aria-label="BisQue Ultra overview">
       <div class="launch-hero-top">
         <div class="section-header launch-hero-copy">
-          <p class="eyebrow">Agentic system for science · live on a 5-node cluster</p>
+          <p class="eyebrow">Agentic system for science</p>
           <h1 class="launch-headline">BisQue Ultra</h1>
           <p class="launch-claim">An agentic distributed system that runs real research where the data live.</p>
           <p class="launch-subhead">
             A governed research agent that plans and acts through the platform's own services: it opens
-            the files instruments produce, runs tools, code, and domain models against them, trains and
-            gates its own models, and keeps every result attached to the evidence that produced it. Not a
-            chatbot beside the data — an agent that operates on it.
+            the files instruments produce, runs tools, code, and domain models against them, and keeps
+            every result attached to the evidence that produced it. Not a chatbot beside the data — an
+            agent that operates on it.
           </p>
           <div class="launch-command-line" aria-label="Current capabilities">
             <span>Governed autonomy</span>
             <span>Durable runs</span>
-            <span>Continual learning</span>
             <span>Self-hosted models</span>
           </div>
           <div class="hero-actions launch-actions">
             <a class="primary-button" href={toHref(siteConfig.accessPath)}>Request research access</a>
             <a class="secondary-button" href={siteConfig.repoUrl} target="_blank" rel="noreferrer">Run locally</a>
-            <a class="secondary-button" href={toHref(`/news/${featuredStory.data.slug}`)}>Explore the release</a>
           </div>
         </div>
         <a
@@ -273,9 +271,10 @@ const metrics = [
     <section class="ultra-research-surface section-block" aria-label="Governed autonomy">
       <div class="section-header ultra-section-heading">
         <p class="eyebrow">Governed autonomy</p>
-        <h2 class="section-title">We concede the premise: language models hallucinate. We answer it with mechanism, not assurance.</h2>
+        <h2 class="section-title">Autonomy bounded by mechanism, not assurance.</h2>
         <p class="section-lead">
-          An autonomous agent that touches real data and real compute has to be bounded structurally, not
+          We concede the premise — language models hallucinate, and their outputs cannot be trusted
+          unvalidated. So an agent that touches real data and real compute is bounded structurally, not
           asked nicely. Every claim below is enforced in code, and every action is recorded.
         </p>
       </div>
