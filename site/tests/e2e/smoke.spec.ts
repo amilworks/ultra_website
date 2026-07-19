@@ -223,3 +223,12 @@ test("current engineering notes preserve implementation and readiness boundaries
   await expect(page.getByText(/evidence-gated research capability/i)).toBeVisible();
   await expect(page.getByText(/It is not production-promoted/i)).toBeVisible();
 });
+
+test("homepage Lens viewer section renders both scientific visuals", async ({ page }) => {
+  await page.goto("/");
+  await expect(
+    page.getByRole("heading", { name: /One viewer for what the instrument produces/i })
+  ).toBeVisible();
+  await expect(page.getByText(/Lens is where the workbench meets the data/i)).toBeVisible();
+  await expect(page.locator(".lens-card img")).toHaveCount(2);
+});

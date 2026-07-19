@@ -61,7 +61,7 @@ const homeJsonLd = canonicalUrl
 
 <SiteShell
   title="Center for Multimodal Learning | Scientific AI at UCSB"
-  description="Center for Multimodal Learning at UCSB ECE builds Bright 4B, scientific computer vision methods, BisQue image informatics, and AI workbenches."
+  description="Center for Multimodal Learning at UCSB ECE builds Bright 4B, scientific computer vision methods, BisQue image informatics, and BisQue Ultra — an agentic system that runs real research where the data live."
   canonicalPath="/"
   image="/images/releases/bisque-ultra-og-2026-07.png"
   imageAlt="BisQue Ultra color field used across the Center for Multimodal Learning research site."
@@ -74,17 +74,17 @@ const homeJsonLd = canonicalUrl
           <h1 class="lab-headline">Center for Multimodal Learning</h1>
           <p class="lab-affiliation">UCSB Electrical and Computer Engineering</p>
           <p class="lab-subhead">
-            We build computer vision systems around the measurements that make science difficult:
-            label-free 3D microscopy, hyperspectral remote sensing, aerial ecology, clinical
-            neuroimaging, materials characterization, and the image infrastructure that turns those
-            methods into reproducible research.
+            We build computer vision around the measurements that make science hard — label-free 3D
+            microscopy, hyperspectral remote sensing, aerial ecology, clinical neuroimaging, materials
+            characterization — and the system that carries those methods out: BisQue Ultra, an agentic
+            platform that runs real research where the data live, with the evidence attached.
           </p>
           <div class="launch-command-line lab-command-line" aria-label="Research themes">
             <span>Bright 4B</span>
             <span>Computer vision</span>
             <span>Multimodal learning</span>
             <span>Scientific image informatics</span>
-            <span>Reproducible AI systems</span>
+            <span>Agentic research systems</span>
           </div>
           <div class="hero-actions launch-actions">
             <a class="primary-button" href={toHref("/bisque-ultra")}>Explore BisQue Ultra</a>
@@ -109,7 +109,7 @@ const homeJsonLd = canonicalUrl
           </div>
           <figcaption>
             A visual field for the lab stack: scientific vision models, BisQue image informatics,
-            and the BisQue Ultra scientific workbench.
+            and the BisQue Ultra agentic workbench.
           </figcaption>
         </figure>
       </div>
@@ -119,26 +119,82 @@ const homeJsonLd = canonicalUrl
           <p class="eyebrow">Measurement-aware models</p>
           <p class="proof-item-title">The measurement shapes the model.</p>
           <p class="proof-item-body">
-            Spectral absorption, species identification, brain anatomy, crystallographic symmetry,
-            and 3D cell structure each shape the method.
+            Spectral absorption, species identity, brain anatomy, crystallographic symmetry, and 3D
+            cell structure each dictate the method. The physics comes first; the network follows.
           </p>
         </article>
         <article class="proof-item">
           <p class="eyebrow">Shared substrate</p>
-          <p class="proof-item-title">BisQue keeps data, metadata, annotation, and visualization close.</p>
+          <p class="proof-item-title">BisQue keeps data, metadata, annotation, and analysis close.</p>
           <p class="proof-item-body">
-            The platform gives research code a browser-visible path into datasets, modules, and
-            inspectable outputs.
+            A scalable image platform gives research code a browser-visible path into datasets,
+            modules, and inspectable outputs — the catalog an agent can operate on.
           </p>
         </article>
         <article class="proof-item">
-          <p class="eyebrow">Research infrastructure</p>
-          <p class="proof-item-title">BisQue Ultra turns methods into inspectable scientific work.</p>
+          <p class="eyebrow">Agentic research systems</p>
+          <p class="proof-item-title">BisQue Ultra runs the work, with receipts.</p>
           <p class="proof-item-body">
-            Ultra connects complex scientific files, viewers, tools, durable runs, model training,
-            and reproducible artifacts in one workbench.
+            A governed agent plans and acts through the platform's own services — durable runs, gated
+            training, inspectable evidence — measured live at 59&nbsp;ms to first token, zero errors under load.
           </p>
         </article>
+      </div>
+    </section>
+
+    <section class="lens-showcase section-block" aria-label="The Lens scientific viewer">
+      <div class="section-header research-section-heading">
+        <p class="eyebrow">The Lens viewer</p>
+        <h2 class="section-title">One viewer for what the instrument produces — and what the agent returns.</h2>
+        <p class="section-lead">
+          Lens is where the workbench meets the data. It opens the multidimensional files scientific
+          instruments actually write, with real physical units and windowing, and it renders the
+          figures the agent generates in the same surface — so a result never leaves the context that
+          produced it.
+        </p>
+      </div>
+      <div class="lens-grid">
+        <figure class="lens-card">
+          <div class="lens-shot">
+            <img
+              src={toHref("/images/home/lens-clinical-ct.webp")}
+              width="1300"
+              height="819"
+              alt="Lens viewer showing an axial clinical CT slice of a head with Hounsfield-unit windowing, z-slice scrubbing at 18 of 34, and 0.39 x 0.39 x 5.00 mm anisotropic voxel spacing."
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>
+            <p class="eyebrow">Clinical CT · NIfTI</p>
+            <p class="lens-card-title">The instrument's data, with its physics intact.</p>
+            <p>
+              A thoracic-window head CT with Hounsfield-unit windowing, z-scrub across 34 planes, and
+              anisotropic voxel spacing read straight from the volume — not flattened to a screenshot.
+            </p>
+          </figcaption>
+        </figure>
+        <figure class="lens-card">
+          <div class="lens-shot">
+            <img
+              src={toHref("/images/home/lens-agent-heatmap.webp")}
+              width="1300"
+              height="990"
+              alt="Lens viewer showing an agent-generated spatial detection density heatmap over a 6000 by 4000 pixel aerial survey, with individual burrow and prairie-dog detections overlaid and a normalized KDE density colorbar."
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption>
+            <p class="eyebrow">Agent output · detection density</p>
+            <p class="lens-card-title">The agent's result, in the same surface.</p>
+            <p>
+              A spatial detection-density heatmap over a 6,000&nbsp;×&nbsp;4,000 aerial survey, with
+              individual prairie-dog and burrow detections overlaid — an artifact the agent produced
+              during a run, opened like any other resource.
+            </p>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -261,8 +317,9 @@ const homeJsonLd = canonicalUrl
           <h2 class="section-title">Research methods become more useful when the infrastructure is shared.</h2>
           <p class="section-lead">
             BisQue, Bright 4B, BisQue Ultra, and the public research repositories form one visible
-            chain: scientific data enters a scalable image platform, domain-shaped models operate
-            close to the data, and the workbench preserves the run, outputs, and evidence.
+            chain: scientific data enters a scalable image platform — one whose pilot already holds
+            nearly six million image uploads and 12.3 million annotations — domain-shaped models
+            operate close to the data, and the agentic workbench preserves the run, outputs, and evidence.
           </p>
         </div>
         <div class="research-platform-steps" aria-label="Lab platform sequence">
@@ -278,8 +335,8 @@ const homeJsonLd = canonicalUrl
           </a>
           <a href={toHref("/bisque-ultra")} class="platform-step">
             <span class="mono-copy">03</span>
-            <strong>BisQue Ultra workbench</strong>
-            <small>Connect data, model-guided work, training decisions, and durable artifacts.</small>
+            <strong>BisQue Ultra agent</strong>
+            <small>A governed agent runs the analysis, gates model updates, and keeps durable artifacts.</small>
           </a>
         </div>
       </div>
@@ -290,8 +347,9 @@ const homeJsonLd = canonicalUrl
         <p class="eyebrow">Collaborate</p>
         <h2>Work with us on the next scientific vision system.</h2>
         <p>
-          We collaborate with researchers and infrastructure teams on new imaging methods, multimodal
-          datasets, model evaluation, scientific viewers, and reproducible AI workflows.
+          We work with researchers, infrastructure teams, and frontier labs on new imaging methods,
+          multimodal datasets, model evaluation, scientific viewers, and agentic research workflows.
+          Tell us what you measure and where the evidence currently breaks apart.
         </p>
       </div>
       <div class="hero-actions">
