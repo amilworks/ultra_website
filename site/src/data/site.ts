@@ -17,8 +17,7 @@ export const siteConfig = {
 };
 
 export const siteNav = [
-  { href: "/", label: "Home" },
-  { href: "/bisque-ultra", label: "BisQue Ultra" },
+  { href: "/", label: "BisQue Ultra" },
   { href: "/bisque", label: "BisQue" },
   { href: "/news", label: "News" },
 ];

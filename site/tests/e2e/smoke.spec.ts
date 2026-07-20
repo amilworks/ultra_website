@@ -1,28 +1,27 @@
 import { expect, test } from "@playwright/test";
 
-test("homepage presents the center project shell and follows system dark mode", async ({ page }) => {
+test("landing page presents BisQue Ultra as the agentic system for science", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/");
 
-  await expect(
-    page.getByRole("heading", {
-      level: 1,
-      name: /Center for Multimodal Learning/i,
-    })
-  ).toBeVisible();
+  await expect(page).toHaveTitle("BisQue Ultra | Agentic System for Science");
+  await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
+  await expect(page.getByText(/agentic distributed system that runs real research where the data live/i)).toBeVisible();
   await expect(page.getByText("UCSB ELECTRICAL & COMPUTER ENGINEERING")).toBeVisible();
-  await expect(page.getByText(/UCSB Electrical and Computer Engineering/i)).toBeVisible();
-  await expect(page.getByText("Hyperspectral remote sensing", { exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Explore BisQue Ultra/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Open BisQue platform/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Collaborate with us/i }).first()).toBeVisible();
-  await expect(page.locator(".research-ultra-hero-frame img")).toHaveAttribute("src", "/images/home/ultra-hero-960.webp");
+  await expect(page.getByText("Collaborators", { exact: true })).toBeVisible();
+  await expect(page.getByText("Allen Institute for Cell Science", { exact: true })).toBeVisible();
+  await expect(page.getByText(/The hard part is already built, deployed, and measured/i)).toBeVisible();
+  await expect(page.locator(".ultra-metric-value").filter({ hasText: "59 ms" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Go control plane", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /closed human-in-the-loop cycle is implemented/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Bright 4B scales hyperspherical learning/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /PSF-aware patch embeddings/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Spectral-absorption-aware transformers/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: /Aerial image analysis for multi-species/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Location-aware patch-based CNNs/i })).toBeVisible();
   await expect(page.getByText(/Scientific Reports 2023/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /evaluate the orchestration tier the way a lab evaluates a model/i })).toBeVisible();
+  await expect(page.getByText("Can BisQue Ultra run locally?", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Built in the UCSB Vision Research Lab/i)).toBeVisible();
   await expect(page.getByTestId("theme-toggle")).toHaveCount(0);
   await expect(page.locator("html")).toHaveClass(/dark/);
   await expect(
@@ -32,29 +31,14 @@ test("homepage presents the center project shell and follows system dark mode", 
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "BisQue", exact: true })
   ).toBeVisible();
 
-  const primaryButton = page.getByRole("link", { name: /Explore BisQue Ultra/i });
+  const primaryButton = page.getByRole("link", { name: /Request research access/i }).first();
   await expect(primaryButton).toHaveCSS("color", "rgb(17, 17, 19)");
 });
 
-test("BisQue Ultra landing page communicates the current product release", async ({ page }) => {
+test("the old BisQue Ultra path redirects to the landing page", async ({ page }) => {
   await page.goto("/bisque-ultra");
-
-  await expect(page).toHaveTitle("BisQue Ultra | Agentic System for Science");
+  await page.waitForURL((url) => url.pathname === "/" || url.pathname.endsWith("/index.html"));
   await expect(page.getByRole("heading", { level: 1, name: "BisQue Ultra", exact: true })).toBeVisible();
-  await expect(page.getByText(/agentic distributed system that runs real research where the data live/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /Request research access/i }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /Run locally/i })).toBeVisible();
-  await expect(page.getByText(/Built in the UCSB Vision Research Lab/i)).toBeVisible();
-  await expect(page.locator(".launch-hero-art-image")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Go control plane", exact: true })).toBeVisible();
-  await expect(page.getByText(/The hard part is already built, deployed, and measured/i)).toBeVisible();
-  await expect(page.locator(".ultra-metric-value").filter({ hasText: "59 ms" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Model improvement is a reviewable/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /closed human-in-the-loop cycle is implemented/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /evaluate the orchestration tier the way a lab evaluates a model/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /4B-parameter vision model is more useful/i })).toBeVisible();
-  await expect(page.getByText("Can BisQue Ultra run locally?", { exact: true })).toBeVisible();
-  await expect(page.getByAltText(/candidate model that failed two evaluation gates/i)).toBeVisible();
 });
 
 test("BisQue platform page renders research infrastructure content", async ({ page }) => {
@@ -158,7 +142,7 @@ test("release alias, sitemap, and robots stay publishable", async ({ page, reque
   expect(sitemap.ok()).toBeTruthy();
   await expect
     .poll(async () => await sitemap.text())
-    .toContain("/bisque-ultra");
+    .toContain("/news/production-performance-envelope");
   await expect
     .poll(async () => await sitemap.text())
     .toContain("/bisque");
